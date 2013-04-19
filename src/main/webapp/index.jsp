@@ -305,6 +305,7 @@
 				<strong>CloudSole Developer</strong>
 			</span>
 		</a>
+		
 		<form action="/login/" method="get" accept-charset="utf-8">
 				<button type="submit" class="btn btn-primary btn-block" tabindex="4">Login to Salesforce</button>
 		</form>

@@ -29,7 +29,479 @@
 	<script src="/resources/assets/javascripts/1.2.1/adminflare-demo.min.js" type="text/javascript"></script>
 	<script src="/resources/assets/javascripts/1.2.1/bootstrap.min.js" type="text/javascript"></script>
 	<script src="/resources/assets/javascripts/1.2.1/adminflare.min.js" type="text/javascript"></script>
+	<style type="text/css">
+		.box { padding-bottom: 0; }
 
+		.box > p { margin-bottom: 20px; }
+
+		#popovers li, #tooltips li {
+			display: block;
+			float: left;
+			list-style: none;
+			margin-right: 20px;
+		}
+		
+		.adminflare > div { margin-bottom: 20px; }
+	</style>
+
+	<script type="text/javascript">
+		$(document).ready(function () {
+			prettyPrint();
+
+			/* Tooltips
+				================================================== */
+			$('a[rel=tooltip]').tooltip();
+
+
+			/* Popovers
+				================================================== */
+			$('a[rel=popover]').popover().click(function () {
+				return false
+			});
+
+
+			/* Butons
+				================================================== */
+			$("#loading-state-btn").click(function () {
+				$(this).button('loading');
+			});
+
+
+			/* Bootstrap-colorpicker
+				================================================== */
+			$("#colorpicker").colorpicker();
+			$("#colorpicker-rgb").colorpicker();
+			$("#colorpicker-component").colorpicker();
+
+
+			/* Bootstrap-datepicker
+				================================================== */
+			$("#datepicker").datepicker();
+			$("#datepicker-component").datepicker();
+			$("#datepicker-limited").datepicker();
+
+
+			/* Bootstrap-timepicker
+				================================================== */
+			$('.timepicker-default').timepicker({
+				defaultTime: 'value'
+			});
+
+			$('.timepicker-1').timepicker({
+				minuteStep: 1,
+				template: 'modal',
+				showSeconds: true,
+				showMeridian: false,
+				defaultTime: 'value'
+			});
+
+
+			/* Notifications
+				================================================== */
+			$('#notify').click(function () {
+				$('.top-right').notify({
+					message: {
+						text: 'Aw yeah, It works!'
+					},
+					type: 'adminflare'
+				}).show()
+			});
+
+
+			/* WYSIWYG-Editor
+				================================================== */
+			$('#wysihtml5').wysihtml5({
+				"stylesheets": []
+			});
+
+
+			/* Form validations
+				================================================== */
+			$("input,select,textarea", '#validate-form').not("[type=submit]").jqBootstrapValidation();
+
+
+			/* Styled form elements
+				================================================== */
+			// Initializing checkboxes
+			$('#checkbox-toggle').on('click', function () {
+				$('#myCheckbox').checkbox('toggle');
+			});
+
+			$('#checkbox-disable').on('click', function () {
+				$('#myCheckbox').checkbox('disable');
+			});
+
+			$('#checkbox-enable').on('click', function () {
+				$('#myCheckbox').checkbox('enable');
+			});
+
+			// Initializing comboboxes
+			$('#myCombobox').on('changed', function (evt, data) {
+				console.log(data);
+			});
+	
+			$('#combobox-logItem').on('click', function () {
+				console.log($('#myCombobox').combobox('selectedItem'));
+			});
+	
+			$('#combobox-setByIndex').on('click', function () {
+				$('#myCombobox').combobox('selectByIndex', '1');
+			});
+	
+			$('#combobox-setByText').on('click', function () {
+				$('#myCombobox').combobox('selectByText', 'Item Three');
+			});
+	
+			$('#combobox-setBySelector').on('click', function () {
+				$('#myCombobox').combobox('selectBySelector', 'li[data-fizz=buzz]');
+			});
+	
+			$('#combobox-setByValue').on('click', function () {
+				$('#myCombobox').combobox('selectByValue', '1');
+			});
+	
+			$('#combobox-enable').on('click', function () {
+				$('#myCombobox').combobox('enable');
+			});
+	
+			$('#combobox-disable').on('click', function () {
+				$('#myCombobox').combobox('disable');
+			});
+
+
+			// Initializing search input
+			$('#MySearch').on('searched', function (e, text) {
+				alert('Searched: ' + text);
+			});
+
+			$('#search-enable').click(function () {
+				$('#MySearch').search('enable');
+			});
+
+			$('#search-disable').click(function () {
+				$('#MySearch').search('disable');
+			});
+
+			// Initializing spinner
+			$('#MySpinner').spinner();
+			$('#spinner-enable').click(function () {
+				$('#MySpinner').spinner('enable');
+			});
+
+			$('#spinner-disable').click(function () {
+				$('#MySpinner').spinner('disable');
+			});
+
+			$('#spinner-log').click(function () {
+				console.log("Spinner value: ", $('#MySpinner').spinner('value'));
+			});
+
+			// Initializing radio
+			$('#radio-disable').on('click', function () {
+				$('#myRadio').radio('disable');
+			});
+
+			$('#radio-enable').on('click', function () {
+				$('#myRadio').radio('enable');
+			});
+
+			// Initializing select
+			$('#mySelect').on('changed', function (evt, data) {
+				console.log(data);
+			});
+
+			$('#select-logItem').on('click', function () {
+				console.log($('#mySelect').select('selectedItem'));
+			});
+
+			$('#select-setByIndex').on('click', function () {
+				$('#mySelect').select('selectByIndex', '1');
+			});
+
+			$('#select-setByText').on('click', function () {
+				$('#mySelect').select('selectByText', 'Item Three');
+			});
+
+			$('#select-setBySelector').on('click', function () {
+				$('#mySelect').select('selectBySelector', 'li[data-fizz=buzz]');
+			});
+
+			$('#select-setByValue').on('click', function () {
+				$('#mySelect').select('selectByValue', '1');
+			});
+
+			$('#select-enable').on('click', function () {
+				$('#mySelect').select('enable');
+			});
+
+			$('#select-disable').on('click', function () {
+				$('#mySelect').select('disable');
+			});
+
+
+			/* Datagrid
+				================================================== */
+			var dataSource = new StaticDataSource({
+				columns: [
+					{
+						property: 'toponymName',
+						label: 'Name',
+						sortable: true
+					},
+					{
+						property: 'countrycode',
+						label: 'Country',
+						sortable: true
+					},
+					{
+						property: 'population',
+						label: 'Population',
+						sortable: true
+					},
+					{
+						property: 'fcodeName',
+						label: 'Type',
+						sortable: true
+					}
+				],
+				data: sampleData.geonames,
+				delay: 250
+			});
+	
+			$('#MyGrid').datagrid({
+				dataSource: dataSource,
+				stretchHeight: true
+			});
+	
+			$('#datagrid-reload').on('click', function () {
+				$('#MyGrid').datagrid('reload');
+			});
+
+
+			/* Wizard
+				================================================== */
+			$('#myWizard').on('change', function (e, data) {
+				console.log('change');
+				if (data.step === 3 && data.direction === 'next') {
+					// return e.preventDefault();
+				}
+			});
+
+			$('#myWizard').on('changed', function (e, data) {
+				console.log('changed');
+			});
+
+			$('#myWizard').on('finished', function (e, data) {
+				console.log('finished');
+			});
+
+			$('#wizard-prev').on('click', function () {
+				$('#myWizard').wizard('previous');
+			});
+
+			$('#wizard-next').on('click', function () {
+				$('#myWizard').wizard('next', 'foo');
+			});
+
+			$('#wizard-logItem').on('click', function () {
+				var item = $('#myWizard').wizard('selectedItem');
+				console.log(item.step);
+			});
+			
+
+			/* Toggle buttons
+				================================================== */
+			$('#normal-toggle-button').toggles({width: 100});
+			$('#text-toggle-button').toggles({ontext:'HI', offtext:'BYE', on: false});
+			
+
+			/* Auto-resizing textarea
+				================================================== */
+			$("#autoresize").autosize();
+
+
+			/* Inline editable
+				================================================== */
+			
+			//enable / disable
+			$('#enable').click(function () {
+				$('#user .editable').editable('toggleDisabled');
+			});
+
+			//editables 
+			$('#username').editable({
+				type: 'text',
+				pk: 1,
+				name: 'username',
+				title: 'Enter username'
+			});
+
+			$('#firstname').editable({
+				validate: function (value) {
+					if ($.trim(value) == '') return 'This field is required';
+				}
+			});
+
+			$('#lastname').editable();
+
+			$('#sex').editable({
+				prepend: "not selected",
+				source: [{
+					value: 1,
+					text: 'Male'
+				}, {
+					value: 2,
+					text: 'Female'
+				}],
+				display: function (value, sourceData) {
+					var colors = {
+						"": "gray",
+						1: "green",
+						2: "blue"
+					},
+					elem = $.grep(sourceData, function (o) {
+						return o.value == value;
+					});
+					if (elem.length) {
+						$(this).text(elem[0].text).css("color", colors[value]);
+					}
+					else {
+						$(this).empty();
+					}
+				}
+			});
+
+			$('#status').editable();
+			$('#dob').editable();
+
+			$('#comments').editable({
+				showbuttons: true
+			});
+
+			$('#note').editable();
+
+			$('#pencil').click(function (e) {
+				e.stopPropagation();
+				e.preventDefault();
+				$('#note').editable('toggle');
+			});
+
+			$('#fruits').editable({
+				pk: 1,
+				limit: 3,
+				source: [{
+					value: 1,
+					text: 'banana'
+				}, {
+					value: 2,
+					text: 'peach'
+				}, {
+					value: 3,
+					text: 'apple'
+				}, {
+					value: 4,
+					text: 'watermelon'
+				}, {
+					value: 5,
+					text: 'orange'
+				}]
+			});
+
+			$('#address').editable({
+				value: {
+					city: "Moscow",
+					street: "Lenina",
+					building: "12"
+				},
+				validate: function (value) {
+					if (value.city == '') return 'city is required!';
+				},
+				display: function (value) {
+					if (!value) {
+						$(this).empty();
+						return;
+					}
+					var html = '<b>' + $('<div>').text(value.city).html() + '</b>, ' + $('<div>').text(value.street).html		() + ' st., bld. ' + $('<div>').text(value.building).html();
+					$(this).html(html);
+				}
+			});
+
+
+			/* Dialog boxes
+				================================================== */
+			$('#bootbox-alert').click(function () {
+				bootbox.alert("Hello world!", function () {
+					alert('Hello world callback');
+				});
+			});
+
+			$('#bootbox-confirm').click(function () {
+				bootbox.confirm("Are you sure?", function (result) {
+					alert("Confirm result: " + result);
+				});
+			});
+
+			$('#bootbox-prompt').click(function () {
+				bootbox.prompt("What is your name?", function (result) {
+					if (result === null) {
+						alert("Prompt dismissed");
+					}
+					else {
+						alert("Hi, " + result + "!");
+					}
+				});
+			});
+
+			$('#bootbox-custom').click(function () {
+				bootbox.dialog("I am a custom dialog", [{
+					"label": "Success!",
+					"class": "btn-green",
+					"callback": function () {
+						alert("great success");
+					}
+				}, {
+					"label": "Danger!",
+					"class": "btn-orange",
+					"callback": function () {
+						alert("uh oh, look out!");
+					}
+				}, {
+					"label": "Click ME!",
+					"class": "btn-primary",
+					"callback": function () {
+						alert("Primary button");
+					}
+				}, {
+					"label": "Just a button..."
+				}]);
+			});
+
+
+			/* Clickovers
+				================================================== */
+			$('[rel="clickover"]').clickover();
+
+			$('#auto-close-co').clickover({
+				auto_close: 15 * 1000
+			});
+
+			$('#no-global-co').clickover({
+				global_close: false
+			});
+
+			$('#shown-co').clickover({
+				onShown: function () {
+					alert("Hello from clickover");
+				}
+			});
+
+			$('#no-esc').clickover({
+				placement: 'top',
+				esc_close: 0
+			});
+		});
+	</script>
+	
 </head>
 <body>
 <script type="text/javascript">demoSetBodyLayout();</script>
