@@ -6,10 +6,10 @@
 <jsp:include page="header.jsp"/>
 
 
-	<jsp:include page="sidemenu.jsp"/>
+	<!--<jsp:include page="sidemenu.jsp"/>
       <jsp:include page="topmenu.jsp" />
       
     </div>
-   </div>
+   </div> -->
  
 <jsp:include page="footer.jsp"/>
