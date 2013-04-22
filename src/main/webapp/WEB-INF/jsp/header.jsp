@@ -141,33 +141,15 @@
 		// Visits Chart
 		var visitsChartData = [{
 			// Visits
-			label: 'Closed Opportunity',
+			label: 'Open Opportunity',
 			data: [
-				[6, 1300],
-				[7, 1600],
-				[8, 1900],
-				[9, 2100],
-				[10, 2500],
-				[11, 2200],
-				[12, 2000],
-				[13, 1950],
-				[14, 1900],
-				[15, 2000]
+				${OpenOppGraph}
 			]
 		}, {
 			// Returning Visits
-			label: 'Open Opportunity',
+			label: 'Closed Opportunity',
 			data: [
-				[6, 500],
-				[7, 600],
-				[8, 550],
-				[9, 600],
-				[10, 800],
-				[11, 900],
-				[12, 800],
-				[13, 850],
-				[14, 830],
-				[15, 1000]
+				${ClosedOppGraph}
 			],
 			filledPoints: true
 		}];
@@ -182,14 +164,14 @@
 				}
 			},
 			xaxis: {
-				tickDecimals: 2
+				tickDecimals: 1
 			},
 			yaxis: {
-				tickSize: 1000
+				tickSize: 10
 			}
 		}, {
 			height: 205,
-			tooltipText: "y + ' visitors at ' + x + '.00h'"
+			tooltipText: "y + ' opportunities at ' + x + '.00h'"
 		});
 		// Comments Tab
 		$('.comment-remove').click(function () {

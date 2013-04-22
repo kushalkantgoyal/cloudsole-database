@@ -76,7 +76,7 @@ public class DashboardController {
 		map.put("queryTasksToday", queryTasksToday);
 		map.put("queryDocumentToday", queryDocumentToday);
 		
-		QueryResult<Map> queryOpportunityOpenToday = loginToSalesforce.LoginToSalesforce().query("Select CreatedDate, StageName from Opportunity where CreatedDate=Today limit 100");
+		QueryResult<Map> queryOpportunityOpenToday = loginToSalesforce.LoginToSalesforce().query("Select CreatedDate, StageName from Opportunity where CreatedDate=Today");
 		
 		Map<String, String> opportunityMap = new HashMap<String, String>();
 		
@@ -87,59 +87,58 @@ public class DashboardController {
 		
 		
 		//2013-04-21T07:00:00.000Z
-		Map<Integer, Integer> openOpportunity = new HashMap<Integer, Integer>();
-		Map<Integer, Integer> closedOpportunity = new HashMap<Integer, Integer>();
+		Map<Integer, Integer> openOpportunities = new HashMap<Integer, Integer>();
+		Map<Integer, Integer> closedOpportunities = new HashMap<Integer, Integer>();
 		
 		for (String groupopp : opportunityMap.keySet())
 		{
 			if (opportunityMap.get(groupopp).equalsIgnoreCase("Open"))
 			{
-				if (openOpportunity.isEmpty())
+				if (openOpportunities.isEmpty())
 				{
-					openOpportunity.put(Integer.valueOf(groupopp.substring(11, 13)), 1);
+					openOpportunities.put(Integer.valueOf(groupopp.substring(11, 13)), 1);
 				}
-				else if (openOpportunity.get(Integer.valueOf(groupopp.substring(11, 13))) == null)
+				else if (openOpportunities.get(Integer.valueOf(groupopp.substring(11, 13))) == null)
 				{
-					openOpportunity.put(Integer.valueOf(groupopp.substring(11, 13)), 1);
+					openOpportunities.put(Integer.valueOf(groupopp.substring(11, 13)), 1);
 				}
-				else if (openOpportunity.get(Integer.valueOf(groupopp.substring(11, 13))) != null)
+				else if (openOpportunities.get(Integer.valueOf(groupopp.substring(11, 13))) != null)
 				{
-					openOpportunity.put(Integer.valueOf(groupopp.substring(11, 13)), openOpportunity.get(Integer.valueOf(groupopp.substring(11, 13)))+1);
+					openOpportunities.put(Integer.valueOf(groupopp.substring(11, 13)), openOpportunities.get(Integer.valueOf(groupopp.substring(11, 13)))+1);
 				}
 			}
 			else if (opportunityMap.get(groupopp).contains("Close"))
 			{
-				if (closedOpportunity.isEmpty())
+				if (closedOpportunities.isEmpty())
 				{
-					closedOpportunity.put(Integer.valueOf(groupopp.substring(11, 13)), 1);
+					closedOpportunities.put(Integer.valueOf(groupopp.substring(11, 13)), 1);
 				}
-				else if (closedOpportunity.get(Integer.valueOf(groupopp.substring(11, 13))) == null)
+				else if (closedOpportunities.get(Integer.valueOf(groupopp.substring(11, 13))) == null)
 				{
-					closedOpportunity.put(Integer.valueOf(groupopp.substring(11, 13)), 1);
+					closedOpportunities.put(Integer.valueOf(groupopp.substring(11, 13)), 1);
 				}
-				else if (closedOpportunity.get(Integer.valueOf(groupopp.substring(11, 13))) != null)
+				else if (closedOpportunities.get(Integer.valueOf(groupopp.substring(11, 13))) != null)
 				{
-					closedOpportunity.put(Integer.valueOf(groupopp.substring(11, 13)), closedOpportunity.get(Integer.valueOf(groupopp.substring(11, 13)))+1);
+					closedOpportunities.put(Integer.valueOf(groupopp.substring(11, 13)), closedOpportunities.get(Integer.valueOf(groupopp.substring(11, 13)))+1);
 				}
 			}
 		}
-	
-		System.out.println("Open: " + openOpportunity);
-		System.out.println("Close: " + closedOpportunity);
 		
-		/* 
-		 		[6, 1300],
-				[7, 1600],
-				[8, 1900],
-				[9, 2100],
-				[10, 2500],
-				[11, 2200],
-				[12, 2000],
-				[13, 1950],
-				[14, 1900],
-				[15, 2000]
-		 * */
+		StringBuilder openOppBuilder = new StringBuilder();
+		for (Integer openOpportunity : openOpportunities.keySet())
+		{
+			openOppBuilder.append("[").append(openOpportunity).append(",").append(openOpportunities.get(openOpportunity)).append("],");
+		}
+		System.out.println(openOppBuilder);
+		map.put("OpenOppGraph", openOppBuilder.substring(0, openOppBuilder.length()-1));
 		
+		StringBuilder closeOppBuilder = new StringBuilder();
+		for (Integer closedOpportunity : closedOpportunities.keySet())
+		{
+			closeOppBuilder.append("[").append(closedOpportunity).append(",").append(openOpportunities.get(closedOpportunity)).append("],");
+		}
+		System.out.println(closeOppBuilder);
+		map.put("ClosedOppGraph",closeOppBuilder.substring(0, closeOppBuilder.length()-1));
 		
 		return "dashboard";
 	}
