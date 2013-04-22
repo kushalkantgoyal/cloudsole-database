@@ -12,6 +12,7 @@ public class StatsController {
 	@RequestMapping(value="")
 	public String returnStatsView(Map<String, Object> map)
 	{
+		
 		return "stats";
 	}
 

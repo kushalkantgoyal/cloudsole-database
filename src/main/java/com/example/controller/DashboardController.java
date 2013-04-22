@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.service.LoginService;
+import com.example.util.GraphMapper;
 import com.force.api.QueryResult;
 
 
@@ -124,21 +125,8 @@ public class DashboardController {
 			}
 		}
 		
-		StringBuilder openOppBuilder = new StringBuilder();
-		for (Integer openOpportunity : openOpportunities.keySet())
-		{
-			openOppBuilder.append("[").append(openOpportunity).append(",").append(openOpportunities.get(openOpportunity)).append("],");
-		}
-	
-		map.put("OpenOppGraph", openOppBuilder.substring(0, openOppBuilder.length()-1));
-		
-		StringBuilder closeOppBuilder = new StringBuilder();
-		for (Integer closedOpportunity : closedOpportunities.keySet())
-		{
-			closeOppBuilder.append("[").append(closedOpportunity).append(",").append(openOpportunities.get(closedOpportunity)).append("],");
-		}
-	
-		map.put("ClosedOppGraph",closeOppBuilder.substring(0, closeOppBuilder.length()-1));
+		map.put("OpenOppGraph", GraphMapper.lineGraphBuilder(openOpportunities));
+		map.put("ClosedOppGraph",GraphMapper.lineGraphBuilder(closedOpportunities));
 		
 		return "dashboard";
 	}

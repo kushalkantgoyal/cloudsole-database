@@ -715,6 +715,7 @@
 	<nav id="left-panel">
 		<div id="left-panel-content">
 			<ul>
+				
 				<li class="active">
 					<a href="/login/dashboard"><span class="icon-dashboard"></span>Dashboard</a>
 				</li>
