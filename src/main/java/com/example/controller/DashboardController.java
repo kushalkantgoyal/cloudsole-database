@@ -129,7 +129,7 @@ public class DashboardController {
 		{
 			openOppBuilder.append("[").append(openOpportunity).append(",").append(openOpportunities.get(openOpportunity)).append("],");
 		}
-		System.out.println(openOppBuilder);
+	
 		map.put("OpenOppGraph", openOppBuilder.substring(0, openOppBuilder.length()-1));
 		
 		StringBuilder closeOppBuilder = new StringBuilder();
@@ -137,7 +137,7 @@ public class DashboardController {
 		{
 			closeOppBuilder.append("[").append(closedOpportunity).append(",").append(openOpportunities.get(closedOpportunity)).append("],");
 		}
-		System.out.println(closeOppBuilder);
+	
 		map.put("ClosedOppGraph",closeOppBuilder.substring(0, closeOppBuilder.length()-1));
 		
 		return "dashboard";
@@ -147,6 +147,21 @@ public class DashboardController {
 	@RequestMapping("/developer")
 	public String returnTechnicalDashboardView(Map<String, Object> map)
 	{
+		//API calls
+		
+		//Apex Class
+		
+		//Visualforce Classes
+		
+		//Components
+		
+		//Scheduled Jobs
+		
+		//Batch Jobs
+		
+		//Streaming Clients
+		
+		
 		return "techdashboard";
 	}
 	

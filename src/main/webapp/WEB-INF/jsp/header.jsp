@@ -719,23 +719,23 @@
 					<a href="/login/dashboard"><span class="icon-dashboard"></span>Dashboard</a>
 				</li>
 				<li>
-					<a href="layout.html"><span class="icon-th-large"></span>Batch</a>
+					<a href="/login/batch"><span class="icon-th-large"></span>Batch</a>
 				</li>
 				<li>
-					<a href="typography.html"><span class="icon-font"></span>Metadata</a>
+					<a href="/login/metadata"><span class="icon-font"></span>Metadata</a>
 				</li>
 				<li>
-					<a href="forms.html"><span class="icon-edit"></span>Apex</a>
+					<a href="/login/apex"><span class="icon-edit"></span>Apex</a>
 				</li>
 				<li>
 					<a href="/login/sobject"><span class="icon-table"></span>SOQL</a>
 				</li>
 				
 				<li>
-					<a href="components.html"><span class="icon-inbox"></span>Email</a>
+					<a href="/login/email"><span class="icon-inbox"></span>Email</a>
 				</li>
 				<li>
-					<a href="javascript.html"><span class="icon-cog"></span>Sync</a>
+					<a href="/login/sync"><span class="icon-cog"></span>Sync</a>
 				</li>
 				<li class="lp-dropdown">
 					<a href="#" class="lp-dropdown-toggle" id="extras-dropdown"><span class="icon-reorder"></span>Extras</a>
@@ -744,7 +744,7 @@
 							<a tabindex="-1" href="extras-icons.html"><span class="icon-coffee"></span>Icons</a>
 						</li>
 						<li>
-							<a tabindex="-1" href="extras-charts.html"><span class="icon-bar-chart"></span>Stats</a>
+							<a tabindex="-1" href="/login/stats"><span class="icon-bar-chart"></span>Stats</a>
 						</li>
 						<li>
 							<a tabindex="-1" href="extras-widgets.html"><span class="icon-star"></span>Wiki</a>
