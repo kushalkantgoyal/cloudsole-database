@@ -21,14 +21,12 @@ public class LoginController {
     private LoginService loginService;
         
     @RequestMapping(value="")
-    public String LoginToCloudSole(Map<String, Object> map) 
+    public String loginToCloudSoleDevelop(Map<String, Object> map) 
     {
     	ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
 		HttpSession session = attr.getRequest().getSession(true); //create a new session
-			// put the UserDetails object here.
-	
+		
 		session.setAttribute("userName", ForceSecurityContextHolder.get().getUserName());
-		session.setAttribute("showSObjects", loginService.showSObjects());
 	
         return "login";
     }

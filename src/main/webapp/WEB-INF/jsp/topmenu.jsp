@@ -116,8 +116,8 @@
                    
                    	 		 </c:when>
                    	 		 <c:when test="${inner.index == 1}">
-                   	 		 	<td><form action="/login/sobject/delete/${currentSObject}/${sobjectRecord.value}" method="post"><input type="submit" class="btn btn-danger btn-mini" value="Delete"/></form></td>
-                   	 		 	<td><form action="/login/sobject/edit/${currentSObject}/${sobjectRecord.value}" method="post"><input type="submit" class="btn btn-danger btn-mini" value="Edit"/></form></td>
+                   	 		 	<td><form action="/login/sobject/delete/${currentSObject}/${sobjectRecord.value}" method="post"><input type="submit" class="btn btn-primary btn-mini" value="Delete"/></form></td>
+                   	 		 	<td><form action="/login/sobject/edit/${currentSObject}/${sobjectRecord.value}" method="post"><input type="submit" class="btn btn-primary btn-mini" value="Edit"/></form></td>
                    	 		 	<td>
                     				${sobjectRecord.value}
                     			</td>
@@ -168,7 +168,7 @@
                 	</c:forEach>
                 	</div>
                 	 
-                	<button class="btn" type="submit">Save ${currentSObject}</button>
+                	<button class="btn btn-primary" type="submit">Save ${currentSObject}</button>
            		 </form>
            		 </c:if>
           	 	</div>
@@ -186,7 +186,7 @@
                 	</c:forEach>
                     </div> 
                    
-                	<button class="btn" type="submit">Save ${currentSObject}</button>
+                	<button class="btn btn-primary" type="submit">Save ${currentSObject}</button>
            		 </form>
            		 </c:if>
           	 	</div>

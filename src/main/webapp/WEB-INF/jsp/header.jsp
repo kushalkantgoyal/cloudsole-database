@@ -29,7 +29,70 @@
 	<script src="/resources/assets/javascripts/1.2.1/adminflare-demo.min.js" type="text/javascript"></script>
 	<script src="/resources/assets/javascripts/1.2.1/bootstrap.min.js" type="text/javascript"></script>
 	<script src="/resources/assets/javascripts/1.2.1/adminflare.min.js" type="text/javascript"></script>
+	
 	<style type="text/css">
+			/* ======================================================================= */
+		/* Server Statistics */
+		.well.widget-pie-charts .box {
+			margin-bottom: -20px;
+		}
+
+		/* ======================================================================= */
+		/* Why AdminFlare */
+		#why-adminflare ul {
+			position: relative;
+			padding: 0 10px;
+			margin: 0 -10px;
+		}
+
+		#why-adminflare ul:nth-child(2n) {
+			background: rgba(0, 0, 0, 0.02);
+		}
+
+		#why-adminflare li {
+			padding: 8px 10px;
+			list-style: none;
+			font-size: 14px;
+			padding-left: 23px;
+		}
+
+		#why-adminflare li i {
+			color: #666;
+			font-size: 14px;
+			margin: 3px 0 0 -23px;
+			position: absolute;
+		}
+
+
+		/* ======================================================================= */
+		/* Supported Browsers */
+		#supported-browsers header { color: #666; display: block; font-size: 14px; }
+			
+		#supported-browsers header strong { font-size: 18px; }
+
+		#supported-browsers .span10 { margin-bottom: -15px; text-align: center; }
+
+		#supported-browsers .span10 div {
+			margin-bottom: 15px;
+			margin-right: 15px;
+			display: inline-block;
+			width: 120px;
+		}
+
+		#supported-browsers .span10 div:last-child { margin-right: 0; }
+
+		#supported-browsers .span10 img { height: 40px; width: 40px; }
+
+		#supported-browsers .span10 span { line-height: 40px; font-size: 14px; font-weight: 600; }
+		
+		@media (max-width: 767px) {
+			#supported-browsers header { text-align: center; margin-bottom: 20px; }
+		}
+
+		/* ======================================================================= */
+		/* Status panel */
+		.status-example { line-height: 0; position:relative; top: 22px }
+		
 		.box { padding-bottom: 0; }
 
 		.box > p { margin-bottom: 20px; }
@@ -45,6 +108,99 @@
 	</style>
 
 	<script type="text/javascript">
+	$(document).ready(function () {
+		$('a[rel=tooltip]').tooltip();
+
+		// Easy Pie Charts
+		var easyPieChartDefaults = {
+			animate: 20000,
+			scaleColor: false,
+			lineWidth: 12,
+			lineCap: 'square',
+			size: 100,
+			trackColor: '#e5e5e5'
+		}
+		$('#easy-pie-chart-1').easyPieChart($.extend({}, easyPieChartDefaults, {
+			barColor: '#3da0ea'
+		}));
+		$('#easy-pie-chart-2').easyPieChart($.extend({}, easyPieChartDefaults, {
+			barColor: '#e7912a'
+		}));
+		$('#easy-pie-chart-3').easyPieChart($.extend({}, easyPieChartDefaults, {
+			barColor: '#bacf0b'
+		}));
+		$('#easy-pie-chart-4').easyPieChart($.extend({}, easyPieChartDefaults, {
+			barColor: '#4ec9ce'
+		}));
+		$('#easy-pie-chart-5').easyPieChart($.extend({}, easyPieChartDefaults, {
+			barColor: '#ec7337'
+		}));
+		$('#easy-pie-chart-6').easyPieChart($.extend({}, easyPieChartDefaults, {
+			barColor: '#f377ab'
+		}));
+		// Visits Chart
+		var visitsChartData = [{
+			// Visits
+			label: 'Closed Opportunity',
+			data: [
+				[6, 1300],
+				[7, 1600],
+				[8, 1900],
+				[9, 2100],
+				[10, 2500],
+				[11, 2200],
+				[12, 2000],
+				[13, 1950],
+				[14, 1900],
+				[15, 2000]
+			]
+		}, {
+			// Returning Visits
+			label: 'Open Opportunity',
+			data: [
+				[6, 500],
+				[7, 600],
+				[8, 550],
+				[9, 600],
+				[10, 800],
+				[11, 900],
+				[12, 800],
+				[13, 850],
+				[14, 830],
+				[15, 1000]
+			],
+			filledPoints: true
+		}];
+		$('#visits-chart').simplePlot(visitsChartData, {
+			series: {
+				points: {
+					show: true,
+					radius: 5
+				},
+				lines: {
+					show: true
+				}
+			},
+			xaxis: {
+				tickDecimals: 2
+			},
+			yaxis: {
+				tickSize: 1000
+			}
+		}, {
+			height: 205,
+			tooltipText: "y + ' visitors at ' + x + '.00h'"
+		});
+		// Comments Tab
+		$('.comment-remove').click(function () {
+			bootbox.confirm("Are you sure?", function (result) {
+				alert("Confirm result: " + result);
+			});
+			return false;
+		});
+		// New Users Tab
+		$('#tab-users a').tooltip();
+	});
 		$(document).ready(function () {
 			prettyPrint();
 
@@ -504,7 +660,6 @@
 	
 </head>
 <body>
-<script type="text/javascript">demoSetBodyLayout();</script>
 	<!-- Main navigation bar
 		================================================== -->
 	<header class="navbar navbar-fixed-top" id="main-navbar">
@@ -540,10 +695,10 @@
 						<li>
 							<ul class="messages">
 								<li>
-									<a href="#"><i class="icon-warning-sign"></i> 2<span class="		responsive-text"> alerts</span></a>
+									<a href="#"><i class="icon-warning-sign"></i>2<span class="		responsive-text"> alerts</span></a>
 								</li>
 								<li>
-									<a href="#"><i class="icon-envelope"></i> 25<span class="		responsive-text"> new messages</span></a>
+									<a href="#"><i class="icon-envelope"></i>25<span class="		responsive-text"> new messages</span></a>
 								</li>
 							</ul>
 						</li>
@@ -551,7 +706,7 @@
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle usermenu" data-toggle="dropdown">
 								<img alt="Avatar" src="/resources/assets/images/avatar.png">
-								<span>&nbsp;&nbsp;Admin</span>
+								<span>${userName}</span>
 							</a>
 							<ul class="dropdown-menu">
 								<li>
@@ -582,13 +737,13 @@
 					<a href="/login/dashboard"><span class="icon-dashboard"></span>Dashboard</a>
 				</li>
 				<li>
-					<a href="layout.html"><span class="icon-th-large"></span>Layout</a>
+					<a href="layout.html"><span class="icon-th-large"></span>Batch</a>
 				</li>
 				<li>
 					<a href="typography.html"><span class="icon-font"></span>Metadata</a>
 				</li>
 				<li>
-					<a href="forms.html"><span class="icon-edit"></span>CRUD</a>
+					<a href="forms.html"><span class="icon-edit"></span>Apex</a>
 				</li>
 				<li>
 					<a href="/login/sobject"><span class="icon-table"></span>SOQL</a>
@@ -598,7 +753,7 @@
 					<a href="components.html"><span class="icon-inbox"></span>Email</a>
 				</li>
 				<li>
-					<a href="javascript.html"><span class="icon-cog"></span>Apex</a>
+					<a href="javascript.html"><span class="icon-cog"></span>Sync</a>
 				</li>
 				<li class="lp-dropdown">
 					<a href="#" class="lp-dropdown-toggle" id="extras-dropdown"><span class="icon-reorder"></span>Extras</a>

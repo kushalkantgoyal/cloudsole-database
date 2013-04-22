@@ -7,192 +7,9 @@
 <!--[if IE 7]><html class="no-js lt-ie9 lt-ie8"><![endif]-->
 <!--[if IE 8]><html class="no-js lt-ie9"><![endif]-->
 <!--[if gt IE 8]><!--><html class="no-js"><!--<![endif]-->
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<title>
-		AdminFlare - Dashboard
-	</title>
-	<meta name="description" content="">
-	<meta name="viewport" content="width=device-width">
-
-	<script src="/resources/assets/javascripts/1.2.1/adminflare-demo-init.min.js" type="text/javascript"></script>
-
-	<link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,300,600,700" rel="stylesheet" type="text/css">
-	<script type="text/javascript">
-		// Include Bootstrap stylesheet 
-		document.write('<link href="/resources/assets/css/' + DEMO_ADMINFLARE_VERSION + '/' + DEMO_CURRENT_THEME + '/bootstrap.min.css" media="all" rel="stylesheet" type="text/css" id="bootstrap-css">');
-		// Include AdminFlare stylesheet 
-		document.write('<link href="/resources/assets/css/' + DEMO_ADMINFLARE_VERSION + '/' + DEMO_CURRENT_THEME + '/adminflare.min.css" media="all" rel="stylesheet" type="text/css" id="adminflare-css">');
-	</script>
-	
-	<script src="/resources/assets/javascripts/1.2.1/modernizr-jquery.min.js" type="text/javascript"></script>
-	<script src="/resources/assets/javascripts/1.2.1/adminflare-demo.min.js" type="text/javascript"></script>
-	<script src="/resources/assets/javascripts/1.2.1/bootstrap.min.js" type="text/javascript"></script>
-	<script src="/resources/assets/javascripts/1.2.1/adminflare.min.js" type="text/javascript"></script>
-
-	<style type="text/css">
-		/* ======================================================================= */
-		/* Server Statistics */
-		.well.widget-pie-charts .box {
-			margin-bottom: -40px;
-		}
-
-		/* ======================================================================= */
-		/* Why AdminFlare */
-		#why-adminflare ul {
-			position: relative;
-			padding: 0 10px;
-			margin: 0 -10px;
-		}
-
-		#why-adminflare ul:nth-child(2n) {
-			background: rgba(0, 0, 0, 0.02);
-		}
-
-		#why-adminflare li {
-			padding: 8px 10px;
-			list-style: none;
-			font-size: 14px;
-			padding-left: 23px;
-		}
-
-		#why-adminflare li i {
-			color: #666;
-			font-size: 14px;
-			margin: 3px 0 0 -23px;
-			position: absolute;
-		}
-
-
-		/* ======================================================================= */
-		/* Supported Browsers */
-		#supported-browsers header { color: #666; display: block; font-size: 14px; }
-			
-		#supported-browsers header strong { font-size: 18px; }
-
-		#supported-browsers .span10 { margin-bottom: -15px; text-align: center; }
-
-		#supported-browsers .span10 div {
-			margin-bottom: 15px;
-			margin-right: 15px;
-			display: inline-block;
-			width: 120px;
-		}
-
-		#supported-browsers .span10 div:last-child { margin-right: 0; }
-
-		#supported-browsers .span10 img { height: 40px; width: 40px; }
-
-		#supported-browsers .span10 span { line-height: 40px; font-size: 14px; font-weight: 600; }
-		
-		@media (max-width: 767px) {
-			#supported-browsers header { text-align: center; margin-bottom: 20px; }
-		}
-
-		/* ======================================================================= */
-		/* Status panel */
-		.status-example { line-height: 0; position:relative; top: 22px }
-	</style>
-	
-	<script type="text/javascript">
-		$(document).ready(function () {
-			$('a[rel=tooltip]').tooltip();
-
-			// Easy Pie Charts
-			var easyPieChartDefaults = {
-				animate: 2000,
-				scaleColor: false,
-				lineWidth: 12,
-				lineCap: 'square',
-				size: 100,
-				trackColor: '#e5e5e5'
-			}
-			$('#easy-pie-chart-1').easyPieChart($.extend({}, easyPieChartDefaults, {
-				barColor: '#3da0ea'
-			}));
-			$('#easy-pie-chart-2').easyPieChart($.extend({}, easyPieChartDefaults, {
-				barColor: '#e7912a'
-			}));
-			$('#easy-pie-chart-3').easyPieChart($.extend({}, easyPieChartDefaults, {
-				barColor: '#bacf0b'
-			}));
-			$('#easy-pie-chart-4').easyPieChart($.extend({}, easyPieChartDefaults, {
-				barColor: '#4ec9ce'
-			}));
-			$('#easy-pie-chart-5').easyPieChart($.extend({}, easyPieChartDefaults, {
-				barColor: '#ec7337'
-			}));
-			$('#easy-pie-chart-6').easyPieChart($.extend({}, easyPieChartDefaults, {
-				barColor: '#f377ab'
-			}));
-			// Visits Chart
-			var visitsChartData = [{
-				// Visits
-				label: 'Visits',
-				data: [
-					[6, 1300],
-					[7, 1600],
-					[8, 1900],
-					[9, 2100],
-					[10, 2500],
-					[11, 2200],
-					[12, 2000],
-					[13, 1950],
-					[14, 1900],
-					[15, 2000]
-				]
-			}, {
-				// Returning Visits
-				label: 'Returning Visits',
-				data: [
-					[6, 500],
-					[7, 600],
-					[8, 550],
-					[9, 600],
-					[10, 800],
-					[11, 900],
-					[12, 800],
-					[13, 850],
-					[14, 830],
-					[15, 1000]
-				],
-				filledPoints: true
-			}];
-			$('#visits-chart').simplePlot(visitsChartData, {
-				series: {
-					points: {
-						show: true,
-						radius: 5
-					},
-					lines: {
-						show: true
-					}
-				},
-				xaxis: {
-					tickDecimals: 2
-				},
-				yaxis: {
-					tickSize: 1000
-				}
-			}, {
-				height: 205,
-				tooltipText: "y + ' visitors at ' + x + '.00h'"
-			});
-			// Comments Tab
-			$('.comment-remove').click(function () {
-				bootbox.confirm("Are you sure?", function (result) {
-					alert("Confirm result: " + result);
-				});
-				return false;
-			});
-			// New Users Tab
-			$('#tab-users a').tooltip();
-		});
-	</script>
-</head>
+<jsp:include page="header.jsp"/>
 <body>
-<script type="text/javascript">demoSetBodyLayout();</script>
+
 	
 	<!-- Page content
 		================================================== -->
@@ -202,61 +19,61 @@
 			================================================== -->
 		<section class="well row-fluid widget-pie-charts">
 			<h3 class="box-header">
-				Server statictics
+				Record statictics
 			</h3>
 			<div class="box no-border non-collapsible">
 				
 				<div class="span2 pie-chart">
-					<div id="easy-pie-chart-1" data-percent="58">
-						58%
+					<div id="easy-pie-chart-1" data-percent="${queryCountOppResult}">
+						${queryCountOppResult}
 					</div>
 					<div class="caption">
-						New Visits
+						Total Opportunities
 					</div>
 				</div>
 				
 				<div class="span2 pie-chart">
-					<div id="easy-pie-chart-2" data-percent="43">
-						43%
+					<div id="easy-pie-chart-2" data-percent="${queryTotalAmountOppResult}">
+						${queryTotalAmountOppResult}
 					</div>
 					<div class="caption">
-						Bounce Rate
+						Total Opportunity Amount
 					</div>
 				</div>
 
 				<div class="span2 pie-chart">
-					<div id="easy-pie-chart-3" data-percent="91">
-						91%
+					<div id="easy-pie-chart-3" data-percent="${queryNewOpenCaseToday}">
+						${queryNewOpenCaseToday}
 					</div>
 					<div class="caption">
-						Server Load
+						Open Cases Today
 					</div>
 				</div>
 
 				<div class="span2 pie-chart">
-					<div id="easy-pie-chart-4" data-percent="82">
-						752MB
+					<div id="easy-pie-chart-4" data-percent="${queryNewClosedCaseToday}">
+						${queryNewClosedCaseToday}
 					</div>
 					<div class="caption">
-						Used RAM
+						Closed Cases Today
 					</div>
 				</div>
 
 				<div class="span2 pie-chart">
-					<div id="easy-pie-chart-5" data-percent="35">
-						35%
+					<div id="easy-pie-chart-5" data-percent="${queryNewLeadsToday}">
+						${queryNewLeadsToday}
 					</div>
 					<div class="caption">
-						Processor Load
+						New Leads Today
 					</div>
 				</div>
 
 				<div class="span2 pie-chart">
-					<div id="easy-pie-chart-6" data-percent="77">
-						1.5TB
+					<div id="easy-pie-chart-6" data-percent="${queryNewContactToday}">
+						${queryNewContactToday}
 					</div>
 					<div class="caption">
-						Bandwidth
+						New Contacts Today
 					</div>
 				</div>
 			</div>
@@ -271,7 +88,7 @@
 			<div class="span8">
 				<h3 class="box-header">
 					<i class="icon-home"></i>
-					Daily visits chart
+					Daily Opportunity Chart
 				</h3>
 
 				<div class="box">
@@ -292,66 +109,66 @@
 					<div class="rounded-borders">
 						<div class="counter small">
 							<span>
-							897
+							${queryLoginsToday}
 							</span>
 						</div>
 						<div class="counter-label">
-							Visits Today
+							Logins Today
 						</div>
 					</div>
 					
 					<div class="rounded-borders">
 						<div class="counter small">
 							<span>
-							563
+							${queryChatterPostsToday}
 							</span>
 						</div>
 						<div class="counter-label">
-							Unique Visits
+							Chatter Posts
 						</div>
 					</div>
 					
 					<div class="rounded-borders">
 						<div class="counter small">
 							<span>
-							65
+							${queryChatterCommentsToday}
 							</span>
 						</div>
 						<div class="counter-label">
-							Posts
+							Chatter Comments
 						</div>
 					</div>
 					
 					<div class="rounded-borders">
 						<div class="counter small">
 							<span>
-							865
+							${queryEmailToday}
 							</span>
 						</div>
 						<div class="counter-label">
-							Total Comments
+							Total Emails
 						</div>
 					</div>
 					
 					<div class="rounded-borders">
 						<div class="counter small">
 							<span>
-							14
+							${queryTasksToday}
 							</span>
 						</div>
 						<div class="counter-label">
-							Pending Comments
+							Total Tasks
 						</div>
 					</div>
 					
 					<div class="rounded-borders">
 						<div class="counter small">
 							<span>
-							11
+							${queryDocumentToday}
 							</span>
 						</div>
 						<div class="counter-label">
-							Support Requests
+							Total Documents
 						</div>
 					</div>
 				</div>
@@ -663,168 +480,5 @@
 				</div>
 			</div>
 			<!-- / Last activity -->
-		</section>
-
-		<!-- Why AdminFlare
-			================================================== -->
-		<section class="row-fluid" id="why-adminflare">
-			<h3 class="box-header"><i class="icon-fire" style="color: #cd522c"></i> Why AdminFlare</h3>
-			<div class=" box well ">
-				<ul class="row-fluid">
-					<li class="span4">
-						<i class="icon-ok"></i> Simple and clean design
-					</li>
-					<li class="span4">
-						<i class="icon-ok"></i> Responsive 12-column stacked-left, centered and fluid layouts
-					</li>
-					<li class="span4">
-						<i class="icon-ok"></i> Built with LESS
-					</li>
-				</ul>
-
-				<ul class="row-fluid">
-					<li class="span4">
-						<i class="icon-ok"></i> HTML5 and CSS3
-					</li>
-					<li class="span4">
-						<i class="icon-ok"></i> Node.js scripts for LESS and JS compiling
-					</li>
-					<li class="span4">
-						<i class="icon-ok"></i> Easy to customize
-					</li>
-				</ul>
-
-				<ul class="row-fluid">
-					<li class="span4">
-						<i class="icon-ok"></i> Easy to exclude unused components and plugins
-					</li>
-					<li class="span4">
-						<i class="icon-ok"></i> 11 color themes
-					</li>
-					<li class="span4">
-						<i class="icon-ok"></i> 249 icons in one font (<a href="http://fortawesome.github.com/Font-Awesome/" title="FontAwesome" target="_blank">FontAwesome</a>)
-					</li>
-				</ul>
-
-				<ul class="row-fluid">
-					<li class="span4">
-						<i class="icon-ok"></i> Based on <a href="http://twitter.github.com/bootstrap/" title="Bootstrap 2.2.2" target="_blank">Bootstrap 2.2.2</a>
-					</li>
-					<li class="span4">
-						<i class="icon-ok"></i> Uses <a href="http://jquery.com/" title="jQuery 1.9.0" target="_blank">jQuery 1.9.0</a>
-					</li>
-					<li class="span4">
-						<i class="icon-ok"></i> Integrated <a href="http://www.flotcharts.org/" title="Flot" target="_blank">Flot</a> charts
-					</li>
-				</ul>
-
-				<ul class="row-fluid">
-					<li class="span4">
-						<i class="icon-ok"></i> <a href="http://rendro.github.com/easy-pie-chart/" title="Easy Pie Charts" target="_blank">Easy Pie Charts</a>
-					</li>
-					<li class="span4">
-						<i class="icon-ok"></i> Dynamic tables (<a href="http://exacttarget.github.com/fuelux/#datagrid" title="Fluelux Datagrid" target="_blank">Fuelux Datagrid</a>)
-					</li>
-					<li class="span4">
-						<i class="icon-ok"></i> Styled form elements (<a href="http://exacttarget.github.com/fuelux/" title="Fuelux" target="_blank">Fuelux</a>)
-					</li>
-				</ul>
-
-				<ul class="row-fluid">
-					<li class="span4">
-						<i class="icon-ok"></i> Form validation (<a href="http://reactiveraven.github.com/jqBootstrapValidation/" title="jqBootstrapValidation" target="_blank">jqBootstrapValidation</a>)
-					</li>
-					<li class="span4">
-						<i class="icon-ok"></i> WYSIWYG-Editor (<a href="http://jhollingworth.github.com/bootstrap-wysihtml5/" title="bootstrap-wysihtml5" target="_blank">bootstrap-wysihtml5</a>)
-					</li>
-					<li class="span4">
-						<i class="icon-ok"></i> Colorpicker for Bootstrap (<a href="http://www.eyecon.ro/bootstrap-colorpicker/" title="bootstrap-colorpicker" target="_blank">bootstrap-colorpicker</a>)
-					</li>
-				</ul>
-
-				<ul class="row-fluid">
-					<li class="span4">
-						<i class="icon-ok"></i> Datepicker for Bootstrap (<a href="http://www.eyecon.ro/bootstrap-datepicker/" title="datepicker-colorpicker" target="_blank">datepicker-colorpicker</a>)
-					</li>
-					<li class="span4">
-						<i class="icon-ok"></i> Timepicker for Bootstrap (<a href="http://jdewit.github.com/bootstrap-timepicker/" title="bootstrap-timepicker" target="_blank">bootstrap-timepicker</a>)
-					</li>
-					<li class="span4">
-						<i class="icon-ok"></i> Autosizing textarea (<a href="http://www.jacklmoore.com/autosize" title="jQuery Autosize" target="_blank">jQuery Autosize</a>)
-					</li>
-				</ul>
-
-				<ul class="row-fluid">
-					<li class="span4">
-						<i class="icon-ok"></i> Toggle buttons (<a href="http://simontabor.com/toggles/" title="jQuery Toggles" target="_blank">jQuery Toggles</a>)
-					</li>
-					<li class="span4">
-						<i class="icon-ok"></i> In-place editing with <a href="http://vitalets.github.com/x-editable/" title="X-editable" target="_blank">X-editable</a>
-					</li>
-					<li class="span4">
-						<i class="icon-ok"></i> Wizards (<a href="http://exacttarget.github.com/fuelux/#wizard" title="jQuery Autosize" target="_blank">Fuelux Wizard</a>)
-					</li>
-				</ul>
-
-				<ul class="row-fluid">
-					<li class="span4">
-						<i class="icon-ok"></i> Growl-like notifications (<a href="https://github.com/Nijikokun/bootstrap-notify/" title="bootstrap-notify" target="_blank">bootstrap-notify</a>)
-					</li>
-					<li class="span4">
-						<i class="icon-ok"></i> Dialog boxes (<a href="http://bootboxjs.com/" title="Bootbox" target="_blank">Bootbox</a>)
-					</li>
-					<li class="span4">
-						<i class="icon-ok"></i> Clickovers (<a href="https://github.com/lecar-red/bootstrapx-clickover" title="Bootstrapx Clickover" target="_blank">Bootstrapx Clickover</a>)
-					</li>
-				</ul>
-
-
-			</div>
-		</section>
-		<!-- / Why AdminFlare -->
-
-		<!-- Supported browsers
-			================================================== -->
-		<section class="row-fluid" id="supported-browsers">
-			<div class="box">
-				<header class="span2">
-					SUPPORTED<br><strong>BROWSERS</strong>
-				</header>
-				<div class="span10">
-					<div>
-						<img src="/resources/assets/images/browsers/chrome.png" alt="Google Chrome">
-						<span>Chrome</span>
-					</div>
-					<div>
-						<img src="/resources/assets/images/browsers/firefox.png" alt="Mozills Firefox 9+">
-						<span>Firefox 4+</span>
-					</div>
-					<div>
-						<img src="/resources/assets/images/browsers/safari.png" alt="Safari 5+">
-						<span>Safari 5+</span>
-					</div>
-					<div>
-						<img src="/resources/assets/images/browsers/opera.png" alt="Opera 10+">
-						<span>Opera 11+</span>
-					</div>
-					<div>
-						<img src="/resources/assets/images/browsers/ie.png" alt="Internet Explorer 9+">
-						<span>IE 9+</span>
-					</div>
-				</div>
-			</div>
-		</section>
-		<!-- / Supported browsers -->
-		
-		<!-- Page footer
-			================================================== -->
-		<footer id="main-footer">
-			Copyright © 2013 <a href="#">Your Company</a>, all rights reserved.
-			<a href="#" class="pull-right" id="on-top-link">
-				On Top&nbsp;<i class=" icon-chevron-up"></i>
-			</a>
-		</footer>
-		<!-- / Page footer -->
-	</section>
-</body>
-</html>
+		</section>		
+<jsp:include page="footer.jsp"/>

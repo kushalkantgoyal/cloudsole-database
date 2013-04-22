@@ -68,6 +68,14 @@ public class SObjectController
 		return queries;
 	}
 	
+	@RequestMapping(value="")
+	public void showSObjects(Map<String, Object> map)
+	{
+		ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+		HttpSession session = attr.getRequest().getSession(false); //create a new session
+		session.setAttribute("showSObjects", loginService.showSObjects());
+	}
+	
 	@RequestMapping(value="/query/download/{sobjectName}", method=RequestMethod.GET)
 	public String downloadSObjectToCSV(@PathVariable("sobjectName") String sObjectName, Map<String, Object> map, HttpServletResponse response) throws Exception
 	{
