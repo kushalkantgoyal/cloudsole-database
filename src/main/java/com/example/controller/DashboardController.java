@@ -50,7 +50,6 @@ public class DashboardController {
 		map.put("queryNewClosedCaseToday", queryNewClosedCaseToday);
 		map.put("queryNewLeadsToday", queryNewLeadsToday);
 		map.put("queryNewContactToday", queryNewContactToday);
-		System.out.println(queryTotalAmountOpportunities.getRecords().get(0).values().toArray()[1]);
 		if (queryTotalAmountOpportunities.getRecords().get(0).values().toArray()[1]!=null)
 			map.put("queryTotalAmountOppResult", new BigDecimal(String.valueOf(queryTotalAmountOpportunities.getRecords().get(0).values().toArray()[1])).toPlainString());
 		else
@@ -152,7 +151,6 @@ public class DashboardController {
 		//Batch Jobs
 		
 		//Streaming Clients
-		
 		
 		return "techdashboard";
 	}
