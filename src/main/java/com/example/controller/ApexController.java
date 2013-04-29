@@ -31,7 +31,7 @@ public class ApexController {
 		//create trigger with template or without.
 		//create trigger with or without Handler
 		//create visualforce templates
-		return "create";
+		return "newclass";
 	}
 	
 	@RequestMapping(value="create", method=RequestMethod.POST)

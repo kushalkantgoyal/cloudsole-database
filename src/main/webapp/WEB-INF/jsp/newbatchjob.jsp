@@ -69,7 +69,7 @@
 											
 											<div class="control-group">
 												<div class="controls">
-													<button class="btn" type="submit">Create Job</button>
+													<button class="btn btn-primary" type="submit">Create Job</button>
 												</div>
 											</div>
 										</fieldset>

@@ -24,6 +24,8 @@ public class AboutController {
 		featureList.add("Easy integration to 3rd party apis");
 		featureList.add("Easy integration to integrations tools");
 		featureList.add("Easy to get started and easy to use");
+		featureList.add("Extended debugging");
+		featureList.add("REST interface to Force.com objects");
 		return featureList;
 	}
 	
