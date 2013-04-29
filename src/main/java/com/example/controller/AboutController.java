@@ -13,10 +13,7 @@ import com.example.service.LoginService;
 @Controller
 @RequestMapping("/about")
 public class AboutController {
-    
-	@Autowired
-    private LoginService loginService;
-	
+    	
 	private List<String> featureList;
 	
 	public List<String> websiteFeatures()

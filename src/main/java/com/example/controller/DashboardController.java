@@ -50,7 +50,11 @@ public class DashboardController {
 		map.put("queryNewClosedCaseToday", queryNewClosedCaseToday);
 		map.put("queryNewLeadsToday", queryNewLeadsToday);
 		map.put("queryNewContactToday", queryNewContactToday);
-		map.put("queryTotalAmountOppResult", new BigDecimal(String.valueOf(queryTotalAmountOpportunities.getRecords().get(0).values().toArray()[1])).toPlainString());
+		System.out.println(queryTotalAmountOpportunities.getRecords().get(0).values().toArray()[1]);
+		if (queryTotalAmountOpportunities.getRecords().get(0).values().toArray()[1]!=null)
+			map.put("queryTotalAmountOppResult", new BigDecimal(String.valueOf(queryTotalAmountOpportunities.getRecords().get(0).values().toArray()[1])).toPlainString());
+		else
+			map.put("queryTotalAmountOppResult", new BigDecimal(String.valueOf(0)).toPlainString());
 		
 		//Logins Today
 		Integer queryLoginsToday = loginToSalesforce.LoginToSalesforce().query("Select count() from LoginHistory where LoginTime=Today").getTotalSize();

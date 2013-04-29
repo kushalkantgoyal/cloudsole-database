@@ -2,16 +2,12 @@ package com.example.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
 import org.springframework.stereotype.Service;
 
-import com.force.api.ApiConfig;
 import com.force.api.ApiSession;
-import com.force.api.DescribeGlobal;
 import com.force.api.DescribeSObjectBasic;
 import com.force.api.ForceApi;
-import com.force.api.Identity;
 import com.force.sdk.oauth.context.ForceSecurityContextHolder;
 import com.force.sdk.oauth.context.SecurityContext;
 
@@ -19,9 +15,6 @@ import com.force.sdk.oauth.context.SecurityContext;
 public class LoginServiceImp implements LoginService {
  	
 	private static List<String> sObjectNames = new ArrayList<String>();
-	
-	public static String sessionId = ForceSecurityContextHolder.get().getSessionId();
-	public static String endPoint = ForceSecurityContextHolder.get().getEndPointHost();
 	
 	@Override
 	public ForceApi LoginToSalesforce() 
@@ -51,6 +44,22 @@ public class LoginServiceImp implements LoginService {
 			return sObjectNames;
 		}
 	
+	}
+
+	@Override
+	public String getSessionId() {
+		if (LoginToSalesforce() != null)
+			return ForceSecurityContextHolder.get().getSessionId();
+		else
+			return null;
+	}
+
+	@Override
+	public String getEndpointURL() {
+		if (LoginToSalesforce() != null)
+			return ForceSecurityContextHolder.get().getEndPointHost();
+		else 
+			return null;
 	}
 	
 	

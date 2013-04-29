@@ -9,4 +9,6 @@ public interface LoginService
 {
 	public ForceApi LoginToSalesforce();
 	public List<String> showSObjects();
+	public String getSessionId();
+	public String getEndpointURL();
 }
