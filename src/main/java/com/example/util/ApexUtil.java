@@ -9,19 +9,20 @@ public class ApexUtil {
 		BASE, TEST, BATCH, SCHED, EMAIL, EXCEPTION, EMPTY;
 	};
 	
-	public String triggerStub(String name, List<String> operations, Boolean createHandler)
+	public String triggerStub(String name, String sObject, List<String> operations, Boolean createHandler)
 	{
 		StringBuilder triggerBuilder = new StringBuilder();
-		triggerBuilder.append("trigger ").append(name).append("{");
-		if (createHandler)
-			triggerBuilder.append(name).append("TriggerHandler handler = new ").append(name).append("TriggerHandler(Trigger.isExecuting, Trigger.size);").append("\n");
-		
+		triggerBuilder.append("trigger ").append(name).append(" on ").append(sObject).append("(");
 		for (String operation : operations)
 		{
 			triggerBuilder.append(operation).append(",");
 		}
 		triggerBuilder.deleteCharAt(triggerBuilder.length()-1);
 		triggerBuilder.append(") {").append("\n");
+		
+		if (createHandler)
+			triggerBuilder.append(name).append("TriggerHandler handler = new ").append(name).append("TriggerHandler(Trigger.isExecuting, Trigger.size);").append("\n");
+		
 		for (String operation : operations)
 		{
 			triggerBuilder.append("\t").append("if ((Trigger.is" + operation.split(" " )[0] + ")").append(" && ").append("(Trigger.is" + operation.split(" " )[1] + ")").append(") {").append("\n");
@@ -118,7 +119,7 @@ public class ApexUtil {
 		return componentBuilder.toString();
 	}
 	
-	public String triggerHandler(String name, List<String> operation)
+	public String triggerHandler(String name, String sObject, List<String> operations)
 	{
 		StringBuilder triggerHandlerBuilder = new StringBuilder();
 		triggerHandlerBuilder.append("public with sharing class ").append(name).append(" {").append("\n");
@@ -128,20 +129,60 @@ public class ApexUtil {
 		triggerHandlerBuilder.append("m_isExecuting = isExecuting;").append("\n");
 		triggerHandlerBuilder.append("BatchSize = size;").append("\n");
 		triggerHandlerBuilder.append("}").append("\n");
-		triggerHandlerBuilder.append("").append("\n");
-		triggerHandlerBuilder.append("").append("\n");
-		triggerHandlerBuilder.append("").append("\n");
-		triggerHandlerBuilder.append("").append("\n");
-		triggerHandlerBuilder.append("").append("\n");
-		triggerHandlerBuilder.append("").append("\n");
-		triggerHandlerBuilder.append("").append("\n");
-		triggerHandlerBuilder.append("").append("\n");
-		triggerHandlerBuilder.append("").append("\n");
-		triggerHandlerBuilder.append("").append("\n");
-		triggerHandlerBuilder.append("").append("\n");
-		triggerHandlerBuilder.append("").append("\n");
 		
-		return "";
+		for (String operation : operations)
+		{
+			if (operation.equalsIgnoreCase("before insert"))
+			{
+				triggerHandlerBuilder.append("public void OnBeforeInsert(").append(sObject).append("[]").append(" new").append(sObject).append("{").append("\n");
+				triggerHandlerBuilder.append("}").append("\n");
+			}
+			else if (operation.equalsIgnoreCase("after insert"))
+			{
+				triggerHandlerBuilder.append("public void OnAfterInsert(").append(sObject).append("[]").append(" new").append(sObject).append("{").append("\n");
+				triggerHandlerBuilder.append("}").append("\n");
+			}
+			else if (operation.equalsIgnoreCase("before update"))
+			{
+				triggerHandlerBuilder.append("public void OnBeforeUpdate(").append(sObject).append("[]").append(" old").append(sObject).append(",").append(sObject).append("[]").append(" updated").append(sObject).append(",").append("Map<ID,").append(sObject).append("> ").append(sObject).append("Map").append(")").append("{").append("\n");
+				triggerHandlerBuilder.append("}").append("\n");
+			}
+			else if(operation.equalsIgnoreCase("after update"))
+			{
+				triggerHandlerBuilder.append("public void OnAfterUpdate(").append(sObject).append("[]").append(" old").append(sObject).append(",").append(sObject).append("[]").append(" updated").append(sObject).append(",").append("Map<ID,").append(sObject).append("> ").append(sObject).append("Map").append(")").append("{").append("\n");
+				triggerHandlerBuilder.append("}").append("\n");
+			}
+			else if (operation.equalsIgnoreCase("before delete"))
+			{
+				triggerHandlerBuilder.append("public void OnBeforeDelete(").append(sObject).append("[]").append(sObject).append("ToDelete").append(",").append("Map<ID,").append(sObject).append("> ").append(sObject).append("Map").append(")").append("{").append("\n");
+				triggerHandlerBuilder.append("}").append("\n");
+			}
+			else if (operation.equalsIgnoreCase("after delete"))
+			{
+				triggerHandlerBuilder.append("public void OnAfterDelete(").append(sObject).append("[]").append(" deleted").append(sObject).append(",").append("Map<ID,").append(sObject).append("> ").append(sObject).append("Map").append(")").append("{").append("\n");
+				triggerHandlerBuilder.append("}").append("\n");
+			}
+			else if (operation.equalsIgnoreCase("undelete"))
+			{
+				triggerHandlerBuilder.append("public void OnUndelete(").append(sObject).append("[]").append("restored").append(sObject).append("{");
+				triggerHandlerBuilder.append("}").append("\n");
+			}
+		}
+		
+		triggerHandlerBuilder.append("public boolean IsTriggerContext{").append("\n");
+		triggerHandlerBuilder.append("get{ return m_isExecuting;}").append("\n");
+		triggerHandlerBuilder.append("}").append("\n");
+		triggerHandlerBuilder.append("public boolean IsVisualforcePageContext{").append("\n");
+		triggerHandlerBuilder.append("get{ return !IsTriggerContext;}").append("\n");
+		triggerHandlerBuilder.append("}").append("\n");
+		triggerHandlerBuilder.append("public boolean IsWebServiceContext{").append("\n");
+		triggerHandlerBuilder.append("get{ return !IsTriggerContext;}").append("\n");
+		triggerHandlerBuilder.append("}").append("\n");
+		triggerHandlerBuilder.append("public boolean IsExecuteAnonymousContext{").append("\n");
+		triggerHandlerBuilder.append("get{ return !IsTriggerContext;}").append("\n");
+		triggerHandlerBuilder.append("}").append("\n");
+		
+		return triggerHandlerBuilder.toString();
 	}
 
 }
