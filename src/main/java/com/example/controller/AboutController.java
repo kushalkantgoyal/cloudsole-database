@@ -13,12 +13,10 @@ import com.example.service.LoginService;
 @Controller
 @RequestMapping("/about")
 public class AboutController {
-    	
-	private List<String> featureList;
 	
 	public List<String> websiteFeatures()
 	{
-		featureList = new ArrayList<String>();
+		List<String> featureList = new ArrayList<String>();
 		featureList.add("SOQL Expression generator");
 		featureList.add("Easy Apex Code Editor with stub on class creation");
 		featureList.add("Run, export and view batch jobs easily");
@@ -32,7 +30,7 @@ public class AboutController {
 	@RequestMapping("")
     public String AboutMe(Map<String, Object> map) 
 	{	
-		 //map.put("loggedinUser", loginService.LoginToSalesforce().getIdentity());
+		 map.put("websiteFeatures", websiteFeatures());
 		 return "about";
     }
 

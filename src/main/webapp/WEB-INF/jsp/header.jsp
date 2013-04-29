@@ -657,15 +657,10 @@
 					<ul class="nav">
 						<li class="active"><a href="#">Home</a></li>
 						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <i class=" icon-caret-down"></i></a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">More<i class=" icon-caret-down"></i></a>
 							<ul class="dropdown-menu">
-								<li><a href="#">Action</a></li>
-								<li><a href="#">Another action</a></li>
-								<li><a href="#">Something else here</a></li>
-								<li class="divider"></li>
-								<li class="nav-header">Nav header</li>
-								<li><a href="#">Separated link</a></li>
-								<li><a href="#">One more separated link</a></li>
+								<li><a href="/login/about">About</a></li>
+								
 							</ul>
 						</li>
 						<li class="divider-vertical"></li>
