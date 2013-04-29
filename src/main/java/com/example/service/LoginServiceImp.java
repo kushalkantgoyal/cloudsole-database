@@ -19,10 +19,9 @@ import com.force.sdk.oauth.context.SecurityContext;
 public class LoginServiceImp implements LoginService {
  	
 	private static List<String> sObjectNames = new ArrayList<String>();
-	private static String loggedInUserName;
 	
-	//private static String sessionId = ForceSecurityContextHolder.get().getSessionId();
-	//private static String endPoint = ForceSecurityContextHolder.get().getEndPointHost();
+	public static String sessionId = ForceSecurityContextHolder.get().getSessionId();
+	public static String endPoint = ForceSecurityContextHolder.get().getEndPointHost();
 	
 	@Override
 	public ForceApi LoginToSalesforce() 

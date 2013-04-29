@@ -23,7 +23,38 @@
         </repository>
     </repositories>
 
-    <dependencies>    
+    <dependencies>
+    	<dependency>
+        	<groupId>javax.inject</groupId>
+        	<artifactId>javax.inject</artifactId>
+        	<version>1</version>
+        </dependency>
+        <dependency>
+			<groupId>org.cometd.java</groupId>
+			<artifactId>cometd-java-common</artifactId>
+			<version>2.5.1</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+			<version>1.4</version>
+		</dependency>
+		 <dependency>
+        <groupId>net.sf.opencsv</groupId>
+        <artifactId>opencsv</artifactId>
+        <version>2.3</version>
+      </dependency>
+       	<dependency>
+			<groupId>org.cometd.java</groupId>
+			<artifactId>cometd-java-client</artifactId>
+			<version>2.5.1</version>
+		</dependency>
+    	<dependency>
+		    <groupId>org.apache.httpcomponents</groupId>
+		    <artifactId>httpclient</artifactId>
+		    <version>4.2.3</version>
+		    <scope>compile</scope>
+		</dependency>    
         <dependency>
             <groupId>com.github.twitter</groupId>
             <artifactId>bootstrap</artifactId>
@@ -128,7 +159,7 @@
         </plugins>
     </build>
     <name>CloudSole</name>
-    <description>CloudSole SOQL Explorer</description>
+    <description>CloudSole</description>
     <organization>
     	<name>Thys Michels</name>
     	<url>http://www.thysmichels.com</url>
