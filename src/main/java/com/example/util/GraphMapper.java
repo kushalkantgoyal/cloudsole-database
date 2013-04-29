@@ -11,7 +11,10 @@ public class GraphMapper {
 		{
 			lineGraph.append("[").append(linegraph).append(",").append(linegrapMap.get(linegraph)).append("],");
 		}
-		return lineGraph.substring(0, lineGraph.length()-1);
+		if (lineGraph.length() > 0)
+			return lineGraph.substring(0, lineGraph.length()-1);
+		else
+			return lineGraph.toString();
 	}
 	public static <T> String donutChartBuilder(Map<T,T> donotgraphMap)
 	{
