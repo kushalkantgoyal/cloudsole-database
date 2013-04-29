@@ -66,7 +66,7 @@ public class DashboardController {
 		Integer queryChatterCommentsToday = loginToSalesforce.LoginToSalesforce().query("Select count() from FeedComment where CreatedDate=Today").getTotalSize();
 			
 		//Total Emails
-		Integer queryEmailToday = loginToSalesforce.LoginToSalesforce().query("Select count() from EmailMessage where CreatedDate=Today").getTotalSize();
+		//Integer queryEmailToday = loginToSalesforce.LoginToSalesforce().query("Select count() from EmailMessage where CreatedDate=Today").getTotalSize();
 		
 		//Total Tasks
 		Integer queryTasksToday = loginToSalesforce.LoginToSalesforce().query("Select count() from Task where CreatedDate=Today").getTotalSize();
@@ -77,7 +77,7 @@ public class DashboardController {
 		map.put("queryLoginsToday", queryLoginsToday);
 		map.put("queryChatterPostsToday", queryChatterPostsToday);
 		map.put("queryChatterCommentsToday", queryChatterCommentsToday);
-		map.put("queryEmailToday", queryEmailToday);
+		//map.put("queryEmailToday", queryEmailToday);
 		map.put("queryTasksToday", queryTasksToday);
 		map.put("queryDocumentToday", queryDocumentToday);
 		
