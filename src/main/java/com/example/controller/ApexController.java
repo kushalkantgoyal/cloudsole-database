@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.example.service.LoginService;
+import com.example.util.ApexUtil;
 import com.force.api.QueryResult;
 
 @Controller
@@ -26,7 +27,10 @@ public class ApexController {
 	@RequestMapping(value="create")
 	public String createApexClassView(Map<String, Object> map)
 	{
-		
+		map.put("classTypes", ApexUtil.classTypes.values());
+		//create trigger with template or without.
+		//create trigger with or without Handler
+		//create visualforce templates
 		return "create";
 	}
 	
