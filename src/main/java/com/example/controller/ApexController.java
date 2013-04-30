@@ -6,8 +6,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.converter.FormHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.example.service.LoginService;
 import com.example.util.ApexUtil;
 import com.force.api.QueryResult;
+import com.example.service.ToolingApi;
 
 @Controller
 @RequestMapping("/apex")
@@ -68,17 +71,31 @@ public class ApexController {
 	@RequestMapping(value="/view")
 	public String viewApexClasses(Map<String , Object> map)
 	{
-		QueryResult<Map> apexClass = loginService.LoginToSalesforce().query("Select Name, ApiVersion, Status from ApexClass");
-		QueryResult<Map> apexTrigger = loginService.LoginToSalesforce().query("Select Name, ApiVersion, Status from ApexTrigger");
-		QueryResult<Map> apexPage = loginService.LoginToSalesforce().query("Select Name, ApiVersion from ApexPage");
-		QueryResult<Map> apexComponent = loginService.LoginToSalesforce().query("Select Name, ApiVersion from ApexComponent");
+		QueryResult<Map> apexClass = loginService.LoginToSalesforce().query("Select Id, Name, ApiVersion, Status from ApexClass");
+		QueryResult<Map> apexTrigger = loginService.LoginToSalesforce().query("Select Id, Name, ApiVersion, Status from ApexTrigger");
+		QueryResult<Map> apexPage = loginService.LoginToSalesforce().query("Select Id, Name, ApiVersion from ApexPage");
+		QueryResult<Map> apexComponent = loginService.LoginToSalesforce().query("Select Id, Name, ApiVersion from ApexComponent");
 		
 		map.put("apexClass", apexClass.getRecords());
 		map.put("apexTrigger", apexTrigger.getRecords());
 		map.put("apexPage", apexPage.getRecords());
 		map.put("apexComponent", apexComponent.getRecords());
 		
-		return "apexview";
+		return "classes";
+	}
+	
+	@RequestMapping("/{id}")
+	public String getClassDetail(@PathVariable("id") String id,
+			Map<String, Object> map) throws ServletException {
+		try {
+			JSONObject apexClassResponse = ToolingApi.get("sobjects/ApexClass/"
+					+ id, ToolingApi.TOOLING_API);
+			map.put("body", apexClassResponse.get("Body"));
+		} catch (IOException e) {
+			throw new ServletException(e);
+		}
+
+		return "classDetail";
 	}
 	
 	@RequestMapping(value="/edit")

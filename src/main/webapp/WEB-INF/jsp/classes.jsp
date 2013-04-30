@@ -23,17 +23,17 @@
                 </thead>
                 <tbody>
                 
-                <c:forEach items="${records}" var="record">
+                <c:forEach items="${apexClass}" var="apexClass">
                    <tr>
                        <td>
-                       	<a href="classes/${record['Id']}">
-                       		${record['Name']}
+                       	<a href="apex/${apexClass['Id']}">
+                       		${apexClass['Name']}
                        	</a>
                        </td>
                        <td>
-                       	<a href="#" onClick="SFDC.deleteApexClass( '${record.metadata.name}', 
-                       											   '${record['Id']}', 
-                       											   '${record['Name']}')"
+                       	<a href="#" onClick="SFDC.deleteApexClass( '${apexClass.metadata.name}', 
+                       											   '${apexClass['Id']}', 
+                       											   '${apexClass['Name']}')"
                        		class="btn btn-danger btn-mini">Delete</a>
                        </td>
                    </tr>

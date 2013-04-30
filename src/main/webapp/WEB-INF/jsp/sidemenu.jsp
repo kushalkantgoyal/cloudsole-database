@@ -2,8 +2,7 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<section class="container">
-<section class="row-fluid">
+
 		<div class="span4">
 			<h3 class="box-header">SOQL Viewer</h3>
            <form method="post">
