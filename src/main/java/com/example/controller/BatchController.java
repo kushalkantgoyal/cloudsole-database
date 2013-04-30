@@ -1,13 +1,26 @@
 package com.example.controller;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.converter.FormHttpMessageConverter;
+import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.http.server.ServletServerHttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.example.service.LoginService;
+import com.example.service.BulkAPIService;
+import com.sforce.async.AsyncApiException;
+import com.sforce.ws.ConnectionException;
 
 @Controller
 @RequestMapping("/batch")
@@ -16,23 +29,50 @@ public class BatchController {
 	@Autowired
 	LoginService loginService;
 	
+	private StringBuilder batchoutput = new StringBuilder();
+	
 	@RequestMapping(value="/job")
 	public String createBulkJobView(Map<String, Object> map)
 	{
-		map.put("sobjects", loginService.LoginToSalesforce().describeGlobal().getSObjects());
 		return "newbatchjob";
 	}
 	
 	public String queryforSelectedsObject(Map<String, Object> map)
 	{
-		//map.put("sObjectquery", value);
 		return "querybatchjob";
 	}
 	
 	@RequestMapping(value="/run", method=RequestMethod.POST)
-	public String runBulkJob(Map<String, Object> map)
+	public String runBulkJob(HttpServletRequest request,
+			Map<String, Object> map, HttpServletResponse response) throws HttpMessageNotReadableException, IOException, AsyncApiException, ConnectionException, InterruptedException
 	{
-		return "runbatchjob";
+		final ServletServerHttpRequest inputMessage = new ServletServerHttpRequest(
+				request);
+		final Map<String, String> formData = new FormHttpMessageConverter().read(null, inputMessage).toSingleValueMap();
+		String environment = formData.get("environment");
+		String operations = formData.get("operations");
+		String export_option = formData.get("export_option");
+		String sobject = formData.get("sobject");
+		String query_string = formData.get("query_string");
+		String filepath = formData.get("uni_file");
+		//TODO: auto create the path depending on the date
+		batchoutput.append(new BulkAPIService().run(environment, operations, export_option, sobject, query_string, "/Users/tmichels/apirecord.csv"));
+		
+		InputStream is = new FileInputStream("/Users/tmichels/apirecord.csv");
+	      // copy it to response's OutputStream
+	    IOUtils.copy(is, response.getOutputStream());
+	    response.flushBuffer();
+		is.close();
+		
+		return "redirect:../batch/result";
+	}
+	
+	@RequestMapping("/result")
+	public String batchJobResult(Map<String, Object> map)
+	{
+		//TODO: show the path where the file is stored.
+		map.put("batchresults", batchoutput.toString());
+		return "batchjobresult";
 	}
 
 }

@@ -1,20 +1,13 @@
 package com.example.service;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.stereotype.Service;
 
 import com.force.api.ApiSession;
-import com.force.api.DescribeSObjectBasic;
 import com.force.api.ForceApi;
 import com.force.sdk.oauth.context.ForceSecurityContextHolder;
 import com.force.sdk.oauth.context.SecurityContext;
 
 @Service
 public class LoginServiceImp implements LoginService {
- 	
-	private static List<String> sObjectNames = new ArrayList<String>();
 	
 	@Override
 	public ForceApi LoginToSalesforce() 
@@ -27,24 +20,6 @@ public class LoginServiceImp implements LoginService {
         return new ForceApi(apiSession);
 	}
 	
-	
-	@Override
-	public List<String> showSObjects() {
-		if (sObjectNames.isEmpty())
-		{
-			for (DescribeSObjectBasic describeObject : LoginToSalesforce().describeGlobal().getSObjects())
-			{
-				if (describeObject.isQueryable())
-					sObjectNames.add(describeObject.getName());
-			}
-			return sObjectNames;
-		}
-		else
-		{
-			return sObjectNames;
-		}
-	
-	}
 
 	@Override
 	public String getSessionId() {
@@ -61,7 +36,4 @@ public class LoginServiceImp implements LoginService {
 		else 
 			return null;
 	}
-	
-	
-	
 }

@@ -9,7 +9,7 @@
 	<jsp:include page="sidemenu.jsp"/>
       <jsp:include page="topmenu.jsp" />
      
-    </div>
-   </div>
+    </section>
+   </section>
  
 <jsp:include page="footer.jsp"/>

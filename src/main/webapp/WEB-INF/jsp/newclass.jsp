@@ -1,17 +1,18 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <jsp:include page="header.jsp"/>
-<div id="contentwrapper">
-<div class="main_content">
-<div class="row-fluid">
-<div class="span12">
-
+<section class="container">
+<section class="row-fluid">
+			<h3 class="box-header">
+				Create New Apex
+			</h3>
+			<div class="box">
+			<div class="span8">
             <c:if test="${error != null}">
                 <div class="alert">${error}</div>
             </c:if>
 
-            <form class="form-horizontal well" method="POST" action="">
+            <form class="form-horizontal" method="POST" action="">
              <fieldset>
-    			<p class="f_legend">Create Class</p>
  				<div class="control-group">
  					<label>Select Type</label>
  					<div class="controls">
@@ -52,7 +53,7 @@
             </form>
     </div>
   </div>
- </div>
- </div>
+ </section>
+ </section>
 
 <jsp:include page="footer.jsp"/>

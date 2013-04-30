@@ -71,9 +71,7 @@ public class SObjectController
 	@RequestMapping(value="")
 	public void showSObjects(Map<String, Object> map)
 	{
-		ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-		HttpSession session = attr.getRequest().getSession(false); //create a new session
-		session.setAttribute("showSObjects", loginService.showSObjects());
+		
 	}
 	
 	@RequestMapping(value="/query/download/{sobjectName}", method=RequestMethod.GET)

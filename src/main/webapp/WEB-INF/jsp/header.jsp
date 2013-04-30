@@ -721,7 +721,7 @@
 						</li>
 					</ul>
 				</li>
-				<li class="active lp-dropdown">
+				<li class="lp-dropdown">
 					<a href="/login/batch" class="lp-dropdown-toggle" id="batch-dropdown"><span class="icon-th-large"></span>Batch</a>
 					<ul class="lp-dropdown-menu" data-dropdown-owner="batch-dropdown">
 						<li>
@@ -732,7 +732,7 @@
 						</li>
 					</ul>
 				</li>
-				<li class="active lp-dropdown">
+				<li class="lp-dropdown">
 					<a href="/login/metadata" class="lp-dropdown-toggle" id="metadata-dropdown"><span class="icon-font"></span>Metadata</a>
 					<ul class="lp-dropdown-menu" data-dropdown-owner="metadata-dropdown">
 						<li>
@@ -743,7 +743,7 @@
 						</li>
 					</ul>
 				</li>
-				<li class="active lp-dropdown">
+				<li class="lp-dropdown">
 					<a href="/login/apex" class="lp-dropdown-toggle" id="apex-dropdown"><span class="icon-edit"></span>Apex</a>
 					<ul class="lp-dropdown-menu" data-dropdown-owner="apex-dropdown">
 						<li>

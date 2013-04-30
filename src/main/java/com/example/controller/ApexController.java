@@ -43,7 +43,7 @@ public class ApexController {
 	
 	
 	
-	@RequestMapping(value="create", method=RequestMethod.POST)
+	@RequestMapping(value="/new", method=RequestMethod.POST)
 	public String createApexClass(Map<String, Object> map, HttpServletRequest request) throws HttpMessageNotReadableException, IOException
 	{
 		final ServletServerHttpRequest inputMessage = new ServletServerHttpRequest(

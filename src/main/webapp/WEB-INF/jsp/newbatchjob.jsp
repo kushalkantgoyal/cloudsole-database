@@ -2,13 +2,15 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <jsp:include page="header.jsp"/>
-<div id="contentwrapper">
-<div class="main_content">
-<div class="row-fluid">
-<div class="span9">
-           	<form class="form-horizontal well" method="POST" action="">
+<section class="container">
+<section class="row-fluid">
+			<h3 class="box-header">
+				Create Batch Job
+			</h3>
+			<div class="box">
+				<div class="span8">
+           			<form class="form-horizontal" method="POST" action="/login/batch/run">
 										<fieldset>
-											<p class="f_legend">Create Bulk API Job</p>
 											<div class="control-group">
 												<label class="control-label">Job Name</label>
 												<div class="controls">
@@ -77,6 +79,6 @@
            
         </div>
     </div>
-</div>
-</div>
+</section>
+</section>
 <jsp:include page="footer.jsp"/>
