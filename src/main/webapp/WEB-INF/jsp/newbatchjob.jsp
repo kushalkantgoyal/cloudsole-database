@@ -5,7 +5,7 @@
 <div id="contentwrapper">
 <div class="main_content">
 <div class="row-fluid">
-<div class="span12">
+<div class="span9">
            	<form class="form-horizontal well" method="POST" action="">
 										<fieldset>
 											<p class="f_legend">Create Bulk API Job</p>
@@ -51,8 +51,8 @@
 												<label class="control-label">SObject</label>
 												<div class="controls">
 													<select class="span5" name="sobject">
-													<c:forEach items="${types}" var="type">
-														<option>${type['name']}</option>
+													<c:forEach items="${sobjects}" var="sobjects">
+														<option>${sobjects['name']}</option>
 													</c:forEach>
 													</select>
 												</div>

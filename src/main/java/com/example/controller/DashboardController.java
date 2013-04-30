@@ -27,58 +27,28 @@ public class DashboardController {
 	@RequestMapping("")
 	public String returnDashboardView(Map<String, Object> map)
 	{
-		//new opportunities
-		Integer queryCountOppResult = loginToSalesforce.LoginToSalesforce().query("Select count() from Opportunity where CreatedDate=Today").getTotalSize();
-		
+
 		//total amount from opportunities today
 		QueryResult<Map> queryTotalAmountOpportunities = loginToSalesforce.LoginToSalesforce().query("Select sum(amount) from Opportunity where CreatedDate=Today"); 
 		
-		//total cases open today
-		Integer queryNewOpenCaseToday = loginToSalesforce.LoginToSalesforce().query("Select count() from Case where CreatedDate=Today and Status='New'").getTotalSize();
-		
-		//total cases closed today
-		Integer queryNewClosedCaseToday = loginToSalesforce.LoginToSalesforce().query("Select count() from Case where CreatedDate=Today and Status='Closed'").getTotalSize();
-		
-		//total new leads today
-		Integer queryNewLeadsToday = loginToSalesforce.LoginToSalesforce().query("Select count() from Lead where CreatedDate=Today").getTotalSize();
-		
-		//new contacts today
-		Integer queryNewContactToday = loginToSalesforce.LoginToSalesforce().query("Select count() from Contact where CreatedDate=Today").getTotalSize();
 				
-		map.put("queryCountOppResult", queryCountOppResult);
-		map.put("queryNewOpenCaseToday", queryNewOpenCaseToday);
-		map.put("queryNewClosedCaseToday", queryNewClosedCaseToday);
-		map.put("queryNewLeadsToday", queryNewLeadsToday);
-		map.put("queryNewContactToday", queryNewContactToday);
+		map.put("queryCountOppResult", loginToSalesforce.LoginToSalesforce().query("Select count() from Opportunity where CreatedDate=Today").getTotalSize());
+		map.put("queryNewOpenCaseToday", loginToSalesforce.LoginToSalesforce().query("Select count() from Case where CreatedDate=Today and Status='New'").getTotalSize());
+		map.put("queryNewClosedCaseToday", loginToSalesforce.LoginToSalesforce().query("Select count() from Case where CreatedDate=Today and Status='Closed'").getTotalSize());
+		map.put("queryNewLeadsToday",  loginToSalesforce.LoginToSalesforce().query("Select count() from Lead where CreatedDate=Today").getTotalSize());
+		map.put("queryNewContactToday", loginToSalesforce.LoginToSalesforce().query("Select count() from Contact where CreatedDate=Today").getTotalSize());
 		if (queryTotalAmountOpportunities.getRecords().get(0).values().toArray()[1]!=null)
 			map.put("queryTotalAmountOppResult", new BigDecimal(String.valueOf(queryTotalAmountOpportunities.getRecords().get(0).values().toArray()[1])).toPlainString());
 		else
 			map.put("queryTotalAmountOppResult", new BigDecimal(String.valueOf(0)).toPlainString());
+
 		
-		//Logins Today
-		Integer queryLoginsToday = loginToSalesforce.LoginToSalesforce().query("Select count() from LoginHistory where LoginTime=Today").getTotalSize();
-		
-		//Chatter Posts
-		Integer queryChatterPostsToday = loginToSalesforce.LoginToSalesforce().query("Select count() from FeedItem where CreatedDate=Today").getTotalSize();
-				
-		//Chatter Comments/Likes
-		Integer queryChatterCommentsToday = loginToSalesforce.LoginToSalesforce().query("Select count() from FeedComment where CreatedDate=Today").getTotalSize();
-			
-		//Total Emails
-		//Integer queryEmailToday = loginToSalesforce.LoginToSalesforce().query("Select count() from EmailMessage where CreatedDate=Today").getTotalSize();
-		
-		//Total Tasks
-		Integer queryTasksToday = loginToSalesforce.LoginToSalesforce().query("Select count() from Task where CreatedDate=Today").getTotalSize();
-		
-		//Total Documents
-		Integer queryDocumentToday = loginToSalesforce.LoginToSalesforce().query("Select count() from Document where CreatedDate=Today").getTotalSize();
-		
-		map.put("queryLoginsToday", queryLoginsToday);
-		map.put("queryChatterPostsToday", queryChatterPostsToday);
-		map.put("queryChatterCommentsToday", queryChatterCommentsToday);
+		map.put("queryLoginsToday", loginToSalesforce.LoginToSalesforce().query("Select count() from LoginHistory where LoginTime=Today").getTotalSize());
+		map.put("queryChatterPostsToday", loginToSalesforce.LoginToSalesforce().query("Select count() from FeedItem where CreatedDate=Today").getTotalSize());
+		map.put("queryChatterCommentsToday", loginToSalesforce.LoginToSalesforce().query("Select count() from FeedComment where CreatedDate=Today").getTotalSize());
 		//map.put("queryEmailToday", queryEmailToday);
-		map.put("queryTasksToday", queryTasksToday);
-		map.put("queryDocumentToday", queryDocumentToday);
+		map.put("queryTasksToday", loginToSalesforce.LoginToSalesforce().query("Select count() from Task where CreatedDate=Today").getTotalSize());
+		map.put("queryDocumentToday", loginToSalesforce.LoginToSalesforce().query("Select count() from Document where CreatedDate=Today").getTotalSize());
 		
 		QueryResult<Map> queryOpportunityOpenToday = loginToSalesforce.LoginToSalesforce().query("Select CreatedDate, StageName from Opportunity where CreatedDate=Today");
 		
@@ -88,7 +58,6 @@ public class DashboardController {
 		{
 			opportunityMap.put(String.valueOf(queryOpportunityOpenToday.getRecords().get(oppcounter).values().toArray()[1]), String.valueOf(queryOpportunityOpenToday.getRecords().get(oppcounter).values().toArray()[2]));
 		}
-		
 		
 		//2013-04-21T07:00:00.000Z
 		Map<Integer, Integer> openOpportunities = new HashMap<Integer, Integer>();
@@ -144,7 +113,6 @@ public class DashboardController {
 		map.put("queryApexComponentTotal", loginToSalesforce.LoginToSalesforce().query("Select count() from ApexComponent").getTotalSize());
 		map.put("queryApexJobTotal", loginToSalesforce.LoginToSalesforce().query("Select count() from AsyncApexJob").getTotalSize());
 		map.put("queryPushTopicTotal", loginToSalesforce.LoginToSalesforce().query("Select count() from PushTopic").getTotalSize());
-		map.put("queryCronTriggersToday", loginToSalesforce.LoginToSalesforce().query("Select count() from CronTriggers where CreatedDate=Today").getTotalSize());
 		return "techdashboard";
 	}
 	

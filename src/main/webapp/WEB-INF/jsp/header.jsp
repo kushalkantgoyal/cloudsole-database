@@ -710,12 +710,19 @@
 	<nav id="left-panel">
 		<div id="left-panel-content">
 			<ul>
-				
-				<li class="active">
-					<a href="/login/dashboard"><span class="icon-dashboard"></span>Dashboard</a>
+				<li class="active lp-dropdown">
+					<a href="/login/dashboard" class="lp-dropdown-toggle" id="dashboard-dropdown"><span class="icon-dashboard"></span>Dashboard</a>
+					<ul class="lp-dropdown-menu" data-dropdown-owner="dashboard-dropdown">
+						<li>
+							<a tabindex="-1" href="/login/dashboard"><span class="icon-bar-chart"></span>Business</a>
+						</li>
+						<li>
+							<a tabindex="-1" href="/login/dashboard/developer"><span class="icon-bar-chart"></span>Developer</a>
+						</li>
+					</ul>
 				</li>
 				<li>
-					<a href="/login/batch"><span class="icon-th-large"></span>Batch</a>
+					<a href="/login/batch/job"><span class="icon-th-large"></span>Batch</a>
 				</li>
 				<li>
 					<a href="/login/metadata"><span class="icon-font"></span>Metadata</a>

@@ -16,7 +16,7 @@ public class BatchController {
 	@Autowired
 	LoginService loginService;
 	
-	@RequestMapping(value="")
+	@RequestMapping(value="/job")
 	public String createBulkJobView(Map<String, Object> map)
 	{
 		map.put("sobjects", loginService.LoginToSalesforce().describeGlobal().getSObjects());
