@@ -721,14 +721,38 @@
 						</li>
 					</ul>
 				</li>
-				<li>
-					<a href="/login/batch/job"><span class="icon-th-large"></span>Batch</a>
+				<li class="active lp-dropdown">
+					<a href="/login/batch" class="lp-dropdown-toggle" id="batch-dropdown"><span class="icon-th-large"></span>Batch</a>
+					<ul class="lp-dropdown-menu" data-dropdown-owner="batch-dropdown">
+						<li>
+							<a tabindex="-1" href="/login/batch/job"><span class="icon-bar-chart"></span>Job</a>
+						</li>
+						<li>
+							<a tabindex="-1" href="/login/batch/schedule"><span class="icon-bar-chart"></span>Schedule</a>
+						</li>
+					</ul>
 				</li>
-				<li>
-					<a href="/login/metadata"><span class="icon-font"></span>Metadata</a>
+				<li class="active lp-dropdown">
+					<a href="/login/metadata" class="lp-dropdown-toggle" id="metadata-dropdown"><span class="icon-font"></span>Metadata</a>
+					<ul class="lp-dropdown-menu" data-dropdown-owner="metadata-dropdown">
+						<li>
+							<a tabindex="-1" href="/login/metadata/view"><span class="icon-bar-chart"></span>View</a>
+						</li>
+						<li>
+							<a tabindex="-1" href="/login/metadata/deploy"><span class="icon-bar-chart"></span>Deploy</a>
+						</li>
+					</ul>
 				</li>
-				<li>
-					<a href="/login/apex/new"><span class="icon-edit"></span>Apex</a>
+				<li class="active lp-dropdown">
+					<a href="/login/apex" class="lp-dropdown-toggle" id="apex-dropdown"><span class="icon-edit"></span>Apex</a>
+					<ul class="lp-dropdown-menu" data-dropdown-owner="apex-dropdown">
+						<li>
+							<a tabindex="-1" href="/login/apex/new"><span class="icon-bar-chart"></span>New</a>
+						</li>
+						<li>
+							<a tabindex="-1" href="/login/apex/view"><span class="icon-bar-chart"></span>View</a>
+						</li>
+					</ul>
 				</li>
 				<li>
 					<a href="/login/sobject"><span class="icon-table"></span>SOQL</a>
