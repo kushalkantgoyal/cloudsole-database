@@ -12,9 +12,9 @@
            <form method="post">
           	  <ul class="nav nav-list">
              	<c:forEach items="${sObject}" var="sObject">    
-                  <li><a href="/login/sobject/query/${sobjects['name']}">${sobjects['name']}</a></li>
+                  <li><a href="/login/sobject/query/${sObject['name']}">${sObject['name']}</a></li>
                </c:forEach>	
             </ul>
             </form>
            </div>
-         </div>
+    
