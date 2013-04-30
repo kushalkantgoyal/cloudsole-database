@@ -9,10 +9,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/debug")
 public class DebuggerController {
 	
+	//setup debugger table
+	//setup debugger rest endpoint
+	//setup debugger issue viewer
+	
+	
 	@RequestMapping(value="/view")
 	public String viewDebugger(Map<String, Object> map)
 	{
 		return "viewdebugger";
 	}
+	
 
 }

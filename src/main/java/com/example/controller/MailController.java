@@ -15,9 +15,10 @@ public class MailController {
 		return "newmail";
 	}
 	
+	@RequestMapping(value="")
 	public String viewMail(Map<String, Object> map)
 	{
-		return "viewmail";
+		return "mailbox";
 	}
 
 }
