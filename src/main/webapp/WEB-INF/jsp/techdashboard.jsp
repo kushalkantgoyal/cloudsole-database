@@ -24,56 +24,56 @@
 			<div class="box no-border non-collapsible">
 				
 				<div class="span2 pie-chart">
-					<div id="easy-pie-chart-1" data-percent="${queryCountOppResult}">
-						${queryCountOppResult}
+					<div id="easy-pie-chart-1" data-percent="${queryApexTriggersTotal}">
+						${queryApexTriggersTotal}
 					</div>
 					<div class="caption">
-						Total Opportunities
+						Total Apex Triggers
 					</div>
 				</div>
 				
 				<div class="span2 pie-chart">
-					<div id="easy-pie-chart-2" data-percent="${queryTotalAmountOppResult}">
-						${queryTotalAmountOppResult}
+					<div id="easy-pie-chart-2" data-percent="${queryApexClassTotal}">
+						${queryApexClassTotal}
 					</div>
 					<div class="caption">
-						Total Opportunity Amount
+						Total Apex Class
 					</div>
 				</div>
 
 				<div class="span2 pie-chart">
-					<div id="easy-pie-chart-3" data-percent="${queryNewOpenCaseToday}">
-						${queryNewOpenCaseToday}
+					<div id="easy-pie-chart-3" data-percent="${queryApexPagesTotal}">
+						${queryApexPagesTotal}
 					</div>
 					<div class="caption">
-						Open Cases Today
+						Total Visualforce Pages
 					</div>
 				</div>
 
 				<div class="span2 pie-chart">
-					<div id="easy-pie-chart-4" data-percent="${queryNewClosedCaseToday}">
-						${queryNewClosedCaseToday}
+					<div id="easy-pie-chart-4" data-percent="${queryApexComponentTotal}">
+						${queryApexComponentTotal}
 					</div>
 					<div class="caption">
-						Closed Cases Today
+						Total Apex Components
 					</div>
 				</div>
 
 				<div class="span2 pie-chart">
-					<div id="easy-pie-chart-5" data-percent="${queryNewLeadsToday}">
-						${queryNewLeadsToday}
+					<div id="easy-pie-chart-5" data-percent="${queryApexJobTotal}">
+						${queryApexJobTotal}
 					</div>
 					<div class="caption">
-						New Leads Today
+						Total Apex Jobs
 					</div>
 				</div>
 
 				<div class="span2 pie-chart">
-					<div id="easy-pie-chart-6" data-percent="${queryNewContactToday}">
-						${queryNewContactToday}
+					<div id="easy-pie-chart-6" data-percent="${queryPushTopicTotal}">
+						${queryPushTopicTotal}
 					</div>
 					<div class="caption">
-						New Contacts Today
+						Total Push Topics
 					</div>
 				</div>
 			</div>

@@ -1,6 +1,9 @@
 package com.example.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,18 +24,24 @@ import com.force.api.QueryResult;
 @RequestMapping("/apex")
 public class ApexController {
 	
+	List<String> operationTypes = Arrays.asList("Before Insert", "After Insert", "Before Update", "After Update", "Before Delete", "After Delete", "Undelete");
+	
 	@Autowired
 	LoginService loginService;
 	
-	@RequestMapping(value="create")
-	public String createApexClassView(Map<String, Object> map)
+	@RequestMapping(value="/new")
+	public String apexClassView(Map<String, Object> map)
 	{
 		map.put("classTypes", ApexUtil.classTypes.values());
+		map.put("opertationTypes", operationTypes);
+		
 		//create trigger with template or without.
 		//create trigger with or without Handler
 		//create visualforce templates
 		return "newclass";
 	}
+	
+	
 	
 	@RequestMapping(value="create", method=RequestMethod.POST)
 	public String createApexClass(Map<String, Object> map, HttpServletRequest request) throws HttpMessageNotReadableException, IOException
@@ -52,10 +61,10 @@ public class ApexController {
 		//ApexClass newapexclass = new ApexClass();
 		//newapexclass.setName();
 		//String id = loginService.LoginToSalesforce().createSObject("ApexClass", newapexclass);
-		return "create";
+		return "newclass";
 	}
 	
-	@RequestMapping(value="view")
+	@RequestMapping(value="/view")
 	public String viewApexClasses(Map<String , Object> map)
 	{
 		QueryResult<Map> apexClass = loginService.LoginToSalesforce().query("Select Name, ApiVersion, Status from ApexClass");
@@ -68,12 +77,12 @@ public class ApexController {
 		map.put("apexPage", apexPage.getRecords());
 		map.put("apexComponent", apexComponent.getRecords());
 		
-		return "view";
+		return "apexview";
 	}
 	
-	@RequestMapping(value="edit")
+	@RequestMapping(value="/edit")
 	public String editApexClass(Map<String, Object> map)
 	{
-		return "edit";
+		return "apexedit";
 	}
 }

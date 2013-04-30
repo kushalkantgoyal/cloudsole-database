@@ -138,20 +138,13 @@ public class DashboardController {
 	@RequestMapping("/developer")
 	public String returnTechnicalDashboardView(Map<String, Object> map)
 	{
-		//API calls
-		
-		//Apex Class
-		
-		//Visualforce Classes
-		
-		//Components
-		
-		//Scheduled Jobs
-		
-		//Batch Jobs
-		
-		//Streaming Clients
-		
+		map.put("queryApexTriggersTotal", loginToSalesforce.LoginToSalesforce().query("Select count() from ApexTrigger").getTotalSize());
+		map.put("queryApexClassTotal",loginToSalesforce.LoginToSalesforce().query("Select count() from ApexClass").getTotalSize());
+		map.put("queryApexPagesTotal", loginToSalesforce.LoginToSalesforce().query("Select count() from ApexPage").getTotalSize());
+		map.put("queryApexComponentTotal", loginToSalesforce.LoginToSalesforce().query("Select count() from ApexComponent").getTotalSize());
+		map.put("queryApexJobTotal", loginToSalesforce.LoginToSalesforce().query("Select count() from AsyncApexJob").getTotalSize());
+		map.put("queryPushTopicTotal", loginToSalesforce.LoginToSalesforce().query("Select count() from PushTopic").getTotalSize());
+		map.put("queryCronTriggersToday", loginToSalesforce.LoginToSalesforce().query("Select count() from CronTriggers where CreatedDate=Today").getTotalSize());
 		return "techdashboard";
 	}
 	

@@ -9,9 +9,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/github")
 public class GitHubController {
 	
-	public String uploadGist(Map<String, Object> map)
+	public String newGist(Map<String, Object> map)
 	{
 		return "githubgist";
 	}
+	
+	public String viewGist(Map<String, Object> map)
+	{
+		return "viewgists";
+	}
+	
 	
 }

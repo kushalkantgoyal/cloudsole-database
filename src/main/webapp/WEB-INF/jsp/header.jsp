@@ -721,7 +721,7 @@
 					<a href="/login/metadata"><span class="icon-font"></span>Metadata</a>
 				</li>
 				<li>
-					<a href="/login/apex"><span class="icon-edit"></span>Apex</a>
+					<a href="/login/apex/new"><span class="icon-edit"></span>Apex</a>
 				</li>
 				<li>
 					<a href="/login/sobject"><span class="icon-table"></span>SOQL</a>
