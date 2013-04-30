@@ -30,11 +30,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class ToolingApi {
-	
-	@Autowired
-	private static LoginService loginService;
-	
-	
+		
 	private static final Logger logger = LoggerFactory
 			.getLogger(ToolingApi.class);
 
@@ -44,8 +40,8 @@ public class ToolingApi {
 	
 	private static final String FILE_DOWNLOAD = "/servlet/servlet.FileDownload?file=";
 
-	private static String accessToken = loginService.getSessionId();
-	private static String apiEndpoint = loginService.getEndpointURL();
+	private static String accessToken = LoginServiceImp.getSessionId();
+	private static String apiEndpoint = LoginServiceImp.getEndpointURL();
 	
 	public static JSONObject get(String path, String api) throws IOException {
 		

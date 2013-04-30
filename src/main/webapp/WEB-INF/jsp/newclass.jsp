@@ -86,7 +86,7 @@
               </fieldset>
             </form>
     	</div>
-    	<div class="tab-pane fade in active" id="tab-class">
+    	<div class="tab-pane fade in" id="tab-class">
     	<form class="form-horizontal" method="POST" action="login/apex/new/class">
              <fieldset>
  				<div class="control-group">

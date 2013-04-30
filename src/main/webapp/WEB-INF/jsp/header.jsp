@@ -712,45 +712,45 @@
 			<ul>
 				<li class="active lp-dropdown">
 					<a href="/login/dashboard" class="lp-dropdown-toggle" id="dashboard-dropdown"><span class="icon-dashboard"></span>Dashboard</a>
-					<ul class="lp-dropdown-menu" data-dropdown-owner="dashboard-dropdown">
+					<ul class="lp-dropdown-menu simple" data-dropdown-owner="dashboard-dropdown">
 						<li>
-							<a tabindex="-1" href="/login/dashboard"><span class="icon-bar-chart"></span>Business</a>
+							<a tabindex="-1" href="/login/dashboard"><span class=""></span>Business</a>
 						</li>
 						<li>
-							<a tabindex="-1" href="/login/dashboard/developer"><span class="icon-bar-chart"></span>Developer</a>
+							<a tabindex="-1" href="/login/dashboard/developer"><span class=""></span>Developer</a>
 						</li>
 					</ul>
 				</li>
 				<li class="lp-dropdown">
 					<a href="/login/batch" class="lp-dropdown-toggle" id="batch-dropdown"><span class="icon-th-large"></span>Batch</a>
-					<ul class="lp-dropdown-menu" data-dropdown-owner="batch-dropdown">
+					<ul class="lp-dropdown-menu simple" data-dropdown-owner="batch-dropdown">
 						<li>
-							<a tabindex="-1" href="/login/batch/job"><span class="icon-bar-chart"></span>Job</a>
+							<a tabindex="-1" href="/login/batch/job"><span class=""></span>Job</a>
 						</li>
 						<li>
-							<a tabindex="-1" href="/login/batch/schedule"><span class="icon-bar-chart"></span>Schedule</a>
+							<a tabindex="-1" href="/login/batch/schedule"><span class=""></span>Schedule</a>
 						</li>
 					</ul>
 				</li>
 				<li class="lp-dropdown">
 					<a href="/login/metadata" class="lp-dropdown-toggle" id="metadata-dropdown"><span class="icon-font"></span>Metadata</a>
-					<ul class="lp-dropdown-menu" data-dropdown-owner="metadata-dropdown">
+					<ul class="lp-dropdown-menu simple" data-dropdown-owner="metadata-dropdown">
 						<li>
-							<a tabindex="-1" href="/login/metadata/view"><span class="icon-bar-chart"></span>View</a>
+							<a tabindex="-1" href="/login/metadata/view"><span class=""></span>View</a>
 						</li>
 						<li>
-							<a tabindex="-1" href="/login/metadata/deploy"><span class="icon-bar-chart"></span>Deploy</a>
+							<a tabindex="-1" href="/login/metadata/deploy"><span class=""></span>Deploy</a>
 						</li>
 					</ul>
 				</li>
 				<li class="lp-dropdown">
 					<a href="/login/apex" class="lp-dropdown-toggle" id="apex-dropdown"><span class="icon-edit"></span>Apex</a>
-					<ul class="lp-dropdown-menu" data-dropdown-owner="apex-dropdown">
+					<ul class="lp-dropdown-menu simple" data-dropdown-owner="apex-dropdown">
 						<li>
-							<a tabindex="-1" href="/login/apex/new"><span class="icon-bar-chart"></span>New</a>
+							<a tabindex="-1" href="/login/apex/new"><span class=""></span>New</a>
 						</li>
 						<li>
-							<a tabindex="-1" href="/login/apex/view"><span class="icon-bar-chart"></span>View</a>
+							<a tabindex="-1" href="/login/apex/view"><span class=""></span>View</a>
 						</li>
 					</ul>
 				</li>
@@ -766,15 +766,15 @@
 				</li>
 				<li class="lp-dropdown">
 					<a href="#" class="lp-dropdown-toggle" id="extras-dropdown"><span class="icon-reorder"></span>Extras</a>
-					<ul class="lp-dropdown-menu" data-dropdown-owner="extras-dropdown">
+					<ul class="lp-dropdown-menu simple" data-dropdown-owner="extras-dropdown">
 						<li>
-							<a tabindex="-1" href="/login/social"><span class="icon-coffee"></span>Social</a>
+							<a tabindex="-1" href="/login/social"><span class=""></span>Social</a>
 						</li>
 						<li>
-							<a tabindex="-1" href="/login/stats"><span class="icon-bar-chart"></span>Stats</a>
+							<a tabindex="-1" href="/login/stats"><span class=""></span>Stats</a>
 						</li>
 						<li>
-							<a tabindex="-1" href="extras-widgets.html"><span class="icon-star"></span>Wiki</a>
+							<a tabindex="-1" href="extras-widgets.html"><span class=""></span>Wiki</a>
 						</li>
 					</ul>
 				</li>

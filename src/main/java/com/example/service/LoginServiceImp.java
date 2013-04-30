@@ -1,5 +1,9 @@
 package com.example.service;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.force.api.ApiSession;
 import com.force.api.ForceApi;
@@ -16,24 +20,21 @@ public class LoginServiceImp implements LoginService {
         ApiSession apiSession = new ApiSession();
         apiSession.setAccessToken(sc.getSessionId());
         apiSession.setApiEndpoint(sc.getEndPointHost());
-
         return new ForceApi(apiSession);
 	}
 	
 
-	@Override
-	public String getSessionId() {
-		if (LoginToSalesforce() != null)
-			return ForceSecurityContextHolder.get().getSessionId();
-		else
-			return null;
+	public static String getSessionId() {
+		ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+		HttpSession session = attr.getRequest().getSession(false); //create a new session
+		System.out.println("SessionId: " + session.getAttribute("sessionId").toString());
+		return session.getAttribute("sessionId").toString();
 	}
 
-	@Override
-	public String getEndpointURL() {
-		if (LoginToSalesforce() != null)
-			return ForceSecurityContextHolder.get().getEndPointHost();
-		else 
-			return null;
+	public static String getEndpointURL() {
+		ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+		HttpSession session = attr.getRequest().getSession(false); //create a new session
+		System.out.println("Endpoint: " + session.getAttribute("endpoint").toString());
+		return session.getAttribute("endpoint").toString();
 	}
 }

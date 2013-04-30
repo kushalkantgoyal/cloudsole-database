@@ -26,9 +26,11 @@ public class LoginController {
     	ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
 		HttpSession session = attr.getRequest().getSession(true); //create a new session
 		
+		session.setAttribute("endpoint", ForceSecurityContextHolder.get().getEndPointHost());
+		session.setAttribute("sessionId",  ForceSecurityContextHolder.get().getSessionId());
 		session.setAttribute("userName", ForceSecurityContextHolder.get().getUserName());
 		session.setAttribute("sObject", loginService.LoginToSalesforce().describeGlobal().getSObjects());
-	
+
         return "login";
     }
 }

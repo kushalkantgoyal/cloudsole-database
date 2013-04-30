@@ -27,11 +27,7 @@ import com.sforce.ws.ConnectionException;
 import com.sforce.ws.ConnectorConfig;
 import com.sforce.ws.transport.SoapConnection;
 
-public class SoapLoginUtil {
-	
-	@Autowired
-	private static LoginService loginService;
-	
+public class SoapLoginUtil {	
 	private static final String SERVICES_SOAP_PARTNER_ENDPOINT = "/services/Soap/u/27.0/";
 	private static final String ENV_START = "<soapenv:Envelope xmlns:soapenv='http://schemas.xmlsoap.org/soap/envelope/'" + " xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' " + "xmlns:urn='urn:partner.soap.sforce.com'><soapenv:Body>";
 	private static final String ENV_END = "</soapenv:Body></soapenv:Envelope>";
@@ -46,7 +42,7 @@ public class SoapLoginUtil {
 	{
 		new PartnerConnection(loginResult);
 		final ConnectorConfig config = new ConnectorConfig();
-		config.setServiceEndpoint(loginService.getEndpointURL() + "/services/Soap/m/27.0");
+		config.setServiceEndpoint(LoginServiceImp.getEndpointURL() + "/services/Soap/m/27.0");
 		config.setSessionId(loginResult.getSessionId());
 		return new MetadataConnection(config);
 	}
@@ -60,8 +56,8 @@ public class SoapLoginUtil {
 	{
 		final ConnectorConfig config = new ConnectorConfig();
 		config.setAuthEndpoint("https://test.salesforce.com/services/Soap/u/27.0");
-		config.setServiceEndpoint(loginService.getEndpointURL() + "/services/Soap/u/");
-		config.setSessionId(loginService.getSessionId());
+		config.setServiceEndpoint(LoginServiceImp.getEndpointURL() + "/services/Soap/u/");
+		config.setSessionId(LoginServiceImp.getSessionId());
 		return config;
 	}
 	
@@ -74,7 +70,7 @@ public class SoapLoginUtil {
 	{
 		ContentExchange exchange = new ContentExchange();
 		exchange.setMethod("POST");
-		exchange.setURL(loginService.getEndpointURL());
+		exchange.setURL(LoginServiceImp.getEndpointURL());
 		exchange.setRequestContentSource(new ByteArrayInputStream(soapXmlForLogin(username, password)));
 		exchange.setRequestHeader("Content-Type", "text/xml");
 		exchange.setRequestHeader("SOAPAction", "''");

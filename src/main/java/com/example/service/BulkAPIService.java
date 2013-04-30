@@ -32,8 +32,7 @@ import com.example.service.ToolingApi;
 
 public class BulkAPIService implements BulkAPIServiceInterface{
 
-	@Autowired
-	LoginService loginService;
+	private LoginServiceImp loginService;
 	
 	private StringBuilder batchoutput = new StringBuilder();
 	
@@ -261,14 +260,27 @@ public class BulkAPIService implements BulkAPIServiceInterface{
 		}
 		if (environment.equalsIgnoreCase("production"))
 		{
-			connectorConfig = new ConnectorConfig();
+			ConnectorConfig partnerConfig = new ConnectorConfig();
+			partnerConfig.setAuthEndpoint("https://login.salesforce.com/services/Soap/u/27.0");
+			partnerConfig.setServiceEndpoint(loginService.getEndpointURL() + "/services/Soap/u/");
+			partnerConfig.setSessionId(loginService.getSessionId());
+			new PartnerConnection(partnerConfig);
 			
-			connectorConfig.setCompression(true);
-		    // Set this to true to see HTTP requests and responses on stdout
-			connectorConfig.setTraceMessage(false);
-			connectorConfig.setPrettyPrintXml(true);
-	
-			connection = new BulkConnection(connectorConfig);
+			ConnectorConfig config = new ConnectorConfig();
+			config.setSessionId(partnerConfig.getSessionId());
+			// The endpoint for the Bulk API service is the same as for the normal
+			// SOAP uri until the /Soap/ part. From here it's '/async/versionNumber'
+			String soapEndpoint = partnerConfig.getServiceEndpoint();
+			String apiVersion = "27.0";
+			String restEndpoint = soapEndpoint.substring(0, soapEndpoint.indexOf("Soap/"))
+			+ "async/" + apiVersion;
+			config.setRestEndpoint(restEndpoint);
+			// This should only be false when doing debugging.
+			config.setCompression(true);
+			// Set this to true to see HTTP requests and responses on stdout
+			config.setTraceMessage(false);
+			connection = new BulkConnection(config);
+			batchoutput.append("Authentication Succcessfull");
 		}
 	    JobInfo job = createJob(sobjectType,operation, connection);
 	    List<BatchInfo> batchInfoList = null;
