@@ -3,10 +3,11 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <div class="span8">
-         <section id="manage-sobjects">
-          <div class="page-header">
-            <h1>Manage ${currentSObject} Object</h1>
-          </div>
+		<h3 class="box-header">
+					<i class="icon-download-alt"></i>
+					Manage ${currentSObject} Object
+				</h3>
+        <div class="box non-collapsible widget-messages">
 		   <c:if  test="${!empty success}">
            <div class="alert alert-success">
           	 <button type="button" class="close" data-dismiss="alert">×</button>
@@ -193,7 +194,7 @@
           	</div>
         
    			</div>
-        </section>
+        </div>
      </div>
       <script type="text/javascript">
     var objvalidate = {

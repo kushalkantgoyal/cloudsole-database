@@ -53,7 +53,7 @@
 												<label class="control-label">SObject</label>
 												<div class="controls">
 													<select class="span5" name="sobject">
-													<c:forEach items="${sobjects}" var="sobjects">
+													<c:forEach items="${sObject}" var="sobjects">
 														<option>${sobjects['name']}</option>
 													</c:forEach>
 													</select>

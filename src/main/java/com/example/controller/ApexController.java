@@ -13,6 +13,7 @@ import org.springframework.http.converter.FormHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.http.server.ServletServerHttpRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -43,8 +44,8 @@ public class ApexController {
 	
 	
 	
-	@RequestMapping(value="/new", method=RequestMethod.POST)
-	public String createApexClass(Map<String, Object> map, HttpServletRequest request) throws HttpMessageNotReadableException, IOException
+	@RequestMapping(value="/new/{apexType}", method=RequestMethod.POST)
+	public String createApexClass(@PathVariable("apexType") String apexType, Map<String, Object> map, HttpServletRequest request) throws HttpMessageNotReadableException, IOException
 	{
 		final ServletServerHttpRequest inputMessage = new ServletServerHttpRequest(
 				request);
@@ -69,8 +70,8 @@ public class ApexController {
 	{
 		QueryResult<Map> apexClass = loginService.LoginToSalesforce().query("Select Name, ApiVersion, Status from ApexClass");
 		QueryResult<Map> apexTrigger = loginService.LoginToSalesforce().query("Select Name, ApiVersion, Status from ApexTrigger");
-		QueryResult<Map> apexPage = loginService.LoginToSalesforce().query("Select Name, ApiVersion, Status from ApexPage");
-		QueryResult<Map> apexComponent = loginService.LoginToSalesforce().query("Select Name, ApiVersion, Status from ApexComponent");
+		QueryResult<Map> apexPage = loginService.LoginToSalesforce().query("Select Name, ApiVersion from ApexPage");
+		QueryResult<Map> apexComponent = loginService.LoginToSalesforce().query("Select Name, ApiVersion from ApexComponent");
 		
 		map.put("apexClass", apexClass.getRecords());
 		map.put("apexTrigger", apexTrigger.getRecords());

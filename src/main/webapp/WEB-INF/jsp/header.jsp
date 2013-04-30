@@ -759,7 +759,7 @@
 				</li>
 				
 				<li>
-					<a href="/login/email"><span class="icon-inbox"></span>Email</a>
+					<a href="/login/mail"><span class="icon-inbox"></span>Email</a>
 				</li>
 				<li>
 					<a href="/login/sync"><span class="icon-cog"></span>Sync</a>
@@ -768,7 +768,7 @@
 					<a href="#" class="lp-dropdown-toggle" id="extras-dropdown"><span class="icon-reorder"></span>Extras</a>
 					<ul class="lp-dropdown-menu" data-dropdown-owner="extras-dropdown">
 						<li>
-							<a tabindex="-1" href="extras-icons.html"><span class="icon-coffee"></span>Icons</a>
+							<a tabindex="-1" href="/login/social"><span class="icon-coffee"></span>Social</a>
 						</li>
 						<li>
 							<a tabindex="-1" href="/login/stats"><span class="icon-bar-chart"></span>Stats</a>

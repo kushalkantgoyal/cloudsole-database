@@ -4,17 +4,14 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <section class="container">
 <section class="row-fluid">
-			<h3 class="box-header">
-				SOQL Explorer
-			</h3>
-			<div class="box">
-			<div class="span4">
+		<div class="span4">
+			<h3 class="box-header">SOQL Viewer</h3>
            <form method="post">
-          	  <ul class="nav nav-list">
+          	  <ul class="well nav nav-tabs nav-stacked">
              	<c:forEach items="${sObject}" var="sObject">    
                   <li><a href="/login/sobject/query/${sObject['name']}">${sObject['name']}</a></li>
                </c:forEach>	
             </ul>
             </form>
-           </div>
+         </div>
     

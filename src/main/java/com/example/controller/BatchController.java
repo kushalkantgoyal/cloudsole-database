@@ -54,7 +54,7 @@ public class BatchController {
 		String export_option = formData.get("export_option");
 		String sobject = formData.get("sobject");
 		String query_string = formData.get("query_string");
-		String filepath = formData.get("uni_file");
+		//String filepath = formData.get("uni_file");
 		//TODO: auto create the path depending on the date
 		batchoutput.append(new BulkAPIService().run(environment, operations, export_option, sobject, query_string, "/Users/tmichels/apirecord.csv"));
 		
@@ -64,7 +64,7 @@ public class BatchController {
 	    response.flushBuffer();
 		is.close();
 		
-		return "redirect:../batch/result";
+		return "newbatchjob";
 	}
 	
 	@RequestMapping("/result")
