@@ -7,54 +7,32 @@
 			<h3 class="box-header">
 				Code
 			</h3>
-			<div class="box">
-					<ul id="myTab" class="nav nav-tabs">
-						<li class="active"><a href="#classes" data-toggle="tab">Classes</a></li>
-						<li><a href="#trigger" data-toggle="tab">Triggers</a></li>
-						<li><a href="#visualforce" data-toggle="tab">VisualForce</a></li>
-						<li><a href="#component" data-toggle="tab">Component</a></li>
-					</ul>
+				<div class="box">
+					<form method="post">
+				  		<ul id="myTab" class="nav nav-tabs">
+							<li><a href="/login/apex/view/class">Classes</a></li>
+							<li><a href="/login/apex/view/trigger">Triggers</a></li>
+							<li><a href="/login/apex/view/page">VisualForce</a></li>
+							<li><a href="/login/apex/view/component">Component</a></li>
+						</ul>
+					</form>
 					<div id="myTabContent" class="tab-content" style="margin-bottom: 10px">
 					
-					
 					<div class="span4">
-						<div class="tab-pane fade in active" id="classes">
 						<form method="post">
+						<div class="tab-pane fade in">
           	 				<ul class="nav nav-tabs nav-stacked">
 							 	<c:forEach items="${apexClass}" var="apexClass">
-									<li><a href="/login/apex/${apexClass['Id']}" data-toggle="tab">${apexClass['Name']}</a></li>
+									<li><a href="/login/apex/view/${apexType}/${apexClass['Id']}">${apexClass['Name']}</a></li>
 								</c:forEach>
 								</ul>
+						</div>
 						</form>
-						</div>
-						
-						<div class="tab-pane fade in" id="trigger">
-          	 				<ul class="nav nav-tabs nav-stacked">
-							 	<c:forEach items="${apexTrigger}" var="apexTrigger">
-									<li><a href="/login/apex/${apexTrigger['Id']}" data-toggle="tab">${apexTrigger['Name']}</a></li>
-								</c:forEach>
-							</ul>
-						</div>
-						<div class="tab-pane fade in" id="visualforce">
-          	 				<ul class="nav nav-tabs nav-stacked">
-							 	<c:forEach items="${apexPage}" var="apexPage">
-									<li><a href="/login/apex/${apexPage['Id']}" data-toggle="tab">${apexPage['Name']}</a></li>
-								</c:forEach>
-							</ul>
-						</div>
-						<div class="tab-pane fade in" id="component">
-          	 				<ul class="nav nav-tabs nav-stacked">
-							 	<c:forEach items="${apexComponent}" var="apexComponent">
-									<li><a href="/login/apex/${apexComponent['Id']}" data-toggle="tab">${apexComponent['Name']}</a></li>
-								</c:forEach>
-							</ul>
-						</div>
-						
-					</div>
-					
+					</div>	
+			
 					<div class="span8">				
 							<form method="post" action="/login/apex/update">
-	        					<textarea name="body" rows="25" style="font-family: monospace; width: 500px;">${body}</textarea><br/>
+	        					<textarea name="body" rows="25" style="font-family: monospace; width: 666px;">${body}</textarea><br/>
 		    					<div class="btn-group">
 		        					<input type="submit" value="Save" class="btn btn-primary">
 		    					</div>

@@ -119,7 +119,6 @@ public class SObjectController
 	@RequestMapping(value="/query/build", method= RequestMethod.GET)
 	public String buildQuery(Map<String, Object> map)
 	{
-		System.out.println("hier");
 		return "sobject";
 	}
 	

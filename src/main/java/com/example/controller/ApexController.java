@@ -8,7 +8,9 @@ import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.converter.FormHttpMessageConverter;
@@ -18,10 +20,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.example.service.LoginService;
 import com.example.util.ApexUtil;
 import com.force.api.QueryResult;
+import com.force.sdk.oauth.context.ForceSecurityContextHolder;
 import com.example.service.ToolingApi;
 
 @Controller
@@ -71,26 +76,63 @@ public class ApexController {
 	@RequestMapping(value="/view")
 	public String viewApexClasses(Map<String , Object> map)
 	{
-		QueryResult<Map> apexClass = loginService.LoginToSalesforce().query("Select Id, Name, ApiVersion, Status from ApexClass");
-		QueryResult<Map> apexTrigger = loginService.LoginToSalesforce().query("Select Id, Name, ApiVersion, Status from ApexTrigger");
-		QueryResult<Map> apexPage = loginService.LoginToSalesforce().query("Select Id, Name, ApiVersion from ApexPage");
-		QueryResult<Map> apexComponent = loginService.LoginToSalesforce().query("Select Id, Name, ApiVersion from ApexComponent");
+		ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+		HttpSession session = attr.getRequest().getSession(false); //create a new session
 		
-		map.put("apexClass", apexClass.getRecords());
-		map.put("apexTrigger", apexTrigger.getRecords());
-		map.put("apexPage", apexPage.getRecords());
-		map.put("apexComponent", apexComponent.getRecords());
+		QueryResult<Map> apexClass = loginService.LoginToSalesforce().query("Select Id, Name, ApiVersion, Status from ApexClass");
+		
+		session.setAttribute("apexClass", apexClass.getRecords());
+		session.setAttribute("apexType", "class");
 		
 		return "classes";
 	}
 	
-	@RequestMapping(value="/{id}", method=RequestMethod.POST)
+	@RequestMapping(value="/view/{type}", method=RequestMethod.GET)
+	public String viewApexTypes(@PathVariable("type") String type, Map<String , Object> map)
+	{
+		ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+		HttpSession session = attr.getRequest().getSession(false); //create a new session
+		
+		if (type.equalsIgnoreCase("class"))
+		{
+			QueryResult<Map> apexClass = loginService.LoginToSalesforce().query("Select Id, Name, ApiVersion, Status from ApexClass");
+			session.setAttribute("apexClass", apexClass.getRecords());
+			session.setAttribute("apexType", "class");
+		}
+		else if (type.equalsIgnoreCase("trigger"))
+		{
+			QueryResult<Map> apexTrigger = loginService.LoginToSalesforce().query("Select Id, Name, ApiVersion, Status from ApexTrigger");
+			session.setAttribute("apexClass", apexTrigger.getRecords());
+			session.setAttribute("apexType", "trigger");
+		}
+		else if (type.equalsIgnoreCase("page"))
+		{
+			QueryResult<Map> apexPage = loginService.LoginToSalesforce().query("Select Id, Name, ApiVersion from ApexPage");
+			session.setAttribute("apexClass", apexPage.getRecords());
+			session.setAttribute("apexType", "page");
+		}
+		else if (type.equalsIgnoreCase("component"))
+		{
+			QueryResult<Map> apexComponent = loginService.LoginToSalesforce().query("Select Id, Name, ApiVersion from ApexComponent");
+			session.setAttribute("apexClass", apexComponent.getRecords());
+			session.setAttribute("apexType", "component");
+		}
+		
+		return "classes";
+	}
+	
+	@RequestMapping(value="/view/{type}/{id}", method = RequestMethod.GET)
 	public String getClassDetail(@PathVariable("id") String id, Map<String, Object> map) throws ServletException {
 		try 
 		{	
-			System.out.println("Hier: " + id);	
-			JSONObject apexClassResponse = ToolingApi.get("sobjects/ApexClass/"
+			ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+			HttpSession session = attr.getRequest().getSession(false); //create a new session
+		
+			JSONObject apexClassResponse = ToolingApi.get("sobjects/apex" + session.getAttribute("apexType") + "/"
 					+ id, ToolingApi.TOOLING_API);
+			
+			System.out.println(apexClassResponse.toJSONString());
+			
 			map.put("body", apexClassResponse.get("Body"));
 		} catch (IOException e) {
 			throw new ServletException(e);
