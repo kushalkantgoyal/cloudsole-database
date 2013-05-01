@@ -6,7 +6,7 @@
 		<div class="span4">
 			<h3 class="box-header">SOQL Viewer</h3>
            <form method="post">
-          	  <ul class="well nav nav-tabs nav-stacked">
+          	  <ul class="nav nav-tabs nav-stacked">
              	<c:forEach items="${sObject}" var="sObject">    
                   <li><a href="/login/sobject/query/${sObject['name']}">${sObject['name']}</a></li>
                </c:forEach>	

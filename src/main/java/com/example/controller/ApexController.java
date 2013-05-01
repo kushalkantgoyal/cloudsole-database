@@ -85,9 +85,10 @@ public class ApexController {
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.POST)
-	public String getClassDetail(@PathVariable("id") String id,
-			Map<String, Object> map) throws ServletException {
-		try {
+	public String getClassDetail(@PathVariable("id") String id, Map<String, Object> map) throws ServletException {
+		try 
+		{	
+			System.out.println("Hier: " + id);	
 			JSONObject apexClassResponse = ToolingApi.get("sobjects/ApexClass/"
 					+ id, ToolingApi.TOOLING_API);
 			map.put("body", apexClassResponse.get("Body"));

@@ -15,53 +15,51 @@
 						<li><a href="#component" data-toggle="tab">Component</a></li>
 					</ul>
 					<div id="myTabContent" class="tab-content" style="margin-bottom: 10px">
+					
+					
 					<div class="span4">
 						<div class="tab-pane fade in active" id="classes">
-							<form method="post">
-          	 				<ul class="well nav nav-tabs nav-stacked">
+						<form method="post">
+          	 				<ul class="nav nav-tabs nav-stacked">
 							 	<c:forEach items="${apexClass}" var="apexClass">
 									<li><a href="/login/apex/${apexClass['Id']}" data-toggle="tab">${apexClass['Name']}</a></li>
 								</c:forEach>
 								</ul>
-							</form>
+						</form>
 						</div>
-						<div class="tab-pane fade in active" id="trigger">
-							<form method="post">
-          	 				<ul class="well nav nav-tabs nav-stacked">
+						
+						<div class="tab-pane fade in" id="trigger">
+          	 				<ul class="nav nav-tabs nav-stacked">
 							 	<c:forEach items="${apexTrigger}" var="apexTrigger">
 									<li><a href="/login/apex/${apexTrigger['Id']}" data-toggle="tab">${apexTrigger['Name']}</a></li>
 								</c:forEach>
-								</ul>
-							</form>
+							</ul>
 						</div>
-						<div class="tab-pane fade in active" id="visualforce">
-							<form method="post">
-          	 				<ul class="well nav nav-tabs nav-stacked">
-							 	<c:forEach items="${apexPage}" var="apexTrigger">
+						<div class="tab-pane fade in" id="visualforce">
+          	 				<ul class="nav nav-tabs nav-stacked">
+							 	<c:forEach items="${apexPage}" var="apexPage">
 									<li><a href="/login/apex/${apexPage['Id']}" data-toggle="tab">${apexPage['Name']}</a></li>
 								</c:forEach>
-								</ul>
-							</form>
+							</ul>
 						</div>
-						<div class="tab-pane fade in active" id="component">
-							<form method="post">
-          	 				<ul class="well nav nav-tabs nav-stacked">
-							 	<c:forEach items="${apexComponent}" var="apexTrigger">
+						<div class="tab-pane fade in" id="component">
+          	 				<ul class="nav nav-tabs nav-stacked">
+							 	<c:forEach items="${apexComponent}" var="apexComponent">
 									<li><a href="/login/apex/${apexComponent['Id']}" data-toggle="tab">${apexComponent['Name']}</a></li>
 								</c:forEach>
-								</ul>
-							</form>
+							</ul>
 						</div>
+						
 					</div>
+					
 					<div class="span8">				
-						<c:if test="${!empty body}">
-							<form method="POST" action="">
-	        					<textarea name="body" rows="25" style="font-family: monospace; width: 800px;">${body}</textarea><br/>
+							<form method="post" action="/login/apex/update">
+	        					<textarea name="body" rows="25" style="font-family: monospace; width: 500px;">${body}</textarea><br/>
 		    					<div class="btn-group">
 		        					<input type="submit" value="Save" class="btn btn-primary">
 		    					</div>
 	    					</form>
-	    				</c:if>
+	    				
 	    			</div>
 				</div>
 			</div>
