@@ -5,15 +5,6 @@
 <link rel="stylesheet" href="/resources/codemirror.css">
 <script src="/resources/codemirror.js"></script>
 <script src="/resources/clike.js"></script>
-<link rel="stylesheet" href="/resources/docs.css">
-<style>.CodeMirror {border: 2px inset #dee;}</style>
- <script>
-      var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
-        lineNumbers: true,
-        matchBrackets: true,
-        mode: "text/x-java"
-      });
- </script>
 <section class="container">
 	<section class="row-fluid">
 			<h3 class="box-header">
@@ -44,35 +35,22 @@
 			
 					<div class="span8">				
 							<form method="post" action="/login/apex/update">
-	        					<textarea name="code" id="code" rows="25" style="font-family: monospace; width: 666px;">${body}</textarea><br/>
+	        					<textarea name="body" id="body" rows="50" style="width: 666px;">${body}</textarea><br/>
 		    					<div class="btn-group">
 		        					<input type="submit" value="Save" class="btn btn-primary">
 		    					</div>
 	    					</form>
-	    				
 	    			</div>
 				</div>
 			</div>
 		</section>
 	</section>
-    <script type="text/javascript">
-    var SFDC = {
-    		deleteApexClass: function(type, id, name) {
-            if (!confirm("Are you sure you want to delete '" +  name + "'?")) {
-                return false;
-            }
-
-            $.ajax({
-                'url': 'classes/'+id,
-                'type': 'DELETE',
-                'success': function(data, textStatus, jqXHR) {
-                    location.href = '/sfdc/classes'
-                },
-                'error': function(jqXHR, textStatus, errorThrown) {
-                    alert('Failed to delete class.');
-                }
-            })
-        }
-    };
-	</script>
+	<!-- Change mode from java to html for visualforce -->
+	<script>
+	  var editor = CodeMirror.fromTextArea(document.getElementById("body"), {
+	        lineNumbers: true,
+	        mode: "text/x-java"
+	      });
+ 	</script>
+   
 <jsp:include page="footer.jsp"/>

@@ -130,8 +130,7 @@ public class ApexController {
 		
 			JSONObject apexClassResponse = ToolingApi.get("sobjects/apex" + session.getAttribute("apexType") + "/"
 					+ id, ToolingApi.TOOLING_API);
-			
-			System.out.println(apexClassResponse.toJSONString());
+		
 			if (session.getAttribute("apexType").equals("page") || session.getAttribute("apexType").equals("component"))
 			{
 				map.put("body", apexClassResponse.get("Markup"));
