@@ -84,7 +84,7 @@ public class ApexController {
 		return "classes";
 	}
 	
-	@RequestMapping("/{id}")
+	@RequestMapping(value="/{id}", method=RequestMethod.POST)
 	public String getClassDetail(@PathVariable("id") String id,
 			Map<String, Object> map) throws ServletException {
 		try {
@@ -95,12 +95,7 @@ public class ApexController {
 			throw new ServletException(e);
 		}
 
-		return "classDetail";
+		return "classes";
 	}
-	
-	@RequestMapping(value="/edit")
-	public String editApexClass(Map<String, Object> map)
-	{
-		return "apexedit";
-	}
+
 }

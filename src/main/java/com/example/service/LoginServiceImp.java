@@ -23,18 +23,15 @@ public class LoginServiceImp implements LoginService {
         return new ForceApi(apiSession);
 	}
 	
-
 	public static String getSessionId() {
 		ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
 		HttpSession session = attr.getRequest().getSession(false); //create a new session
-		System.out.println("SessionId: " + session.getAttribute("sessionId").toString());
 		return session.getAttribute("sessionId").toString();
 	}
 
 	public static String getEndpointURL() {
 		ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
 		HttpSession session = attr.getRequest().getSession(false); //create a new session
-		System.out.println("Endpoint: " + session.getAttribute("endpoint").toString());
 		return session.getAttribute("endpoint").toString();
 	}
 }

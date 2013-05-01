@@ -2,49 +2,71 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <jsp:include page="header.jsp"/>
-<div id="contentwrapper">
-<div class="main_content">
-<div class="row-fluid">
-<div class="span12">
-
-			 <div class="btn-group sepH_b">
-                                <button data-toggle="dropdown" class="btn dropdown-toggle">Action <span class="caret"></span></button>
-                                <ul class="dropdown-menu">
-                                    <li><a href="classes/c" class="delete_rows_simple" data-tableid="smpl_tbl"><i class="icon-adt_atach"></i>Create</a></li>
-                                </ul>
-             </div>
-		
-            <table class="table table-striped table-bordered table-condensed">
-                <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>&nbsp;</th>
-                </tr>
-                </thead>
-                <tbody>
-                
-                <c:forEach items="${apexClass}" var="apexClass">
-                   <tr>
-                       <td>
-                       	<a href="apex/${apexClass['Id']}">
-                       		${apexClass['Name']}
-                       	</a>
-                       </td>
-                       <td>
-                       	<a href="#" onClick="SFDC.deleteApexClass( '${apexClass.metadata.name}', 
-                       											   '${apexClass['Id']}', 
-                       											   '${apexClass['Name']}')"
-                       		class="btn btn-danger btn-mini">Delete</a>
-                       </td>
-                   </tr>
-               </c:forEach>
-               
-               </tbody>
-           </table>
-        </div>
-    </div>
-  </div>
-</div>
+<section class="container">
+	<section class="row-fluid">
+			<h3 class="box-header">
+				Code
+			</h3>
+			<div class="box">
+					<ul id="myTab" class="nav nav-tabs">
+						<li class="active"><a href="#classes" data-toggle="tab">Classes</a></li>
+						<li><a href="#trigger" data-toggle="tab">Triggers</a></li>
+						<li><a href="#visualforce" data-toggle="tab">VisualForce</a></li>
+						<li><a href="#component" data-toggle="tab">Component</a></li>
+					</ul>
+					<div id="myTabContent" class="tab-content" style="margin-bottom: 10px">
+					<div class="span4">
+						<div class="tab-pane fade in active" id="classes">
+							<form method="post">
+          	 				<ul class="well nav nav-tabs nav-stacked">
+							 	<c:forEach items="${apexClass}" var="apexClass">
+									<li><a href="/login/apex/${apexClass['Id']}" data-toggle="tab">${apexClass['Name']}</a></li>
+								</c:forEach>
+								</ul>
+							</form>
+						</div>
+						<div class="tab-pane fade in active" id="trigger">
+							<form method="post">
+          	 				<ul class="well nav nav-tabs nav-stacked">
+							 	<c:forEach items="${apexTrigger}" var="apexTrigger">
+									<li><a href="/login/apex/${apexTrigger['Id']}" data-toggle="tab">${apexTrigger['Name']}</a></li>
+								</c:forEach>
+								</ul>
+							</form>
+						</div>
+						<div class="tab-pane fade in active" id="visualforce">
+							<form method="post">
+          	 				<ul class="well nav nav-tabs nav-stacked">
+							 	<c:forEach items="${apexPage}" var="apexTrigger">
+									<li><a href="/login/apex/${apexPage['Id']}" data-toggle="tab">${apexPage['Name']}</a></li>
+								</c:forEach>
+								</ul>
+							</form>
+						</div>
+						<div class="tab-pane fade in active" id="component">
+							<form method="post">
+          	 				<ul class="well nav nav-tabs nav-stacked">
+							 	<c:forEach items="${apexComponent}" var="apexTrigger">
+									<li><a href="/login/apex/${apexComponent['Id']}" data-toggle="tab">${apexComponent['Name']}</a></li>
+								</c:forEach>
+								</ul>
+							</form>
+						</div>
+					</div>
+					<div class="span8">				
+						<c:if test="${!empty body}">
+							<form method="POST" action="">
+	        					<textarea name="body" rows="25" style="font-family: monospace; width: 800px;">${body}</textarea><br/>
+		    					<div class="btn-group">
+		        					<input type="submit" value="Save" class="btn btn-primary">
+		    					</div>
+	    					</form>
+	    				</c:if>
+	    			</div>
+				</div>
+			</div>
+		</section>
+	</section>
     <script type="text/javascript">
     var SFDC = {
     		deleteApexClass: function(type, id, name) {

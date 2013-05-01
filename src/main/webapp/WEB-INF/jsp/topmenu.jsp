@@ -80,8 +80,7 @@
       			</div>
    			 </div>
   			</div>
-          	
-          	<form method="POST" action=""> <textarea class="span9" row-fluids="5" id="autoresize" rows="5" name="soqlquery" id="soqlquery">${sobjectQuery}</textarea><br />
+          	<form method="POST" action=""> <textarea class="span9" row-fluids="5" rows="5" name="soqlquery" id="soqlquery">${sobjectQuery}</textarea><br />
           	  <button class="btn btn-primary" type="submit">Run</button></form>
           	  	</c:if>
           	  	</div>
