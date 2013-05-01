@@ -2,6 +2,18 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <jsp:include page="header.jsp"/>
+<link rel="stylesheet" href="/resources/codemirror.css">
+<script src="/resources/codemirror.js"></script>
+<script src="/resources/clike.js"></script>
+<link rel="stylesheet" href="/resources/docs.css">
+<style>.CodeMirror {border: 2px inset #dee;}</style>
+ <script>
+      var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+        lineNumbers: true,
+        matchBrackets: true,
+        mode: "text/x-java"
+      });
+ </script>
 <section class="container">
 	<section class="row-fluid">
 			<h3 class="box-header">
@@ -32,7 +44,7 @@
 			
 					<div class="span8">				
 							<form method="post" action="/login/apex/update">
-	        					<textarea name="body" rows="25" style="font-family: monospace; width: 666px;">${body}</textarea><br/>
+	        					<textarea name="code" id="code" rows="25" style="font-family: monospace; width: 666px;">${body}</textarea><br/>
 		    					<div class="btn-group">
 		        					<input type="submit" value="Save" class="btn btn-primary">
 		    					</div>

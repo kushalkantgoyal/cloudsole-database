@@ -15,7 +15,7 @@
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width">
 
-	<script src="/resources/assets/javascripts/1.2.1/adminflare-demo-init.min.js" type="text/javascript"></script>
+	<script src="/resources/assets/javascripts/1.2.2/adminflare-demo-init.min.js" type="text/javascript"></script>
 
 	<link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,300,600,700" rel="stylesheet" type="text/css">
 	<script type="text/javascript">
@@ -25,10 +25,10 @@
 		document.write('<link href="/resources/assets/css/' + DEMO_ADMINFLARE_VERSION + '/' + DEMO_CURRENT_THEME + '/adminflare.min.css" media="all" rel="stylesheet" type="text/css" id="adminflare-css">');
 	</script>
 	
-	<script src="/resources/assets/javascripts/1.2.1/modernizr-jquery.min.js" type="text/javascript"></script>
-	<script src="/resources/assets/javascripts/1.2.1/adminflare-demo.min.js" type="text/javascript"></script>
-	<script src="/resources/assets/javascripts/1.2.1/bootstrap.min.js" type="text/javascript"></script>
-	<script src="/resources/assets/javascripts/1.2.1/adminflare.min.js" type="text/javascript"></script>
+	<script src="/resources/assets/javascripts/1.2.2/modernizr-jquery.min.js" type="text/javascript"></script>
+	<script src="/resources/assets/javascripts/1.2.2/adminflare-demo.min.js" type="text/javascript"></script>
+	<script src="/resources/assets/javascripts/1.2.2/bootstrap.min.js" type="text/javascript"></script>
+	<script src="/resources/assets/javascripts/1.2.2/adminflare.min.js" type="text/javascript"></script>
 	
 	<style type="text/css">
 			/* ======================================================================= */

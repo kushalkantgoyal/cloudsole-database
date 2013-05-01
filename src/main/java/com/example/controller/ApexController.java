@@ -132,8 +132,14 @@ public class ApexController {
 					+ id, ToolingApi.TOOLING_API);
 			
 			System.out.println(apexClassResponse.toJSONString());
-			
-			map.put("body", apexClassResponse.get("Body"));
+			if (session.getAttribute("apexType").equals("page") || session.getAttribute("apexType").equals("component"))
+			{
+				map.put("body", apexClassResponse.get("Markup"));
+			}
+			else
+			{	
+				map.put("body", apexClassResponse.get("Body"));
+			}
 		} catch (IOException e) {
 			throw new ServletException(e);
 		}
