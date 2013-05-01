@@ -12,6 +12,9 @@ import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.converter.FormHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -32,7 +35,8 @@ import com.example.service.ToolingApi;
 @Controller
 @RequestMapping("/apex")
 public class ApexController {
-	
+	private static final Logger logger = LoggerFactory.getLogger(ApexController.class);
+
 	List<String> operationTypes = Arrays.asList("Before Insert", "After Insert", "Before Update", "After Update", "Before Delete", "After Delete", "Undelete");
 	
 	@Autowired
@@ -49,8 +53,7 @@ public class ApexController {
 		//create visualforce templates
 		return "newclass";
 	}
-	
-	
+
 	
 	@RequestMapping(value="/new/{apexType}", method=RequestMethod.POST)
 	public String createApexClass(@PathVariable("apexType") String apexType, Map<String, Object> map, HttpServletRequest request) throws HttpMessageNotReadableException, IOException
@@ -127,7 +130,8 @@ public class ApexController {
 		{	
 			ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
 			HttpSession session = attr.getRequest().getSession(false); //create a new session
-		
+			session.setAttribute("currentId", id);
+			
 			JSONObject apexClassResponse = ToolingApi.get("sobjects/apex" + session.getAttribute("apexType") + "/"
 					+ id, ToolingApi.TOOLING_API);
 		
@@ -145,5 +149,112 @@ public class ApexController {
 
 		return "classes";
 	}
+	
+	@SuppressWarnings("unchecked")
+	@RequestMapping(method = RequestMethod.POST, value = "/save/{type}/{id}")
+	public String updateClassDetail(
+			@PathVariable("id") String id, 
+			@PathVariable("type") String type,
+			HttpServletRequest request, Map<String, Object> map)
+			throws IOException {
+		
+		final ServletServerHttpRequest inputMessage = new ServletServerHttpRequest(
+				request);
+		final Map<String, String> formData = new FormHttpMessageConverter()
+				.read(null, inputMessage).toSingleValueMap();
+		String body = formData.get("body");
 
+		try {
+			
+			JSONObject metadataContainerRequest = new JSONObject();
+			
+			logger.info("metadataRequest: " + metadataContainerRequest);
+			
+			metadataContainerRequest.put("Name", "Save"+ type + id);
+			JSONObject metadataContainerResponse = ToolingApi.post(
+					"sobjects/MetadataContainer", metadataContainerRequest);
+			
+			logger.info("MetadataContainer id: "
+					+ metadataContainerResponse.get("id"));
+			
+			logger.info("metadataResponse: " + metadataContainerResponse);
+			
+			JSONObject apexClassMemberRequest = new JSONObject();
+			
+			apexClassMemberRequest.put("MetadataContainerId",
+					metadataContainerResponse.get("id"));
+			apexClassMemberRequest.put("ContentEntityId", id);
+			apexClassMemberRequest.put("Body", body);
+			
+			JSONObject apexClassMemberResponse = ToolingApi.post(
+					"sobjects/Apex" + type + "Member", apexClassMemberRequest);
+			
+			logger.info("apexClassMemberResponse: " + apexClassMemberResponse);
+			
+			JSONObject containerAsyncRequest = new JSONObject();
+			containerAsyncRequest.put("MetadataContainerId",
+					metadataContainerResponse.get("id"));
+			containerAsyncRequest.put("isCheckOnly", false);
+			
+			JSONObject containerAsyncResponse = ToolingApi.post(
+					"sobjects/ContainerAsyncRequest", containerAsyncRequest);
+			
+			System.out.println("ContainerAsyncRequest id: "
+					+ containerAsyncResponse.get("id"));
+
+			logger.info("ContainerAsyncResponse: " + containerAsyncResponse);
+			JSONObject result = ToolingApi.get("sobjects/ContainerAsyncRequest/"
+							+ containerAsyncResponse.get("id"), ToolingApi.TOOLING_API);
+			
+			logger.info("Result: " + result);
+			String state = (String) result.get("State");
+			
+			logger.info("State: " + state);
+		
+			int wait = 1;
+			while (state.equals("Queued")) {
+				try {
+					System.out.println("Sleeping for " + wait + " second(s)");
+					Thread.sleep(wait * 10);
+				} catch (InterruptedException ex) {
+					Thread.currentThread().interrupt();
+				}
+
+				wait *= 2;
+
+				result = ToolingApi.get("sobjects/ContainerAsyncRequest/"
+						+ containerAsyncResponse.get("id"), ToolingApi.TOOLING_API);
+				state = (String) result.get("State");
+			}
+
+			ToolingApi.delete("sobjects/MetadataContainer/"
+					+ metadataContainerResponse.get("id"));
+			
+			if (state.equals("Completed")) 
+			{
+				map.put("body", body);
+				map.put("result", "Successful");
+				return "classes";
+			} else {
+				map.put("body", body);
+				String errormessage = (String) result.get("ErrorMsg");
+				if (errormessage != null)
+				{
+					JSONArray parsedErrorsMsg = (JSONArray) JSONValue
+							.parse(errormessage);
+					map.put("result", parsedErrorsMsg);
+				}
+				String compilerErrors = (String) result.get("CompilerErrors");
+				if (compilerErrors != null) {
+					JSONArray parsedErrors = (JSONArray) JSONValue
+							.parse(compilerErrors);
+					map.put("result", parsedErrors);
+				}
+				return "classes";
+			}
+		} catch (RuntimeException e) {
+			map.put("result", "Exception: " + e.getMessage()); // TODO: better looking error
+			return "classes";
+		}
+	}
 }

@@ -1,6 +1,7 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <jsp:include page="header.jsp"/>
 <link rel="stylesheet" href="/resources/codemirror.css">
 <script src="/resources/codemirror.js"></script>
@@ -32,9 +33,35 @@
 						</div>
 						</form>
 					</div>	
-			
-					<div class="span8">				
-							<form method="post" action="/login/apex/update">
+					
+					<div class="span8">	
+					<c:if test="${not empty result}">
+						<c:choose>
+							<c:when test="${result == 'Successful'}">
+								<div class="alert alert-success">
+									<c:forEach items="${result}" var="result">
+  										<a href="#" class="close" data-dismiss="alert">×</a>${result}
+  									</c:forEach>
+								</div>
+							</c:when>
+							<c:when test="${fn:containsIgnoreCase(result, 'Exception')}">
+								<div class="alert alert-error">
+								  <c:forEach items="${result}" var="result">
+  									<a href="#" class="close" data-dismiss="alert">×</a>${result}
+								</c:forEach>
+								</div>
+							</c:when>
+							<c:otherwise>
+								<div class="alert alert-error">
+								  <c:forEach items="${result}" var="result">
+  									<a href="#" class="close" data-dismiss="alert">×</a>Error in line ${result['line']} : ${result['problem']}
+								</c:forEach>
+								</div>
+							</c:otherwise>
+						</c:choose>
+       				</c:if>
+       		
+							<form method="post" action="/login/apex/save/${apexType}/${currentId}">
 	        					<textarea name="body" id="body" rows="50" style="width: 666px;">${body}</textarea><br/>
 		    					<div class="btn-group">
 		        					<input type="submit" value="Save" class="btn btn-primary">
