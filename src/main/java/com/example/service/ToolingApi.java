@@ -23,7 +23,6 @@ import org.apache.http.impl.cookie.BasicClientCookie;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.slf4j.Logger;
@@ -149,9 +148,6 @@ public class ToolingApi {
 		// set the token in the header
 		post.setHeader("Authorization", "Bearer " + accessToken);
 
-		System.out.println("ToolingApi.post path: " + path);
-		System.out.println("ToolingApi.post body: " + jsonIn);
-
 		// set the content
 		StringEntity input = new StringEntity(jsonIn);
 		input.setContentType("application/json");
@@ -163,15 +159,16 @@ public class ToolingApi {
 				+ response.getStatusLine().getStatusCode());
 
 		HttpEntity entity = response.getEntity();
+		
 		if (entity != null) {
 			InputStream instream = entity.getContent();
 			try {
-				JSONArray json = (JSONArray) JSONValue
+				JSONObject json = (JSONObject) JSONValue
 						.parse(new InputStreamReader(instream));
 
 				System.out.println("ToolingApi.post response: " + json.toString());
 
-				return (JSONObject)json.get(0);
+				return json;
 			} finally {
 				instream.close();
 			}

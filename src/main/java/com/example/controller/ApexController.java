@@ -108,10 +108,25 @@ public class ApexController {
 		}
 		else if (apexType.equalsIgnoreCase("class"))
 		{
+			final String className = formData.get("className");
 			final String classTypeSelected = formData.get("classTypeSelected");
+			
+			JSONObject apexClassRequest = new JSONObject();
+			apexClassRequest.put("Name", className);
+			apexClassRequest.put("Body", ApexUtil.classStub(className, classTypeSelected));
+			JSONObject apexClassResponse = ToolingApi.post("sobjects/ApexClass", apexClassRequest);
+	
 			System.out.println(classTypeSelected);
 		}
+		else if (apexType.equalsIgnoreCase("visualforce"))
+		{
+			
+		}
 
+		else if (apexType.equalsIgnoreCase("component"))
+		{
+		
+		}
 		return null;
 	}
 	

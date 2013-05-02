@@ -86,6 +86,10 @@
     	<div class="tab-pane fade in" id="tab-class">
     	<form class="form-horizontal" method="POST" action="/login/apex/new/class">
              <fieldset>
+             	<div class="control-group">
+    				<label>Enter Class Name</label>
+		        		<input id="classname" name="classname" placeholder="Type trigger name" required/>
+		      	</div>
  				<div class="control-group">
  				<select name="classTypeSelected">
  					<c:forEach items="${classTypes}" var="classtypes">
@@ -93,6 +97,36 @@
  					</c:forEach>
  				</select>
  				</div>
+ 				 <div class="control-group">
+					<div class="controls">
+                    	<input type="submit" value="Save" class="btn btn-primary">
+                    </div>
+                </div>
+ 			</fieldset>
+ 		</form>
+    	</div>
+    	<div class="tab-pane fade in" id="tab-visualforce">
+    	<form class="form-horizontal" method="POST" action="/login/apex/new/visualforce">
+             <fieldset>
+             	<div class="control-group">
+    				<label>Enter Class Name</label>
+		        		<input id="visualforcename" name="visualforcename" placeholder="Type visualforce page name" required/>
+		      	</div>
+ 				 <div class="control-group">
+					<div class="controls">
+                    	<input type="submit" value="Save" class="btn btn-primary">
+                    </div>
+                </div>
+ 			</fieldset>
+ 		</form>
+    	</div>
+    	<div class="tab-pane fade in" id="tab-component">
+    	<form class="form-horizontal" method="POST" action="/login/apex/new/component">
+             <fieldset>
+             	<div class="control-group">
+    				<label>Enter Class Name</label>
+		        		<input id="componentname" name="componentname" placeholder="Type component name" required/>
+		      	</div>
  				 <div class="control-group">
 					<div class="controls">
                     	<input type="submit" value="Save" class="btn btn-primary">

@@ -727,9 +727,6 @@
 						<li>
 							<a tabindex="-1" href="/login/batch/job"><span class=""></span>Job</a>
 						</li>
-						<li>
-							<a tabindex="-1" href="/login/batch/schedule"><span class=""></span>Schedule</a>
-						</li>
 					</ul>
 				</li>
 				<li class="lp-dropdown">
@@ -752,12 +749,14 @@
 						<li>
 							<a tabindex="-1" href="/login/apex/view"><span class=""></span>View</a>
 						</li>
+						<li>
+							<a tabindex="-1" href="/login/apex/run"><span class=""></span>Run</a>
+						</li>
 					</ul>
 				</li>
 				<li>
 					<a href="/login/sobject"><span class="icon-table"></span>SOQL</a>
 				</li>
-				
 				<li>
 					<a href="/login/mail"><span class="icon-inbox"></span>Email</a>
 				</li>

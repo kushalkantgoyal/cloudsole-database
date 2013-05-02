@@ -19,8 +19,8 @@ public class ApexUtil {
 		}
 		triggerBuilder.deleteCharAt(triggerBuilder.length()-1);
 		triggerBuilder.append(") {").append("\n");
-		/*
-		if (createHandler)
+		
+	/*	if (createHandler)
 			triggerBuilder.append(name).append("TriggerHandler handler = new ").append(name).append("TriggerHandler(Trigger.isExecuting, Trigger.size);").append("\n");
 		
 		for (String operation : operations)
@@ -51,7 +51,7 @@ public class ApexUtil {
 		return triggerBuilder.toString();
 	}
 	
-	public String classStub(String name, String type)
+	public static String classStub(String name, String type)
 	{
 		StringBuilder classBuilder = new StringBuilder();
 		switch (classTypes.valueOf(type)) {
