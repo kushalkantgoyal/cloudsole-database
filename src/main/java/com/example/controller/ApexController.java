@@ -29,7 +29,6 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import com.example.service.LoginService;
 import com.example.util.ApexUtil;
 import com.force.api.QueryResult;
-import com.force.sdk.oauth.context.ForceSecurityContextHolder;
 import com.example.service.ToolingApi;
 
 @Controller
@@ -47,13 +46,8 @@ public class ApexController {
 	{
 		map.put("classTypes", ApexUtil.classTypes.values());
 		map.put("opertationTypes", operationTypes);
-		
-		//create trigger with template or without.
-		//create trigger with or without Handler
-		//create visualforce templates
 		return "newclass";
 	}
-
 	
 	@RequestMapping(value="/new/{apexType}", method=RequestMethod.POST)
 	public String createApexClass(@PathVariable("apexType") String apexType, Map<String, Object> map, HttpServletRequest request) throws HttpMessageNotReadableException, IOException
@@ -64,6 +58,8 @@ public class ApexController {
 				.read(null, inputMessage).toSingleValueMap();
 		
 		List<String> operationsList = new ArrayList<String>();
+		
+	
 		Boolean createhandler = false;
 		
 		if (apexType.equalsIgnoreCase("trigger"))
@@ -91,9 +87,24 @@ public class ApexController {
 			final String triggername = formData.get("triggername");
 			final String sobjectselected = formData.get("sobjectselected");
 			
-			//System.out.println(ApexUtil.triggerStub(triggername, sobjectselected, operationsList, createhandler));
-			System.out.println(ApexUtil.triggerHandler(triggername, sobjectselected, operationsList));
+			JSONObject apexTriggerRequest = new JSONObject();
+			apexTriggerRequest.put("Name", triggername);
+			apexTriggerRequest.put("Body", ApexUtil.triggerStub(triggername, sobjectselected, operationsList, createhandler));
+			JSONObject apexTriggerResponse = ToolingApi.post("sobjects/ApexTrigger", apexTriggerRequest);
 			
+			System.out.println(ApexUtil.triggerStub(triggername, sobjectselected, operationsList, createhandler));
+				
+			/*if (createhandler)
+			{
+				JSONObject apexClassRequest = new JSONObject();
+				apexClassRequest.put("Name", triggername);
+				apexClassRequest.put("Body", ApexUtil.triggerHandler(triggername, sobjectselected, operationsList));
+				JSONObject apexClassResponse = ToolingApi.post("sobjects/ApexClass", apexClassRequest);
+				
+				//System.out.println(ApexUtil.triggerHandler(triggername, sobjectselected, operationsList));
+			}
+			*/
+			return "classes";
 		}
 		else if (apexType.equalsIgnoreCase("class"))
 		{
@@ -101,7 +112,7 @@ public class ApexController {
 			System.out.println(classTypeSelected);
 		}
 
-		return "newclass";
+		return null;
 	}
 	
 	@RequestMapping(value="/view")

@@ -19,13 +19,12 @@ public class ApexUtil {
 		}
 		triggerBuilder.deleteCharAt(triggerBuilder.length()-1);
 		triggerBuilder.append(") {").append("\n");
-		
+		/*
 		if (createHandler)
 			triggerBuilder.append(name).append("TriggerHandler handler = new ").append(name).append("TriggerHandler(Trigger.isExecuting, Trigger.size);").append("\n");
 		
 		for (String operation : operations)
 		{
-			
 			String[] splitOperation = operation.split("\\s+");
 			triggerBuilder.append("\t").append("if ((Trigger.is" + splitOperation[0].substring(0, 1).toUpperCase() + splitOperation[0].substring(1) + ")").append(" && ").append("(Trigger.is" + splitOperation[1].substring(0, 1).toUpperCase() + splitOperation[1].substring(1) + ")").append(") {").append("\n");
 			
@@ -46,7 +45,7 @@ public class ApexUtil {
 			
 			triggerBuilder.append("}").append("\n");
 		}
-
+		 */
 		triggerBuilder.append("}");
 		
 		return triggerBuilder.toString();
@@ -125,19 +124,19 @@ public class ApexUtil {
 	public static String triggerHandler(String name, String sObject, List<String> operations)
 	{
 		StringBuilder triggerHandlerBuilder = new StringBuilder();
-		triggerHandlerBuilder.append("public with sharing class ").append(name).append(" {").append("\n");
+		triggerHandlerBuilder.append("public with sharing class ").append(name).append("TriggerHandler").append(" {").append("\n");
 		triggerHandlerBuilder.append("\t").append("private boolean m_isExecuting = false;").append("\n");
-		triggerHandlerBuilder.append("\t").append("private integer BatchSize = 0;").append("\n\n");
-		triggerHandlerBuilder.append("\t").append("public ").append(name).append("boolean isExecuting, integer size){").append("\n");
+		triggerHandlerBuilder.append("\t").append("private Integer BatchSize = 0;").append("\n\n");
+		triggerHandlerBuilder.append("\t").append("public ").append(name).append("TriggerHandler").append("(boolean isExecuting, Integer size){").append("\n");
 		triggerHandlerBuilder.append("\t\t").append("m_isExecuting = isExecuting;").append("\n");
 		triggerHandlerBuilder.append("\t\t").append("BatchSize = size;").append("\n");
 		triggerHandlerBuilder.append("\t").append("}").append("\n");
 		
 		for (String operation : operations)
 		{
-			if (operation.equalsIgnoreCase("before insert"))
+				if (operation.equalsIgnoreCase("before insert"))
 			{
-				triggerHandlerBuilder.append("\t").append("public void OnBeforeInsert(").append(sObject).append("[]").append(" new").append(sObject).append(") {").append("\n\n");
+				triggerHandlerBuilder.append("\t").append("public void OnBeforeInsert(List<").append(sObject).append(">").append(" new").append(sObject).append(") {").append("\n");
 				triggerHandlerBuilder.append("\t").append("}").append("\n");
 			}
 			else if (operation.equalsIgnoreCase("after insert"))
