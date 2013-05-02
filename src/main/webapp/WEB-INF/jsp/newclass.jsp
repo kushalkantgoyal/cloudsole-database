@@ -2,25 +2,20 @@
 <jsp:include page="header.jsp"/>
 <section class="container">
 <section class="row-fluid">
-<div class="span8">
+<div class="span12">
 			<h3 class="box-header">
 				Create New Apex
 			</h3>
 			<div class="box">
-			<div class="tabbable">
-					
-						<!-- Tabs
-							================================================== -->
-						<ul class="nav nav-tabs box-wide">
+			<div class="tabbable">	
+							<ul class="nav nav-tabs box-wide">
 						
 							<li class="active">
 								<a href="#tab-trigger" data-toggle="tab">Trigger</a>
-							</li>
-							
+							</li>		
 							<li>
 								<a href="#tab-class" data-toggle="tab">Class</a>
 							</li>
-							
 							<li>
 								<a href="#tab-visualforce" data-toggle="tab">Visualforce</a>
 							</li>
@@ -29,8 +24,6 @@
 							</li>
 						</ul>
 						<!-- / Tabs -->
-			<!-- Tabs content
-							================================================== -->
 			<div class="tab-content box-wide box-no-bottom-padding">
 			<c:if test="${error != null}">
                 <div class="alert">${error}</div>
@@ -73,14 +66,13 @@
 					</label>
  				</div>
  				<div class="control-group">
- 					<label>Select Handler</label>
  					<label class="checkbox inline">
   						<input type="checkbox" name="handler">Create Handler
 					</label>
  				</div>
     			<div class="control-group">
     				<label>Enter Trigger Name</label>
-		        		<input id="triggername" name="triggername" value="" placeholder="Type trigger name"/>
+		        		<input id="triggername" name="triggername" value="" placeholder="Type trigger name" required/>
 		      	</div>
 		      	
                 <div class="control-group">

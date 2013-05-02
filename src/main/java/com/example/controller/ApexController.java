@@ -82,9 +82,8 @@ public class ApexController {
 				operationsList.add("after delete");
 			if (formData.get("undelete") != null)
 				operationsList.add("after undelete");
-			
-			final String handler = formData.get("handler");
-			if (handler == "on")
+
+			if (formData.get("handler") != null)
 			{
 				createhandler=true;
 			}
@@ -92,7 +91,9 @@ public class ApexController {
 			final String triggername = formData.get("triggername");
 			final String sobjectselected = formData.get("sobjectselected");
 			
-			System.out.println(ApexUtil.triggerStub(triggername, sobjectselected, operationsList, createhandler));	
+			//System.out.println(ApexUtil.triggerStub(triggername, sobjectselected, operationsList, createhandler));
+			System.out.println(ApexUtil.triggerHandler(triggername, sobjectselected, operationsList));
+			
 		}
 		else if (apexType.equalsIgnoreCase("class"))
 		{
