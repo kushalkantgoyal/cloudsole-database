@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -14,6 +15,7 @@ import org.springframework.http.converter.FormHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.http.server.ServletServerHttpRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -56,13 +58,25 @@ public class BatchController {
 		String query_string = formData.get("query_string");
 		//String filepath = formData.get("uni_file");
 		//TODO: auto create the path depending on the date
-		batchoutput.append(new BulkAPIService().run(environment, operations, export_option, sobject, query_string, "/Users/tmichels/apirecord.csv"));
-		
-		InputStream is = new FileInputStream("/Users/tmichels/apirecord.csv");
-	      // copy it to response's OutputStream
-	    IOUtils.copy(is, response.getOutputStream());
-	    response.flushBuffer();
-		is.close();
+		File tmpFile = File.createTempFile("cloudsole", ".csv");
+		System.out.println(tmpFile.getAbsolutePath());
+		batchoutput.append(new BulkAPIService().run(environment, operations, export_option, sobject, query_string, tmpFile.getAbsolutePath()));
+	
+		response.setContentType("application/csv"); 
+	    response.setContentLength(new Long(tmpFile.length()).intValue());
+	    response.setHeader("Content-Disposition","attachment; filename=CloudSole-Batch-" + sobject + ".csv");
+	 
+	     try {
+	    	 FileCopyUtils.copy(new FileInputStream(tmpFile), response.getOutputStream());
+	    	 map.put("success", "Your file was downloaded successfully");
+	     } catch (IOException e) {
+	         e.printStackTrace();
+	         map.put("error", e.getMessage());
+	     }
+	     finally
+	     {
+	    	 tmpFile.deleteOnExit();
+	     }
 		
 		return "newbatchjob";
 	}
