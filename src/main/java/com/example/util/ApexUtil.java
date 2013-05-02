@@ -9,7 +9,7 @@ public class ApexUtil {
 		BASE, TEST, BATCH, SCHED, EMAIL, EXCEPTION, EMPTY;
 	};
 	
-	public String triggerStub(String name, String sObject, List<String> operations, Boolean createHandler)
+	public static String triggerStub(String name, String sObject, List<String> operations, Boolean createHandler)
 	{
 		StringBuilder triggerBuilder = new StringBuilder();
 		triggerBuilder.append("trigger ").append(name).append(" on ").append(sObject).append("(");
@@ -25,7 +25,10 @@ public class ApexUtil {
 		
 		for (String operation : operations)
 		{
-			triggerBuilder.append("\t").append("if ((Trigger.is" + operation.split(" " )[0] + ")").append(" && ").append("(Trigger.is" + operation.split(" " )[1] + ")").append(") {").append("\n");
+			
+			String[] splitOperation = operation.split("\\s+");
+			triggerBuilder.append("\t").append("if ((Trigger.is" + splitOperation[0] + ")").append(" && ").append("(Trigger.is" + splitOperation[1] + ")").append(") {").append("\n");
+			
 			if (operation.equalsIgnoreCase("before insert"))
 				triggerBuilder.append("handler.OnBeforeInsert(Trigger.new);").append("\n");
 			else if (operation.equalsIgnoreCase("after insert"))
@@ -36,12 +39,12 @@ public class ApexUtil {
 				triggerBuilder.append("handler.OnAfterUpdate(Trigger.old, Trigger.new, Trigger.newMap);").append("\n");
 			else if (operation.equalsIgnoreCase("before delete"))
 				triggerBuilder.append("handler.OnBeforeDelete(Trigger.old, Trigger.oldMap);").append("\n");
-			else if (operation.equalsIgnoreCase("after insert"))
+			else if (operation.equalsIgnoreCase("after delete"))
 				triggerBuilder.append("handler.OnAfterDelete(Trigger.old, Trigger.oldMap);").append("\n");
-			else if (operation.equalsIgnoreCase("undelete"))
+			else if (operation.equalsIgnoreCase("after undelete"))
 				triggerBuilder.append("handler.OnUndelete(Trigger.new);").append("\n");
 			
-			triggerBuilder.append("}");
+			triggerBuilder.append("}").append("\n");
 		}
 
 		triggerBuilder.append("}");

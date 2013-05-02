@@ -62,17 +62,44 @@ public class ApexController {
 				request);
 		final Map<String, String> formData = new FormHttpMessageConverter()
 				.read(null, inputMessage).toSingleValueMap();
-		final String type = formData.get("type");
-		final String name = formData.get("name");
-		final String triggersobject = formData.get("sobject");
-		final String triggeroperation = formData.get("operation");
+		
+		List<String> operationsList = new ArrayList<String>();
+		Boolean createhandler = false;
+		
+		if (apexType.equalsIgnoreCase("trigger"))
+		{
+			if (formData.get("before_insert") != null)
+				operationsList.add("before insert");
+			if (formData.get("after_insert") != null)
+				operationsList.add("after insert");
+			if (formData.get("before_update")!="null")
+				operationsList.add("before update");
+			if (formData.get("after_update") != null)
+				operationsList.add("after update");
+			if (formData.get("before_delete") != null)
+				operationsList.add("before delete");
+			if (formData.get("after_delete") != null)
+				operationsList.add("after delete");
+			if (formData.get("undelete") != null)
+				operationsList.add("after undelete");
+			
+			final String handler = formData.get("handler");
+			if (handler == "on")
+			{
+				createhandler=true;
+			}
+			
+			final String triggername = formData.get("triggername");
+			final String sobjectselected = formData.get("sobjectselected");
+			
+			System.out.println(ApexUtil.triggerStub(triggername, sobjectselected, operationsList, createhandler));	
+		}
+		else if (apexType.equalsIgnoreCase("class"))
+		{
+			final String classTypeSelected = formData.get("classTypeSelected");
+			System.out.println(classTypeSelected);
+		}
 
-		//final String body = "public class " + name + " {\n\n}";
-		
-		
-		//ApexClass newapexclass = new ApexClass();
-		//newapexclass.setName();
-		//String id = loginService.LoginToSalesforce().createSObject("ApexClass", newapexclass);
 		return "newclass";
 	}
 	

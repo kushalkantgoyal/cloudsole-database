@@ -38,46 +38,51 @@
 			<!-- Recent comments tab content -->
 			<div class="tab-pane fade in active" id="tab-trigger">
             
-            <form class="form-horizontal" method="POST" action="">
+            <form class="form-horizontal" method="POST" action="/login/apex/new/trigger">
              <fieldset>
+             	<div class="control-group">
+             		<label>Select SObject</label>
+             		<select name="sobjectselected">
+             			<c:forEach items="${sObject}" var="sObject">    
+                  			<option>${sObject['name']}</option>
+               			</c:forEach>	
+             		</select>
+             	</div>
  				<div class="control-group">
  					<label>Select Operation</label>
  					<label class="checkbox">
-  						<input type="checkbox" name="before_insert" value="before insert">Before Insert
+  						<input type="checkbox" name="before_insert">Before Insert
 					</label>
 					<label class="checkbox">
-  						<input type="checkbox" name="after_insert" value="after insert">After Insert
+  						<input type="checkbox" name="after_insert">After Insert
 					</label>
 					<label class="checkbox">
-  						<input type="checkbox" name="before_update" value="before update">Before Update
+  						<input type="checkbox" name="before_update">Before Update
 					</label>
 					<label class="checkbox">
-  						<input type="checkbox" name="after_updater" value="after update">After Update
+  						<input type="checkbox" name="after_update">After Update
 					</label>
 					<label class="checkbox">
-  						<input type="checkbox" name="before_delete" value="before update">Before Delete
+  						<input type="checkbox" name="before_delete">Before Delete
 					</label>
 					<label class="checkbox">
-  						<input type="checkbox" name="after_delete" value="after update">After Update
+  						<input type="checkbox" name="after_delete">After Delete
 					</label>
 					<label class="checkbox">
-  						<input type="checkbox" name="undelete" value="undelete">Undelete
+  						<input type="checkbox" name="undelete">Undelete
 					</label>
  				</div>
  				<div class="control-group">
  					<label>Select Handler</label>
  					<label class="checkbox inline">
-  						<input type="checkbox" value="handler">Create Handler
+  						<input type="checkbox" name="handler">Create Handler
 					</label>
  				</div>
     			<div class="control-group">
     				<label>Enter Trigger Name</label>
 		        		<input id="triggername" name="triggername" value="" placeholder="Type trigger name"/>
 		      	</div>
-		      	<div class="control-group">
-    				<label>Enter Trigger Handler Name:</label>
-		        		<input id="triggerhandlername" name="triggerhandlername" value="" placeholder="Type trigger handler name"/>
-		      	</div>
+		      	
                 <div class="control-group">
 					<div class="controls">
                     	<input type="submit" value="Save" class="btn btn-primary">
@@ -87,12 +92,12 @@
             </form>
     	</div>
     	<div class="tab-pane fade in" id="tab-class">
-    	<form class="form-horizontal" method="POST" action="login/apex/new/class">
+    	<form class="form-horizontal" method="POST" action="/login/apex/new/class">
              <fieldset>
  				<div class="control-group">
- 				<select>
+ 				<select name="classTypeSelected">
  					<c:forEach items="${classTypes}" var="classtypes">
- 					<option>${classtypes}</option>
+ 						<option>${classtypes}</option>
  					</c:forEach>
  				</select>
  				</div>
