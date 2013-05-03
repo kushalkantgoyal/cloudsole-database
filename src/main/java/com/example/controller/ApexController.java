@@ -58,7 +58,6 @@ public class ApexController {
 				.read(null, inputMessage).toSingleValueMap();
 		
 		List<String> operationsList = new ArrayList<String>();
-		
 	
 		Boolean createhandler = false;
 		
