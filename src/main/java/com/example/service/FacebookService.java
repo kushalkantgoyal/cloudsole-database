@@ -19,12 +19,14 @@ import com.restfb.Facebook;
 import com.restfb.FacebookClient;
 import com.restfb.JsonMapper;
 import com.restfb.Parameter;
+import com.restfb.batch.BatchRequest;
+import com.restfb.batch.BatchRequest.BatchRequestBuilder;
+import com.restfb.batch.BatchResponse;
 import com.restfb.json.JsonArray;
 import com.restfb.json.JsonObject;
 import com.restfb.types.NamedFacebookType;
 import com.restfb.types.Page;
 import com.restfb.types.Post;
-import com.restfb.types.Url;
 import com.restfb.types.User;
 import com.restfb.types.User.Education;
 import com.restfb.types.User.Sport;
@@ -34,8 +36,9 @@ import com.restfb.types.User.Work;
 public class FacebookService {
 	
 	private final FacebookClient facebookClient;
-	private final static String AccessToken = "AAADPhmv3fagBAFzfe6xksCqH633cXYAtL8VZANWDNwENPFgumbfcxpmKvo7YujGs9Fe3Oi00goSMKrbRwfTFh2J7QbHZA5IltrTDs9rAZDZD";
-	  /**
+	private final static String AccessToken = "BAAHTNvXJOfwBAEKvuAY3xzeF6UfKLWOxDvaFGlknAKPtWYAvuquuZBdqwx97E3GOHCtmHgMCsAVxDLgr9zDnebJFfZCIzp3ZCEMXmsyvb7ayXvdo9bM";
+
+	/**
 	   * Entry point. You must provide a single argument on the command line: a
 	   * valid Graph API access token.
 	   * 
@@ -44,7 +47,64 @@ public class FacebookService {
 	   * @throws IllegalArgumentException
 	   *           If no command-line arguments are provided.
 	   */
-	
+		
+	 public void batch()
+	 {
+		// The Batch API is great if you have multiple operations you'd like to
+		// perform in one server trip. Let's build a batch with three GET requests and
+		// one POST request here:
+		
+		BatchRequest meRequest = new BatchRequestBuilder("me").build();
+		BatchRequest badRequest = new BatchRequestBuilder("this-is-a-bad-request/xxx").build();
+		BatchRequest m83musicRequest = new BatchRequestBuilder("m83music/feed")
+		  .parameters(Parameter.with("limit", 5)).build();
+		BatchRequest postRequest = new BatchRequestBuilder("me/feed")
+		  .method("POST")
+		  .body(Parameter.with("message", "Testing!")).build();
+
+		// ...and execute the batch.
+
+		List<BatchResponse> batchResponses =
+		  facebookClient.executeBatch(meRequest, badRequest, m83musicRequest, postRequest);
+
+		// Responses are ordered to match up with their corresponding requests.
+
+		BatchResponse meResponse = batchResponses.get(0);
+		BatchResponse badResponse = batchResponses.get(1);
+		BatchResponse m83musicResponse = batchResponses.get(2);
+		BatchResponse postResponse = batchResponses.get(3);
+
+		// Since batches can have heterogenous response types, it's up to you
+		// to parse the JSON into Java objects yourself. Luckily RestFB has some built-in
+		// support to help you with this.
+
+		JsonMapper jsonMapper = new DefaultJsonMapper();
+
+		// Here we marshal to the built-in User type.
+
+		User me = jsonMapper.toJavaObject(meResponse.getBody(), User.class);
+		out.println(me);
+
+		// To detect errors, check the HTTP response code.
+
+		if(badResponse.getCode() != 200)
+		  out.println("Batch request failed: " + badResponse);
+
+		// You can pull out connection data...
+
+		out.println("M83's feed follows");
+
+		Connection<Post> m83musicPosts =
+		  new Connection<Post>(facebookClient, m83musicResponse.getBody(), Post.class);
+
+		for (List<Post> m83musicPostsConnectionPage : m83musicPosts)
+		  for (Post post : m83musicPostsConnectionPage)
+		    out.println(post);
+
+		// ...or do whatever you'd like with the raw JSON.
+
+		out.println(postResponse.getBody());
+	 }
 	
 	  public static void main(String[] args) {
 	   
@@ -58,12 +118,12 @@ public class FacebookService {
 	  void runEverything() {
 	    //fetchObject();
 	    //fetchObjects();
-	   // fetchObjectsAsJsonObject();
+	    fetchObjectsAsJsonObject();
 	   // fetchConnections();
 	    //fetchDifferentDataTypesAsJsonObject();
 	    //query();
 	    //multiquery();
-	    search();
+	    //search();
 	    //metadata();
 	    //paging();
 	    //selection();
@@ -145,19 +205,17 @@ public class FacebookService {
 	    out.println("* Fetching multiple objects at once as a JsonObject *");
 
 	    List<String> ids = new ArrayList<String>();
-	    ids.add("marise.michels");
-	    ids.add("http://techcrunch.com/2012/10/30/george-lucas-i-sold-lucasfilm-to-disney-to-protect-it/");
-
+	    ids.add("charley.moore");
+	   
 	    // Make the API call
 	    JsonObject results = facebookClient.fetchObjects(ids, JsonObject.class);
 
 	    // Pull out JSON data by key and map each type by hand.
 	    JsonMapper jsonMapper = new DefaultJsonMapper();
-	    User user = jsonMapper.toJavaObject(results.getString("marise.michels"), User.class);
-	    Url url = jsonMapper.toJavaObject(results.getString("http://techcrunch.com/2012/10/30/george-lucas-i-sold-lucasfilm-to-disney-to-protect-it/"), Url.class);
-
+	    User user = jsonMapper.toJavaObject(results.getString("charley.moore"), User.class);
+	    
 	    out.println("User is " + user);
-	    out.println("URL is " + url);
+	  
 	  }
 
 	  void fetchObjects() {
@@ -228,7 +286,7 @@ public class FacebookService {
 	    out.println("* FQL Query *");
 
 	    List<FqlUser> users =
-	        facebookClient.executeQuery("SELECT uid, name FROM user WHERE uid=220439 or uid=7901103", FqlUser.class);
+	        facebookClient.executeQuery("SELECT uid, name FROM user WHERE name=charley.moore", FqlUser.class);
 
 	    out.println("User: " + users);
 	  }
@@ -293,19 +351,19 @@ public class FacebookService {
 	  void search() {
 	    out.println("* Searching connections *");
 
-	    Connection<Post> publicSearch =
-	        facebookClient.fetchConnection("search", Post.class, Parameter.with("q", "South Africa"),
-	          Parameter.with("type", "post"));
+	  //  Connection<Post> publicSearch =
+	   //     facebookClient.fetchConnection("search", Post.class, Parameter.with("q", "South Africa"),
+	    //      Parameter.with("type", "post"));
 
 	    Connection<User> targetedSearch =
-	        facebookClient.fetchConnection("me/home", User.class, Parameter.with("q", "Irene"),
+	        facebookClient.fetchConnection("me/home", User.class, Parameter.with("q", "irene.haque"),
 	          Parameter.with("type", "user"));
 
-	    if (publicSearch.getData().size() > 0)
-	    for (int k =0; k<publicSearch.getData().size();k++)
-	      out.println("Public search: " + publicSearch.getData().get(k).getMessage());
+	    if (targetedSearch.getData().size() > 0)
+	    for (int k =0; k<targetedSearch.getData().size();k++)
+	      out.println("Public search: " + targetedSearch.getData().get(k));
 
-	    out.println("Posts on my wall by friends named Irene: " + targetedSearch.getData().size());
+	    //out.println("Posts on my wall by friends named Irene: " + targetedSearch.getData().size());
 	  }
 
 	  void metadata() {
