@@ -14,8 +14,10 @@ import twitter4j.Status;
 import twitter4j.StatusDeletionNotice;
 import twitter4j.StatusListener;
 import twitter4j.Twitter;
+import twitter4j.TwitterAdapter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
+import twitter4j.TwitterListener;
 import twitter4j.TwitterStreamFactory;
 import twitter4j.conf.ConfigurationBuilder;
 
@@ -81,11 +83,11 @@ public class TwitterService {
 	}
 	
 	public static void asyncTwitter()
-	{		 
-		    // The factory instance is re-useable and thread safe.
-		    AsyncTwitterFactory factory = new AsyncTwitterFactory();
-		    AsyncTwitter asyncTwitter = factory.getInstance();
-		    asyncTwitter.updateStatus("");
+	{		
+	    // The factory instance is re-useable and thread safe.
+	    AsyncTwitterFactory factory = new AsyncTwitterFactory();
+	    AsyncTwitter asyncTwitter = factory.getInstance();
+	    asyncTwitter.updateStatus("");
 	}
 	
 	public static void streamTwitter()
