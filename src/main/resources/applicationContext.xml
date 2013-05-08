@@ -36,7 +36,7 @@
     <security:http use-expressions="true">
         <security:intercept-url pattern="/login/**" access="isAuthenticated()" />
     </security:http>
-    
+      
     <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 	    <property name="host" value="smtp.gmail.com"/>
 	    <property name="port" value="587"/>

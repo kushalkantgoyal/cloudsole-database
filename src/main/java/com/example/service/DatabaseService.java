@@ -3,7 +3,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import com.example.service.CustomerService;
 import com.example.model.Customer;
 import com.example.config.JpaConfiguration;
 
