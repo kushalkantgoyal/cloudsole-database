@@ -1,4 +1,4 @@
-package com.example.service;
+package com.example.config;
 
 import java.sql.Driver;
 
@@ -12,7 +12,6 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 
-import com.example.service.DataSourceConfiguration;
 
 @PropertySource("classpath:/services.properties")
 @Configuration
