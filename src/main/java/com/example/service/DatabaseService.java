@@ -1,4 +1,6 @@
 package com.example.service;
+import java.util.List;
+
 import javax.annotation.PostConstruct;
 
 import org.apache.commons.logging.Log;
@@ -53,5 +55,9 @@ public class DatabaseService {
 			Customer updatedCustomer = customerService.updateCustomer(existingCustomer.getId(), "Poes", "Klap");
 			log.info(String.format("updated customer's firstName: %s", updatedCustomer.getFirstName()));
 		}
-  
+		
+		public List<Customer> getAllCustomers() {
+			 return customerService.getAllCustomers("SELECT c FROM Customer c");
+		}
+
 }

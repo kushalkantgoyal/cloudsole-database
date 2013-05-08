@@ -70,9 +70,7 @@
       			 			</td>
                     	 </c:otherwise>
                      </c:choose>
-  
       			 	</c:forEach>
-      				
       			 </table>
       			 <a href="/login/sobject/query/build" class="btn btn-primary btn-mini">Build Query</a>
       			 </form>

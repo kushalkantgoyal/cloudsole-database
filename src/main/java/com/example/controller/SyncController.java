@@ -35,6 +35,7 @@ public class SyncController {
 	private static final String FROM = "FROM ";
 	private static QueryResult<Map> res = null;	
 	private static Map<String, String> paginationPages =null;
+	private static List<String> recordsToSync;
 	final static Integer PAGESIZE = 100;
 	
 	@Autowired
@@ -123,7 +124,7 @@ public class SyncController {
 		final ServletServerHttpRequest inputMessage = new ServletServerHttpRequest(request);
 		final Map<String, String> formData = new FormHttpMessageConverter().read(null, inputMessage).toSingleValueMap();
 		
-		List<String> recordsToSync = new ArrayList<String>();
+		recordsToSync = new ArrayList<String>();
 		for (Integer k = 0; k<3; k++)
 		{
 			if (formData.get(k.toString()) != null)
@@ -133,7 +134,6 @@ public class SyncController {
 		}
 		
 		System.out.println(recordsToSync);
-	
 		return "sync";
 	}
 	

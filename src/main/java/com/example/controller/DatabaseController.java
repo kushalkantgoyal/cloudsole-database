@@ -19,9 +19,13 @@ import com.example.service.DatabaseService;
 public class DatabaseController {
 
 	@RequestMapping("")
-	public String showDatabase()
+	public String showDatabase(Map<String, Object> map)
 	{
-		return "insertdb";
+		DatabaseService dbservice = new DatabaseService();
+    	dbservice.setupJPA();
+    	dbservice.getCustomerService();
+    	map.put("contactList", dbservice.getAllCustomers());
+		return "viewdb";
 	}
 	
 	@RequestMapping(value="/insert", method=RequestMethod.POST)

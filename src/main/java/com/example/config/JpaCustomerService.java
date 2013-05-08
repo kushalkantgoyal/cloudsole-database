@@ -1,5 +1,7 @@
 package com.example.config;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -35,4 +37,9 @@ public class JpaCustomerService implements CustomerService {
         this.entityManager.merge(customer);
         return getCustomerById(id);
     }
+    
+    public List<Customer> getAllCustomers(String query) {
+		 return this.entityManager.createQuery(query, Customer.class).getResultList();
+	}
+
 }

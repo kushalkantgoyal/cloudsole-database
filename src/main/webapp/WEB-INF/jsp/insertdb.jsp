@@ -5,7 +5,7 @@
 <section class="container">
 <section class="row-fluid">
 			<h3 class="box-header">
-				Create Batch Job
+				Create Databse Insert
 			</h3>
 			<div class="box">
 				<div class="span8">
@@ -14,14 +14,14 @@
 											<div class="control-group">
 												<label class="control-label">First Name</label>
 												<div class="controls">
-													<input type="text" class="span5" id="firstName" />
+													<input type="text" class="span5" name="firstName" />
 													<span class="help-block">block Job Name</span>
 												</div>
 											</div>
 											<div class="control-group">
 												<label class="control-label">Environment</label>
 												<div class="controls">
-													<input type="text" class="span5" id="lastName" />
+													<input type="text" class="span5" name="lastName" />
 												</div>
 											</div>
 											
