@@ -773,7 +773,7 @@
 							<a tabindex="-1" href="/login/stats"><span class=""></span>Stats</a>
 						</li>
 						<li>
-							<a tabindex="-1" href="extras-widgets.html"><span class=""></span>Wiki</a>
+							<a tabindex="-1" href="/login/db"><span class=""></span>Database</a>
 						</li>
 					</ul>
 				</li>

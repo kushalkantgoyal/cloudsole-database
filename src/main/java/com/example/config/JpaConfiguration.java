@@ -16,7 +16,6 @@ import com.example.model.Customer;
 import javax.inject.Inject;
 import javax.persistence.EntityManagerFactory;
 
-
 @Configuration
 @PropertySource("classpath:/services.properties")
 @EnableTransactionManagement

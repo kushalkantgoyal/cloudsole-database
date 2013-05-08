@@ -1,10 +1,8 @@
 package com.example.config;
 
 import java.sql.Driver;
-
 import javax.inject.Inject;
 import javax.sql.DataSource;
-
 import org.apache.commons.dbcp.BasicDataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,13 +10,10 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 
-
 @PropertySource("classpath:/services.properties")
 @Configuration
 @Profile("default")
 public class LocalDataSourceConfiguration implements DataSourceConfiguration {
-
-
     @Inject
     private Environment environment;
 
