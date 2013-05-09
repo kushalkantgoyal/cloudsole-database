@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 @RequestMapping("/contact")
-public class ContactController 
+public class EmailController 
 {
 	@Autowired
 	private MailSender mailSender;
