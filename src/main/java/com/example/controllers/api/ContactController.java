@@ -16,8 +16,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping(value = "/api/v1/contacts")
-@Api(value = "Contact operations", listingClass = "ContactController", basePath = "/api/v1/contact", description = "All operations for contacts")
+@RequestMapping(value = "/doc/v1/contact")
+@Api(value = "Contact operations", listingClass = "ContactController", basePath = "/v1/contact", description = "All operations for contacts")
 public class ContactController {
 	
 	@Autowired
@@ -58,7 +58,7 @@ public class ContactController {
     
     @ApiOperation(value = "Update a contact", notes = "Update a existing contact in salesforce", httpMethod = "PUT", responseClass = "Contact", multiValueResponse = true)
     @ApiError(code = 500, reason = "Process error")
-    @RequestMapping(value = "/{contactId}", method = RequestMethod.POST, consumes = "application/json")
+    @RequestMapping(value = "/{contactId}", method = RequestMethod.GET, consumes = "application/json")
     public @ResponseBody String updateContact(@PathVariable String contactId, @RequestBody Contact contact) {
     	loginService.LoginToSalesforce().updateSObject("Contact", contactId, contact);
 		return "{status: success}";

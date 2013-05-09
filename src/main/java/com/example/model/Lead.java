@@ -4,7 +4,7 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-@JsonIgnoreProperties(ignoreUnknown=true)
+
 public class Lead {
 	@JsonProperty("LastName")
 	private String LastName;

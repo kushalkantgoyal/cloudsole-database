@@ -12,9 +12,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 
-@Entity
-@XmlRootElement(name = "customer")
-@Table(name = "customer")
 public class Customer implements java.io.Serializable {
 
     private Long id;

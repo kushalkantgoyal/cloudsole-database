@@ -781,7 +781,7 @@
 					<a href="#" class="lp-dropdown-toggle" id="pages-dropdown"><span class="icon-file-alt"></span>Tools</a>
 					<ul class="lp-dropdown-menu simple" data-dropdown-owner="pages-dropdown">
 						<li>
-							<a tabindex="-1" href="/login/api/"><i class="icon-signin"></i>&nbsp;&nbsp;API</a>
+							<a tabindex="-1" href="/login/doc"><i class="icon-signin"></i>&nbsp;&nbsp;API</a>
 						</li>
 						<li>
 							<a tabindex="-1" href="pages-signup.html"><i class="icon-check"></i>&nbsp;&nbsp;Sign Up</a>

@@ -16,10 +16,7 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 /**
  * Generated from information gathered from /services/data/v27.0/sobjects/Opportunity/describe
  */
-@Entity
-@XmlRootElement(name = "Opportunity")
-@Table(name = "Opportunity")
-@JsonIgnoreProperties(ignoreUnknown=true)
+
 public class Opportunity implements java.io.Serializable {
     public static boolean CREATEABLE = true;
     public static boolean DELETABLE = true;

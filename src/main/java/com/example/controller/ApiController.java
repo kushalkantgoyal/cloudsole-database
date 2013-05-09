@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * the controller in your servlet context.
  */
 @Controller
-@RequestMapping(value = "/api")
+@RequestMapping(value = "/doc")
 public class ApiController extends ApiDocumentationController {
 
     public ApiController() {
@@ -20,7 +20,7 @@ public class ApiController extends ApiDocumentationController {
         setApiVersion("v1");
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "", method = RequestMethod.GET)
     public String documentation() {
         return "api";
     }

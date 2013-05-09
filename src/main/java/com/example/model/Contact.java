@@ -14,10 +14,7 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 /**
  * Generated from information gathered from /services/data/v27.0/sobjects/Contact/describe
  */
-@Entity
-@XmlRootElement(name = "Contact")
-@Table(name = "Contact")
-@JsonIgnoreProperties(ignoreUnknown=true)
+
 public class Contact implements java.io.Serializable {
     public static boolean CREATEABLE = true;
     public static boolean DELETABLE = true;

@@ -2,11 +2,6 @@ package com.example.controllers.api;
 
 import java.util.List;
 
-import javax.annotation.PostConstruct;
-import javax.inject.Inject;
-import javax.inject.Named;
-import javax.ws.rs.core.Response;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,8 +11,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-
-import com.force.api.ForceApi;
 import com.force.api.QueryResult;
 import com.example.model.Account;
 import com.example.service.LoginService;
@@ -29,8 +22,8 @@ import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiParam;
 
 @Controller
-@RequestMapping(value = "/api/v1/accounts")
-@Api(value = "Account operations", listingClass = "AccountController", basePath = "/api/v1/account", description = "All operations for accounts")
+@RequestMapping(value = "/doc/v1/account")
+@Api(value = "Account operations", listingClass = "AccountController", basePath = "/v1/account", description = "All operations for accounts")
 public class AccountController {
 	
 	@Autowired
@@ -51,7 +44,6 @@ public class AccountController {
     	Account account = loginService.LoginToSalesforce().getSObject("account", accountId).as(Account.class);
         return new Account[]{account};
     }
-
 	
 	@ApiOperation(value = "Delete a account", notes = "Delete a specific account with the given ID", httpMethod = "DELETE")
     @ApiError(code = 500, reason = "Process error")
@@ -61,9 +53,9 @@ public class AccountController {
     	return "{status: success}";
     }
 	
-	@ApiOperation(value = "Create a account using Param", notes = "Creates a new account in salesforce using Param", httpMethod = "POST")
+	@ApiOperation(value = "Create a account using Param", notes = "Creates a new account in salesforce using Param", httpMethod = "GET")
     @ApiError(code = 500, reason = "Process error")
-    @RequestMapping(method = RequestMethod.POST, produces = "application/json")
+    @RequestMapping(method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody String createAccountFromParamName(@ApiParam(internalDescription = "java.lang.string", value="string", name = "Name", required = false) @RequestParam(required = true) String Name) 
     {	
 		Account newAccount = new Account();
@@ -72,17 +64,17 @@ public class AccountController {
     	return "{id:" + id +"}";
     }
 	
-	@ApiOperation(value = "Create a account", notes = "Creates a new account in salesforce", httpMethod = "POST")
+	@ApiOperation(value = "Create a account", notes = "Creates a new account in salesforce", httpMethod = "GET")
     @ApiError(code = 500, reason = "Process error")
-    @RequestMapping(method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
+    @RequestMapping(method = RequestMethod.GET, consumes = "application/json", produces = "application/json")
     public @ResponseBody String createAccountFromJSON(@RequestBody Account newAccount) 
     {	
     	String id = loginService.LoginToSalesforce().createSObject("Account", newAccount);
     	return "{id:" + id +"}";
     }
 	
-	@ApiOperation(value = "Update Account", notes = "Update a existing Account", httpMethod = "POST") 
-	@RequestMapping(value = "/{accountId}", method = RequestMethod.POST, consumes = "application/json")
+	@ApiOperation(value = "Update Account", notes = "Update a existing Account", httpMethod = "GET") 
+	@RequestMapping(value = "/{accountId}", method = RequestMethod.GET, consumes = "application/json")
 	 public @ResponseBody String updateAccount(@PathVariable String accountId, @RequestBody Account account) {
 		 loginService.LoginToSalesforce().updateSObject("Account", accountId, account);
 		 return "{status: success}";
