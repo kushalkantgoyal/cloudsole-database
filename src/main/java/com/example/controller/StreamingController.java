@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/streaming")
 public class StreamingController 
 {
-	@RequestMapping(value="/new")
+	@RequestMapping(value="")
 	public String createNewStream(Map<String, Object> map)
 	{
-		return "createstream";
+		return "streaming";
 	}
 	
 	@RequestMapping(value="/view")

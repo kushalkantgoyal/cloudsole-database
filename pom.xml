@@ -12,6 +12,10 @@
     </properties>
 
     <repositories>
+    	<repository>
+                <id>repo</id>
+                <url>https://raw.github.com/naamannewbold/repo/master/releases/</url>
+        </repository>
         <repository>
             <id>force-rest-api</id>
             <name>force-rest-api repository on GitHub</name>
@@ -24,6 +28,11 @@
     </repositories>
 
     <dependencies>
+    	<dependency>
+            <groupId>com.force.sdk.streaming</groupId>
+            <artifactId>streaming</artifactId>
+            <version>0.14</version>
+        </dependency>
     	<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
@@ -74,7 +83,6 @@
 			<artifactId>restfb</artifactId>
 			<version>1.6.12</version>
 		</dependency>
-            
     	<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
@@ -90,11 +98,6 @@
         	<artifactId>javax.inject</artifactId>
         	<version>1</version>
         </dependency>
-        <dependency>
-			<groupId>org.cometd.java</groupId>
-			<artifactId>cometd-java-common</artifactId>
-			<version>2.5.1</version>
-		</dependency>
 		<dependency>
 			<groupId>commons-dbcp</groupId>
 			<artifactId>commons-dbcp</artifactId>
@@ -105,11 +108,7 @@
         <artifactId>opencsv</artifactId>
         <version>2.3</version>
       </dependency>
-       	<dependency>
-			<groupId>org.cometd.java</groupId>
-			<artifactId>cometd-java-client</artifactId>
-			<version>2.5.1</version>
-		</dependency>
+       
     	<dependency>
 		    <groupId>org.apache.httpcomponents</groupId>
 		    <artifactId>httpclient</artifactId>
@@ -137,11 +136,7 @@
             <artifactId>standard</artifactId>
             <version>1.1.2</version>
         </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>jstl</artifactId>
-            <version>1.2</version>
-        </dependency>
+       
         <dependency>
             <groupId>com.force.api</groupId>
             <artifactId>force-rest-api</artifactId>

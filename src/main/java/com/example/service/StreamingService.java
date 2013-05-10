@@ -25,12 +25,12 @@ public class StreamingService {
 		// NOTE: Putting passwords in code is not a good practice and not recommended.
 		// Set this to true only when using this client
 		// against the Summer'11 release (API version=22.0).
-		private static final boolean VERSION_22 = false;
-		private static final boolean USE_COOKIES = VERSION_22;
+		private static final boolean VERSION_27 = false;
+		private static final boolean USE_COOKIES = VERSION_27;
 		// The channel to subscribe to. Same as the name of the PushTopic.
 		// Be sure to create this topic before running this sample.
-		private static final String CHANNEL = VERSION_22 ? "/LawyerConTopic" : "/topic/LawyerConTopic";
-		private static final String STREAMING_ENDPOINT_URI = VERSION_22 ? "/cometd" : "/cometd/25.0";
+		private static final String CHANNEL = VERSION_27 ? "/LawyerConTopic" : "/topic/LawyerConTopic";
+		private static final String STREAMING_ENDPOINT_URI = VERSION_27 ? "/cometd" : "/cometd/25.0";
 		// The long poll duration.
 		private static final int CONNECTION_TIMEOUT = 20 * 1000; // milliseconds
 		private static final int READ_TIMEOUT = 120 * 1000; // milliseconds
@@ -78,5 +78,4 @@ public class StreamingService {
 			client.setCookie("sid", sid, 24 * 60 * 60 * 1000);
 			client.setCookie("language", "en_US", 24 * 60 * 60 * 1000);
 		}
-
 }
