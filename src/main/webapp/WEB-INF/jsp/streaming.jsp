@@ -1,8 +1,11 @@
-<!doctype html>
+<!DOCTYPE html>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Streaming Tests</title>
+    <title>Salesforce Streaming</title>
     <script src="/resources/js/jquery-1.7.1.min.js"></script>
     <script src="/resources/js/json2.js"></script>
     <script src="/resources/js/cometd.js"></script>
@@ -41,7 +44,7 @@
   </head>
   <body>
 
-    <div id="messages">messages should appear here</div>
+    <div id="messages">Salesforce Streaming API</div>
 
   </body>
 </html>
