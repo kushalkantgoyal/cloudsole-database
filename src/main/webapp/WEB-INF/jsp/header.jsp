@@ -26,7 +26,6 @@
 	</script>
 	
 	<script src="/resources/assets/javascripts/1.2.2/modernizr-jquery.min.js" type="text/javascript"></script>
-	<script src="/resources/assets/javascripts/1.2.2/adminflare-demo.min.js" type="text/javascript"></script>
 	<script src="/resources/assets/javascripts/1.2.2/bootstrap.min.js" type="text/javascript"></script>
 	<script src="/resources/assets/javascripts/1.2.2/adminflare.min.js" type="text/javascript"></script>
 	

@@ -12,10 +12,7 @@
     </properties>
 
     <repositories>
-    	<repository>
-                <id>repo</id>
-                <url>https://raw.github.com/naamannewbold/repo/master/releases/</url>
-        </repository>
+  
         <repository>
             <id>force-rest-api</id>
             <name>force-rest-api repository on GitHub</name>
@@ -25,14 +22,15 @@
             <id>webjars</id>
             <url>http://webjars.github.com/m2</url>
         </repository>
+        <repository>
+        	<id>jetty-releases</id>
+        	<name>Jetty Releases</name>
+        	<url>https://oss.sonatype.org/content/repositories/jetty-releases</url>
+      </repository>
     </repositories>
 
     <dependencies>
-    	<dependency>
-            <groupId>com.force.sdk.streaming</groupId>
-            <artifactId>streaming</artifactId>
-            <version>0.14</version>
-        </dependency>
+    	
     	<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
@@ -200,25 +198,6 @@
         	<version>2.1.6</version>
         </dependency>
         <dependency>
-            <groupId>com.knappsack</groupId>
-            <artifactId>swagger4spring-web</artifactId>
-            <version>0.1.7</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>slf4j-log4j12</artifactId>
-                    <groupId>org.slf4j</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>junit</artifactId>
-                    <groupId>junit</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>slf4j-api</artifactId>
-                    <groupId>org.slf4j</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
         	<groupId>org.aspectj</groupId>
         	<artifactId>aspectjrt</artifactId>
         	<version>1.6.11</version>
@@ -233,6 +212,7 @@
                     <source>1.6</source>
                     <target>1.6</target>
                 </configuration>
+                <version>2.3.2</version>
             </plugin>
             <plugin>
                 <artifactId>maven-war-plugin</artifactId>

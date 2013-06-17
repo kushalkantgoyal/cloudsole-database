@@ -7,8 +7,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ServiceLoader;
 
-import org.eclipse.jetty.client.ContentExchange;
-import org.eclipse.jetty.client.HttpClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -66,35 +64,7 @@ public class SoapLoginUtil {
 		return (ENV_START + " <urn:login>" + " <urn:username>" + username + "</urn:username>" + " <urn:password>" + password + "</urn:password>" + " </urn:login>" + ENV_END).getBytes("UTF-8");
 	}
 	
-	public static String[] login(HttpClient client, String username, String password) throws IOException, InterruptedException, SAXException, ParserConfigurationException 
-	{
-		ContentExchange exchange = new ContentExchange();
-		exchange.setMethod("POST");
-		exchange.setURL(LoginServiceImp.getEndpointURL());
-		exchange.setRequestContentSource(new ByteArrayInputStream(soapXmlForLogin(username, password)));
-		exchange.setRequestHeader("Content-Type", "text/xml");
-		exchange.setRequestHeader("SOAPAction", "''");
-		exchange.setRequestHeader("PrettyPrint", "Yes");
-		client.send(exchange);
-		exchange.waitForDone();
-		String response = exchange.getResponseContent();
-		SAXParserFactory spf = SAXParserFactory.newInstance();
-		spf.setNamespaceAware(true);
-		SAXParser saxParser = spf.newSAXParser();
-		LoginResponseParser parser = new LoginResponseParser();
-		saxParser.parse(new ByteArrayInputStream(response.getBytes("UTF-8")), parser);
-		if (parser.sessionId == null || parser.serverUrl == null) 
-		{
-			System.out.println("Login Failed!\n" + response);
-			return null;
-		 }
-		
-		URL soapEndpoint = new URL(parser.serverUrl);
-		StringBuilder endpoint = new StringBuilder().append(soapEndpoint.getProtocol()).append("://").append(soapEndpoint.getHost());
-
-		if (soapEndpoint.getPort() > 0) endpoint.append(":").append(soapEndpoint.getPort());
-			return new String[] {parser.sessionId, endpoint.toString()};
-	}
+	
 	
 	
 	private static String getSoapUri() 
