@@ -742,7 +742,9 @@
 				<li>
 					<a href="/login/sobject"><span class="icon-table"></span>SOQL</a>
 				</li>
-				
+				<li>
+					<a href="/login/import"><span class="icon-inbox"></span>Import</a>
+				</li>
 				
 				<li class="lp-dropdown">
 					<a href="#" class="lp-dropdown-toggle" id="extras-dropdown"><span class="icon-reorder"></span>Extras</a>
