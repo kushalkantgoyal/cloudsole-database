@@ -24,8 +24,7 @@
 	</script>
 	
 	<script src="/resources/assets/javascripts/1.2.1/modernizr-jquery.min.js" type="text/javascript"></script>
-	<script src="/resources/assets/javascripts/1.2.1/adminflare-demo.min.js" type="text/javascript"></script>
-
+	
 	<!--[if lte IE 9]>
 		<script src="/resources/assets/javascripts/jquery.placeholder.min.js" type="text/javascript"></script>
 		<script type="text/javascript">

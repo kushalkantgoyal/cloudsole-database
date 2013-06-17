@@ -659,7 +659,6 @@
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">More<i class=" icon-caret-down"></i></a>
 							<ul class="dropdown-menu">
 								<li><a href="/login/about">About</a></li>
-								
 							</ul>
 						</li>
 						<li class="divider-vertical"></li>
@@ -668,16 +667,6 @@
 						<input type="text" class="search-query" placeholder="Search" style="width: 120px">
 					</form>
 					<ul class="nav pull-right">
-						<li>
-							<ul class="messages">
-								<li>
-									<a href="#"><i class="icon-warning-sign"></i>2<span class="		responsive-text"> alerts</span></a>
-								</li>
-								<li>
-									<a href="#"><i class="icon-envelope"></i>25<span class="		responsive-text"> new messages</span></a>
-								</li>
-							</ul>
-						</li>
 						<li class="separator"></li>
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle usermenu" data-toggle="dropdown">
@@ -687,9 +676,6 @@
 							<ul class="dropdown-menu">
 								<li>
 									<a href="#">Profile</a>
-								</li>
-								<li>
-									<a href="#">Settings</a>
 								</li>
 								<li class="divider"></li>
 								<li>
@@ -756,47 +742,23 @@
 				<li>
 					<a href="/login/sobject"><span class="icon-table"></span>SOQL</a>
 				</li>
-				<li>
-					<a href="/login/mail"><span class="icon-inbox"></span>Email</a>
-				</li>
-				<li>
-					<a href="/login/sync"><span class="icon-cog"></span>Sync</a>
-				</li>
+				
+				
 				<li class="lp-dropdown">
 					<a href="#" class="lp-dropdown-toggle" id="extras-dropdown"><span class="icon-reorder"></span>Extras</a>
 					<ul class="lp-dropdown-menu simple" data-dropdown-owner="extras-dropdown">
 						<li>
-							<a tabindex="-1" href="/login/social"><span class=""></span>Social</a>
-						</li>
-						<li>
 							<a tabindex="-1" href="/login/stats"><span class=""></span>Stats</a>
 						</li>
 						<li>
-							<a tabindex="-1" href="/login/db"><span class=""></span>Database</a>
+							<a tabindex="-1" href="/login/logs"><span class=""></span>Logs</a>
 						</li>
 					</ul>
 				</li>
 				<li class="lp-dropdown">
 					<a href="#" class="lp-dropdown-toggle" id="pages-dropdown"><span class="icon-file-alt"></span>Tools</a>
 					<ul class="lp-dropdown-menu simple" data-dropdown-owner="pages-dropdown">
-						<li>
-							<a tabindex="-1" href="/login/doc"><i class="icon-signin"></i>&nbsp;&nbsp;API</a>
-						</li>
-						<li>
-							<a tabindex="-1" href="pages-signup.html"><i class="icon-check"></i>&nbsp;&nbsp;Sign Up</a>
-						</li>
-						<li>
-							<a tabindex="-1" href="pages-messages.html"><i class="icon-envelope-alt"></i>&nbsp;&nbsp;Messages</a>
-						</li>
-						<li>
-							<a tabindex="-1" href="pages-stream.html"><i class="icon-leaf"></i>&nbsp;&nbsp;Stream</a>
-						</li>
-						<li>
-							<a tabindex="-1" href="pages-pricing.html"><i class="icon-money"></i>&nbsp;&nbsp;Pricing</a>
-						</li>
-						<li>
-							<a tabindex="-1" href="pages-invoice.html"><i class="icon-pencil"></i>&nbsp;&nbsp;Invoice</a>
-						</li>
+						
 					</ul>
 				</li>
 			</ul>

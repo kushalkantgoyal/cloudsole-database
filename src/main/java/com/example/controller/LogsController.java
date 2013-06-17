@@ -25,7 +25,7 @@ public class LogsController {
 	public String LogsView(Map<String, Object> map)
 	{
 		map.put("logs", loginService.LoginToSalesforce().query("SELECT Id, StartTime FROM ApexLog ORDER BY StartTime"));
-		return "logsview";
+		return "logs";
 	}
 	
 	@RequestMapping("/{id}")
