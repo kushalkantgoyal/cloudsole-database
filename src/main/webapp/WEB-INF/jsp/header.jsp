@@ -646,7 +646,7 @@
 	<header class="navbar navbar-fixed-top" id="main-navbar">
 		<div class="navbar-inner">
 			<div class="container">
-				<a class="logo" href="#"><img alt="Af_logo" src="/resources/assets/images/af-logo.png"></a>
+				<div class="logo">CloudSole Developer</div>
 				
 				<a class="btn nav-button collapsed" data-toggle="collapse" data-target=".nav-collapse">
 					<span class="icon-reorder"></span>
