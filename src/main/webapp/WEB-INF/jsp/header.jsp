@@ -10,12 +10,12 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<title>
-		CloudSole - Developer
+		CloudSole - Database
 	</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width">
 
-	<script src="/resources/assets/javascripts/1.2.2/adminflare-demo-init.min.js" type="text/javascript"></script>
+	<script src="/resources/assets/javascripts/1.3.0/adminflare-demo-init.min.js" type="text/javascript"></script>
 
 	<link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,300,600,700" rel="stylesheet" type="text/css">
 	<script type="text/javascript">
@@ -25,9 +25,9 @@
 		document.write('<link href="/resources/assets/css/' + DEMO_ADMINFLARE_VERSION + '/' + DEMO_CURRENT_THEME + '/adminflare.min.css" media="all" rel="stylesheet" type="text/css" id="adminflare-css">');
 	</script>
 	
-	<script src="/resources/assets/javascripts/1.2.2/modernizr-jquery.min.js" type="text/javascript"></script>
-	<script src="/resources/assets/javascripts/1.2.2/bootstrap.min.js" type="text/javascript"></script>
-	<script src="/resources/assets/javascripts/1.2.2/adminflare.min.js" type="text/javascript"></script>
+	<script src="/resources/assets/javascripts/1.3.0/modernizr-jquery.min.js" type="text/javascript"></script>
+	<script src="/resources/assets/javascripts/1.3.0/bootstrap.min.js" type="text/javascript"></script>
+	<script src="/resources/assets/javascripts/1.3.0/adminflare.min.js" type="text/javascript"></script>
 	
 	<style type="text/css">
 			/* ======================================================================= */
@@ -646,7 +646,7 @@
 	<header class="navbar navbar-fixed-top" id="main-navbar">
 		<div class="navbar-inner">
 			<div class="container">
-				<div class="logo">CloudSole Developer</div>
+				<a class="logo" href="#"><img alt="Af_logo" src="/resources/assets/images/af-logo.png"></a>
 				
 				<a class="btn nav-button collapsed" data-toggle="collapse" data-target=".nav-collapse">
 					<span class="icon-reorder"></span>
@@ -654,24 +654,24 @@
 
 				<div class="nav-collapse collapse">
 					<ul class="nav">
-						<li class="active"><a href="#">Home</a></li>
+						<li><a href="#">Home</a></li>
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">More<i class=" icon-caret-down"></i></a>
 							<ul class="dropdown-menu">
-								<li><a href="/login/about">About</a></li>
+								<li><a href="/about">About</a></li>
+								<li><a href="/email">Email</a></li>
 							</ul>
 						</li>
 						<li class="divider-vertical"></li>
 					</ul>
-					<form class="navbar-search pull-left" action="" _lpchecked="1">
-						<input type="text" class="search-query" placeholder="Search" style="width: 120px">
+					<form class="navbar-search pull-left" method="POST" action="/db/search">
+						<input type="text" name="seachquery" class="search-query" placeholder="Search" style="width: 120px">
 					</form>
 					<ul class="nav pull-right">
 						<li class="separator"></li>
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle usermenu" data-toggle="dropdown">
 								<img alt="Avatar" src="/resources/assets/images/avatar.png">
-								<span>${userName}</span>
 							</a>
 							<ul class="dropdown-menu">
 								<li>
@@ -695,74 +695,16 @@
 	<nav id="left-panel">
 		<div id="left-panel-content">
 			<ul>
-				<li class="active lp-dropdown">
-					<a href="/login/dashboard" class="lp-dropdown-toggle" id="dashboard-dropdown"><span class="icon-dashboard"></span>Dashboard</a>
-					<ul class="lp-dropdown-menu simple" data-dropdown-owner="dashboard-dropdown">
-						<li>
-							<a tabindex="-1" href="/login/dashboard"><span class=""></span>Business</a>
-						</li>
-						<li>
-							<a tabindex="-1" href="/login/dashboard/developer"><span class=""></span>Developer</a>
-						</li>
-					</ul>
-				</li>
-				<li class="lp-dropdown">
-					<a href="/login/batch" class="lp-dropdown-toggle" id="batch-dropdown"><span class="icon-th-large"></span>Batch</a>
-					<ul class="lp-dropdown-menu simple" data-dropdown-owner="batch-dropdown">
-						<li>
-							<a tabindex="-1" href="/login/batch/job"><span class=""></span>Job</a>
-						</li>
-					</ul>
-				</li>
-				<li class="lp-dropdown">
-					<a href="/login/metadata" class="lp-dropdown-toggle" id="metadata-dropdown"><span class="icon-font"></span>Metadata</a>
-					<ul class="lp-dropdown-menu simple" data-dropdown-owner="metadata-dropdown">
-						<li>
-							<a tabindex="-1" href="/login/metadata/view"><span class=""></span>View</a>
-						</li>
-						<li>
-							<a tabindex="-1" href="/login/metadata/deploy"><span class=""></span>Deploy</a>
-						</li>
-					</ul>
-				</li>
-				<li class="lp-dropdown">
-					<a href="/login/apex" class="lp-dropdown-toggle" id="apex-dropdown"><span class="icon-edit"></span>Apex</a>
-					<ul class="lp-dropdown-menu simple" data-dropdown-owner="apex-dropdown">
-						<li>
-							<a tabindex="-1" href="/login/apex/new"><span class=""></span>New</a>
-						</li>
-						<li>
-							<a tabindex="-1" href="/login/apex/view"><span class=""></span>View</a>
-						</li>
-						<li>
-							<a tabindex="-1" href="/login/apex/run"><span class=""></span>Run</a>
-						</li>
-					</ul>
+				<li>
+					<a href="/dashboard"><span class="icon-dashboard"></span>Dashboard</a>
+				</li>	
+				<li>
+					<a href="/db"><span class="icon-th-large"></span>Tables</a>
 				</li>
 				<li>
-					<a href="/login/sobject"><span class="icon-table"></span>SOQL</a>
-				</li>
-				<li>
-					<a href="/login/import"><span class="icon-inbox"></span>Import</a>
+					<a href="/api"><span class="icon-reorder"></span>API</a>
 				</li>
 				
-				<li class="lp-dropdown">
-					<a href="#" class="lp-dropdown-toggle" id="extras-dropdown"><span class="icon-reorder"></span>Extras</a>
-					<ul class="lp-dropdown-menu simple" data-dropdown-owner="extras-dropdown">
-						<li>
-							<a tabindex="-1" href="/login/stats"><span class=""></span>Stats</a>
-						</li>
-						<li>
-							<a tabindex="-1" href="/login/logs"><span class=""></span>Logs</a>
-						</li>
-					</ul>
-				</li>
-				<li class="lp-dropdown">
-					<a href="#" class="lp-dropdown-toggle" id="pages-dropdown"><span class="icon-file-alt"></span>Tools</a>
-					<ul class="lp-dropdown-menu simple" data-dropdown-owner="pages-dropdown">
-						
-					</ul>
-				</li>
 			</ul>
 		</div>
 		<div class="icon-caret-down"></div>

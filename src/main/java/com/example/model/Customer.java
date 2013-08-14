@@ -11,7 +11,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 
-
+@Entity
+@XmlRootElement(name = "customer")
+@Table(name = "customer")
 public class Customer implements java.io.Serializable {
 
     private Long id;
@@ -53,6 +55,7 @@ public class Customer implements java.io.Serializable {
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
+    
 
     @XmlAttribute(name = "last-name", required = false)
     @Column(name = "last_name", nullable = false)
@@ -68,6 +71,6 @@ public class Customer implements java.io.Serializable {
     public String toString() {
         return ToStringBuilder.reflectionToString(this);
     }
+    
+    
 }
-
-

@@ -10,14 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MailController {
 	
 	@RequestMapping(value="/new")
-	public String createNewMail(Map<String, Object> map)
-	{
+	public String createNewMail(Map<String, Object> map){
 		return "newmail";
 	}
 	
 	@RequestMapping(value="")
-	public String viewMail(Map<String, Object> map)
-	{
+	public String viewMail(Map<String, Object> map){
 		return "mailbox";
 	}
 
