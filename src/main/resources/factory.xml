@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd" 
+	
+	default-init-method="initMethod" default-destroy-method="destroyMethod">
+
+	<bean id="customer" class="com.example.beanfactory.Customer">
+		<constructor-arg index="0" name="type" value="investorCustomer" />
+		<constructor-arg index="1" name="name" value="Thys" type="java.lang.String"/>
+	</bean>
+	
+	<bean id="customerWithAccount" class="com.example.beanfactory.Customer">
+		<constructor-arg index="0" name="type" value="investorCustomer" />
+		<constructor-arg index="1" name="name" value="Thys" type="java.lang.String"/>
+		<property name="account1" ref="account1"/>
+		<property name="account2" ref="account2"/>
+		<property name="account3" ref="account3"/>
+	</bean>
+	
+	<bean id="customerInnerAccount" class="com.example.beanfactory.Customer">
+		<constructor-arg index="0" name="type" value="investorCustomer" />
+		<constructor-arg index="1" name="name" value="Thys" type="java.lang.String"/>
+		<property name="account1" ref="account1"/>
+		<property name="account2">
+			<bean id="account2" class="com.example.beanfactory.Account">
+				<property name="balance" value="300"/>
+				<property name="loan" value="400"/>
+			</bean>
+		</property>
+		<property name="account3">
+			<bean id="account3" class="com.example.beanfactory.Account">
+				<property name="balance" value="500"/>
+				<property name="loan" value="600"/>
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="customerWithListAccount" class="com.example.beanfactory.Customer">
+		<constructor-arg index="0" name="type" value="investorCustomer" />
+		<constructor-arg index="1" name="name" value="Thys" type="java.lang.String"/>
+		<property name="accounts">
+		<list>
+			<ref bean="account1"/>
+			<ref bean="account2"/>
+			<ref bean="account3"/>
+		</list>
+		</property>
+	</bean>
+	
+	<bean id="account1" class="com.example.beanfactory.Account">
+		<property name="balance" value="100"/>
+		<property name="loan" value="200"/>
+	</bean>
+	
+	<bean id="account2" class="com.example.beanfactory.Account">
+		<property name="balance" value="300"/>
+		<property name="loan" value="400"/>
+	</bean>
+	
+	<bean id="account3" class="com.example.beanfactory.Account">
+		<property name="balance" value="500"/>
+		<property name="loan" value="600"/>
+	</bean>
+	
+	<alias name="customerInnerAccount" alias="customerWithInnerAccountAlias"/>
+	
+	<bean name="customerWithAccountAutoWired" class="com.example.beanfactory.Customer" autowire="byName" scope="prototype" >
+		<constructor-arg index="0" name="type" value="investorCustomer" />
+		<constructor-arg index="1" name="name" value="Thys" type="java.lang.String"/>
+	</bean>
+	
+	<bean name="parentCustomer" class="com.example.beanfactory.Customer">
+		<constructor-arg index="0" name="type" value="investorCustomer" />
+		<constructor-arg index="1" name="name" value="Thys" type="java.lang.String"/>
+		<property name="account1" ref="account1"/>
+	</bean>
+	
+	<bean id="account2child" class="com.example.beanfactory.Customer" parent="parentCustomer">
+		<property name="account2" ref="account2"/>
+	</bean>
+	
+	<bean id="account3child" class="com.example.beanfactory.Customer" parent="parentCustomer">
+		<property name="account3" ref="account3"/>
+	</bean>
+	
+</beans>
