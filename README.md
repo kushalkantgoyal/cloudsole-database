@@ -1,8 +1,10 @@
-# Salesforce Developer Manager
+# CloudSole Database
 
-    Try it now: http://cloudsole.herokuapp.com
+    Spring Data
+    Spring MVC
+    JPA
+    Hibernate
+    
+    
 
-
-Streaming API
-
-    export FORCE_FORCEDATABASE_URL="force://<instance>.salesforce.com;user=<username>;password=<password+security_token>"
+    
