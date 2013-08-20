@@ -1,4 +1,4 @@
-package com.example.dao;
+package com.example.jdbc;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -21,7 +21,6 @@ import com.example.model.Customer;
 
 @Component(value="JdbcDaoImpl")
 public class JdbcDoaImpl {
-	
 	
 	private DataSource dataSource;
 	private JdbcTemplate jdbcTemplate;

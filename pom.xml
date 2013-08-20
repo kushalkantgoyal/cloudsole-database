@@ -2,7 +2,7 @@
 <project>
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.thysmichels</groupId>
-    <artifactId>cloudsole-develop</artifactId>
+    <artifactId>cloudsole-database</artifactId>
     <packaging>war</packaging>
     <version>0.0.1-SNAPSHOT</version>
 
@@ -96,7 +96,7 @@
     	<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.9</version>
+			<version>5.1.22</version>
 		</dependency>
     	<dependency>
 			<groupId>cglib</groupId>
@@ -198,8 +198,18 @@
         	<artifactId>aspectjrt</artifactId>
         	<version>1.6.11</version>
         </dependency>
-       
-    
+
+
+        <dependency>
+        	<groupId>commons-fileupload</groupId>
+        	<artifactId>commons-fileupload</artifactId>
+        	<version>1.2.2</version>
+        </dependency>
+        <dependency>
+        	<groupId>commons-io</groupId>
+        	<artifactId>commons-io</artifactId>
+        	<version>2.1</version>
+        </dependency>
     </dependencies>
     
     <build>
@@ -241,8 +251,8 @@
             </plugin>
         </plugins>
     </build>
-    <name>CloudSole</name>
-    <description>CloudSole</description>
+    <name>cloudsole-database</name>
+    <description>cloudsole-database</description>
     <organization>
     	<name>Thys Michels</name>
     	<url>http://www.thysmichels.com</url>

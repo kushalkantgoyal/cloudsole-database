@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 public class HibernateDaoImpl {
 	
 	@Autowired
-	private SessionFactory session;
+	private SessionFactory sessionFactory;
 
 	public int getCustomerCount() {
 		String hql = "Select count(*) from Customer";
@@ -19,11 +19,11 @@ public class HibernateDaoImpl {
 	}
 		
 	public SessionFactory getSession() {
-		return session;
+		return sessionFactory;
 	}
 
 	public void setSession(SessionFactory session) {
-		this.session = session;
+		this.sessionFactory = session;
 	}
 	
 

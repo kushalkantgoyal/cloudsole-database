@@ -5,7 +5,6 @@ import java.sql.SQLException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.example.dao.JdbcDoaImpl;
 import com.example.model.Customer;
 
 public class Main {

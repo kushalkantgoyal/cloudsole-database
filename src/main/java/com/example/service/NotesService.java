@@ -6,7 +6,6 @@ import java.util.List;
 import com.example.model.Notes;
 
 public interface NotesService {
-
 	    Notes updateNotes(long id, String subject, String body);
 	    Notes getNotesById(long id);
 	    Collection<Notes> getAllNotes();

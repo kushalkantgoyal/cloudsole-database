@@ -32,7 +32,7 @@ public class JpaConfiguration {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() throws Exception {
 
         LocalContainerEntityManagerFactoryBean localContainerEntityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
-        localContainerEntityManagerFactoryBean.setDataSource(dataSourceConfiguration.dataSource() );
+        localContainerEntityManagerFactoryBean.setDataSource(dataSourceConfiguration.dataSource());
         localContainerEntityManagerFactoryBean.setPackagesToScan(Customer.class.getPackage().getName());
 
         HibernateJpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter();
@@ -49,5 +49,5 @@ public class JpaConfiguration {
         EntityManagerFactory entityManagerFactory = entityManagerFactory().getObject();
         return new JpaTransactionManager(entityManagerFactory);
     }
-
+    
 }

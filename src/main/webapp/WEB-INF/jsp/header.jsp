@@ -448,10 +448,10 @@
 
 			/* Toggle buttons
 				================================================== */
-			$('#normal-toggle-button').toggles({width: 100});
-			$('#text-toggle-button').toggles({ontext:'HI', offtext:'BYE', on: false});
-			
+			$('#normal-toggle-button').toggles({on: true});
+			$('#text-toggle-button').toggles({text:{on:'YES',off:'NO'}});
 
+			
 			/* Auto-resizing textarea
 				================================================== */
 			$("#autoresize").autosize();
@@ -699,12 +699,22 @@
 					<a href="/dashboard"><span class="icon-dashboard"></span>Dashboard</a>
 				</li>	
 				<li>
-					<a href="/db"><span class="icon-th-large"></span>Tables</a>
+					<a href="/db"><span class="icon-th-large"></span>Table</a>
 				</li>
 				<li>
 					<a href="/api"><span class="icon-reorder"></span>API</a>
 				</li>
+				<li>
+					<a href="/db/query"><span class="icon-edit"></span>Query</a>
+				</li>
 				
+				<li>
+					<a href="/quartz"><span class="icon-reorder"></span>Quartz</a>
+				</li>
+				
+				<li>
+					<a href="/file"><span class="icon-file-alt"></span>Files</a>
+				</li>	
 			</ul>
 		</div>
 		<div class="icon-caret-down"></div>

@@ -23,7 +23,7 @@ public class Main {
 
         CustomerService customerService = applicationContext.getBean(CustomerService.class);
 
-        Customer customer = customerService.createCustomer("Jpa", "Lover");
+       /* Customer customer = customerService.createCustomer("Jpa", "Lover");
 
         Customer retrievedCustomer = customerService.getCustomerById(customer.getId());
 
@@ -50,6 +50,21 @@ public class Main {
         for (Customer c : insertedCustomer){
         	System.out.println(c);
         }
+        
+        
+        List<Customer> customQueryCustomer = customerService.findCustomerByQuery("Select * from customer");
+        for (Customer c : customQueryCustomer){
+        	System.out.println(c);
+        }*/
+        
+        List<Customer> customerPagination = customerService.getPaginatedCustomer(0, 10);
+        for (Customer c : customerPagination){
+        	System.out.println(c);
+        }
+       
+        //System.out.println((int)Math.round((customerService.getTotalRecords()/10)+0.5));
+        System.out.println(customerService.getPaginationSequence());
+        
         
     }
 }

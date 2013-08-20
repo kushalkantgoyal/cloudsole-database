@@ -1,7 +1,5 @@
 package com.example.controller;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
@@ -11,11 +9,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.converter.FormHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.http.server.ServletServerHttpRequest;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,11 +26,20 @@ import com.example.service.CustomerService;
 public class DatabaseController {
 	
 	@Autowired
+	@Qualifier("jpaRepository")
 	private CustomerService customerService;
 	
 	@RequestMapping(value="")
 	public String showAllCustomers(Map<String, Object> map){
-		map.put("contactList", customerService.getAllCustomers());
+		map.put("pagination", customerService.getPaginationSequence());
+		map.put("contactList", customerService.getPaginatedCustomer(0, 10));
+		return "viewdb";
+	}
+	
+	@RequestMapping(value="/{pageNumber}", method = RequestMethod.GET)
+	public String returnPageOfCustomers(Map<String, Object> map, @PathVariable("pageNumber") Integer pageNumber){
+		map.put("pagination", customerService.getPaginationSequence());
+		map.put("contactList", customerService.getPaginatedCustomer((pageNumber-1)*10, (pageNumber*10 > customerService.getTotalRecords()) ? customerService.getTotalRecords() : pageNumber*10));
 		return "viewdb";
 	}
 	
@@ -61,8 +68,13 @@ public class DatabaseController {
 		final Map<String, String> formData = new FormHttpMessageConverter()
 				.read(null, inputMessage).toSingleValueMap();
 		String searchId = formData.get("seachquery");
-		List<Customer> createListWithOne = Arrays.asList(customerService.getCustomerById(Long.parseLong(searchId)));
-		map.put("contactList", createListWithOne);
+		try{
+		Customer foundCustomer = customerService.getCustomerById(Long.parseLong(searchId));
+		List<Customer> createListWithOne = Arrays.asList(foundCustomer);
+		map.put("contactList", createListWithOne);}
+		catch(RuntimeException re) {
+			map.put("errormsg", "Could not find the user");
+		}
 		return "viewdb";
 	}
 	
@@ -111,5 +123,20 @@ public class DatabaseController {
 	     {
 	    	 file.deleteOnExit();
 	     }*/
+	}
+	
+	@RequestMapping("/query")
+	public String showQuery(){
+		return "query";
+	}
+	
+	@RequestMapping(value="/query", method=RequestMethod.POST)
+	public String showQueryResult(Map<String, Object> map, HttpServletRequest request) throws HttpMessageNotReadableException, IOException{
+		final ServletServerHttpRequest inputMessage = new ServletServerHttpRequest(request);
+		final Map<String, String> formData = new FormHttpMessageConverter().read(null, inputMessage).toSingleValueMap();
+		final String query = formData.get("query");
+		
+		map.put("contactList", customerService.findCustomerByQuery(query));
+		return "viewdb";
 	}
 }

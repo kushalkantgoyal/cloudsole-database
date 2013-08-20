@@ -6,7 +6,7 @@
                         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
     
     <context:annotation-config />
-    <context:component-scan base-package="com.example.dao" />
+    <context:component-scan base-package="com.example.jdbc" />
     
 	<!--  <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
@@ -23,7 +23,5 @@
 		<property name="initialSize" value="2"/>
 		<property name="maxActive" value="5"/>
 	</bean>
-	
-	
-	
+
 </beans>

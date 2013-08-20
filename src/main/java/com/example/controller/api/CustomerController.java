@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,6 +27,7 @@ import com.wordnik.swagger.annotations.ApiParam;
 public class CustomerController {
 	
 	@Autowired
+	@Qualifier("jpaRepository")
 	private CustomerService customerService;
 	
 	 @ApiOperation(value = "Find all customers", notes = "Get all customers currently available", httpMethod = "GET", responseClass = "Customer", multiValueResponse = true)

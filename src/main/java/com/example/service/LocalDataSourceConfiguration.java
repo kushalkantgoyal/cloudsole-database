@@ -19,7 +19,6 @@ import java.sql.Driver;
 @Profile("default")
 public class LocalDataSourceConfiguration implements DataSourceConfiguration {
 
-
     @Inject
     private Environment environment;
 
