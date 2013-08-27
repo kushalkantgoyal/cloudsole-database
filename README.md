@@ -72,7 +72,8 @@
 	
 	</beans>
     
-    package com.example.jdbc;
+#Jdbc
+    	package com.example.jdbc;
 
 	import java.sql.Connection;
 	import java.sql.DriverManager;
@@ -197,7 +198,8 @@
 		}
 	}
     
-    
+#Main
+
 	package com.example.jdbc;
 
 	import java.sql.SQLException;
