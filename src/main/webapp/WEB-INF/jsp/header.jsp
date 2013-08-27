@@ -714,6 +714,9 @@
 				
 				<li>
 					<a href="/file"><span class="icon-file-alt"></span>Files</a>
+				</li>
+				<li>
+					<a href="/dbconf"><span class="icon-cog"></span>Database</a> 
 				</li>	
 			</ul>
 		</div>

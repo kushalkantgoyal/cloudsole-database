@@ -1,10 +1,11 @@
-package com.example.jpa;
+package com.example.spring_data;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
@@ -20,10 +21,11 @@ import javax.persistence.EntityManagerFactory;
 
 
 @Configuration
+@EnableJpaRepositories
 @PropertySource("classpath:/services.properties")
 @EnableTransactionManagement
 @Import( { LocalDataSourceConfiguration.class })
-public class JpaConfiguration {
+public class JpaCustomerConfiguration {
 
     @Inject private DataSourceConfiguration dataSourceConfiguration;
 
@@ -40,8 +42,7 @@ public class JpaConfiguration {
         jpaVendorAdapter.setGenerateDdl(true);
 
         localContainerEntityManagerFactoryBean.setJpaVendorAdapter(jpaVendorAdapter);
-
-        // look ma, no persistence.xml !
+        
         return localContainerEntityManagerFactoryBean;
     }
 

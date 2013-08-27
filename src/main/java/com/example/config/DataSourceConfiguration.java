@@ -1,11 +1,11 @@
-package com.example.service;
+package com.example.config;
 
 import javax.sql.DataSource;
 
 /**
  * handles configuring the datasource per environment
  *
- * @author Josh Long
+ * @author Thys Michels
  */
 public interface DataSourceConfiguration {
     DataSource dataSource() throws Exception;

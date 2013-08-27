@@ -1,4 +1,4 @@
-package com.example.service;
+package com.example.config;
 
 import org.apache.commons.dbcp.BasicDataSource;
 import org.springframework.context.annotation.Bean;
@@ -6,13 +6,14 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import javax.inject.Inject;
 import javax.sql.DataSource;
 import java.sql.Driver;
 
 /**
- * @author Josh Long
+ * @author Thys Michels
  */
 @PropertySource("classpath:/services.properties")
 @Configuration

@@ -3,17 +3,24 @@ package com.example.hibernate;
 import java.util.Properties;
 
 import javax.inject.Inject;
+import javax.persistence.EntityManagerFactory;
+import javax.sql.DataSource;
 
+import org.hibernate.ejb.HibernateEntityManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.orm.hibernate3.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
+import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import com.example.service.DataSourceConfiguration;
-import com.example.service.LocalDataSourceConfiguration;
+import com.example.config.DataSourceConfiguration;
+import com.example.config.LocalDataSourceConfiguration;
 
 @Configuration
 @PropertySource("classpath:/services.properties")
@@ -35,5 +42,9 @@ public class HibernateConfiguration {
 		  localSessionFactory.setHibernateProperties(hibernateProperties);
 		  return localSessionFactory;
 	  }
-
+	 
+	  @Bean
+	  public PlatformTransactionManager transactionManager(DataSource dataSource) throws Exception {
+		  return new DataSourceTransactionManager(dataSource);
+	  }
 }

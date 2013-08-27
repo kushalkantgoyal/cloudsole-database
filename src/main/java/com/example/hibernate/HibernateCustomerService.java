@@ -1,38 +1,33 @@
-package com.example.jdbc;
+package com.example.hibernate;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
-import javax.persistence.PersistenceContext;
 
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
+import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.example.model.Customer;
 import com.example.service.CustomerService;
 
 @Repository
-@Transactional
-@Qualifier("jdbcRepository")
-public class JdbcCustomerService implements CustomerService{
+@Qualifier("hibernateRepository")
+public class HibernateCustomerService implements CustomerService{
 
 	@Inject
-    private JdbcTemplate jdbcTemplate;
+	SessionFactory sessionFactory;
 	
 	@Override
 	public Customer updateCustomer(long id, String fn, String ln) {
-		Customer updateCustomer = new Customer();
-		updateCustomer.setId(id);
-		updateCustomer.setFirstName(fn);
-		updateCustomer.setLastName(ln);
-		jdbcTemplate.update("", updateCustomer);
+		Query query = sessionFactory.openSession().createQuery("update Customer set firstName=:fName, lastName=:lName where id=:id").setParameter("fName", fn).setParameter("lName", ln).setParameter("id", id);
+		query.executeUpdate();
 		return null;
 	}
 
@@ -41,46 +36,44 @@ public class JdbcCustomerService implements CustomerService{
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	public static final class CustomerMapper implements RowMapper<Customer>{
-		@Override
-		public Customer mapRow(ResultSet resultSet, int rowNum) throws SQLException {
-			Customer customer = new Customer();
-			customer.setId(resultSet.getLong("id"));
-			customer.setFirstName(resultSet.getString("first_name"));
-			customer.setLastName(resultSet.getString("last_name"));
-			return customer;
-		}
-	}
 
 	@Override
 	public Customer getCustomerById(long id) {
-		String sql = "Select * from customer where id = ?";
-		return jdbcTemplate.queryForObject(sql, new Object[]{id},new CustomerMapper());
+		return  (Customer) sessionFactory.openSession().createQuery("from Customer where id=?").setLong(0, id).list().get(0);
 	}
 
 	@Override
 	public Collection<Customer> getAllCustomers() {
-		// TODO Auto-generated method stub
-		return null;
+		return (Collection<Customer>)sessionFactory.openSession().createQuery("from Customer").list();
 	}
 
 	@Override
 	public Customer createCustomer(String fn, String ln) {
-		// TODO Auto-generated method stub
-		return null;
+		Session session = sessionFactory.openSession();
+		Transaction tx = session.beginTransaction();
+		Customer c = new Customer();
+		c.setFirstName(fn);
+		c.setLastName(ln);
+		session.save(c);
+		tx.commit();
+		session.close();
+		return c;
 	}
 
 	@Override
 	public void deleteCustomer(long id) {
-		// TODO Auto-generated method stub
-		
+		Query query = sessionFactory.openSession().createQuery("delete Customer where id = :id").setParameter("id", id);
+		query.executeUpdate();
 	}
 
 	@Override
 	public Customer createCustomer(Customer newCustomer) {
-		// TODO Auto-generated method stub
-		return null;
+		Session session = sessionFactory.openSession();
+		Transaction tx = session.beginTransaction();
+		session.save(newCustomer);
+		tx.commit();
+		session.close();
+		return newCustomer;
 	}
 
 	@Override
@@ -116,8 +109,9 @@ public class JdbcCustomerService implements CustomerService{
 
 	@Override
 	public int getTotalRecords() {
-		// TODO Auto-generated method stub
-		return 0;
+		String hql = "Select count(*) from Customer";
+		Query query = sessionFactory.openSession().createQuery(hql);
+		return ((Long)query.uniqueResult()).intValue();
 	}
 
 	@Override
@@ -131,5 +125,6 @@ public class JdbcCustomerService implements CustomerService{
 		// TODO Auto-generated method stub
 		
 	}
+
 
 }
