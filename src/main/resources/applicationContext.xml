@@ -47,7 +47,7 @@
 	    </property>
 	</bean>
 	
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+	<!--  <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url" value="jdbc:mysql://localhost:3306/servicecore"/>
 		<property name="username" value="root"/>
@@ -64,7 +64,7 @@
 				<prop key="dialect">org.hibernate.dialect.MySQLDialect</prop>
 			</props>
 		</property>
-	</bean>
+	</bean>-->
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
 	
 </beans>

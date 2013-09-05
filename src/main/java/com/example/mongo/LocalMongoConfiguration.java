@@ -1,0 +1,27 @@
+package com.example.mongo;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
+import org.springframework.data.mongodb.MongoDbFactory;
+import org.springframework.data.mongodb.core.SimpleMongoDbFactory;
+
+import com.mongodb.Mongo;
+
+
+@PropertySource("classpath:/services.properties")
+@Configuration
+@Profile("default")
+public class LocalMongoConfiguration {
+	
+	  @Bean
+	    public MongoDbFactory mongoDbFactory1(Environment environment) throws Exception {
+	        String dbName = environment.getProperty("mongo.db");
+	        String host = environment.getProperty("mongo.host");
+	        Mongo mongo = new Mongo(host);
+	        return new SimpleMongoDbFactory(mongo, dbName);
+	    }
+
+}

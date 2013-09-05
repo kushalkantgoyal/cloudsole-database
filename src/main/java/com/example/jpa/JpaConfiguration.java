@@ -40,8 +40,6 @@ public class JpaConfiguration {
         jpaVendorAdapter.setGenerateDdl(true);
 
         localContainerEntityManagerFactoryBean.setJpaVendorAdapter(jpaVendorAdapter);
-
-        // look ma, no persistence.xml !
         return localContainerEntityManagerFactoryBean;
     }
 

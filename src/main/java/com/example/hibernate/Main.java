@@ -21,9 +21,9 @@ public class Main {
         CustomerService customerService = applicationContext.getBean(CustomerService.class);
         //System.out.println(customerService.getAllCustomers());
         //System.out.println(customerService.getCustomerById(new Long(14)));
-        //System.out.println(customerService.createCustomer("HibernateFName", "HibernateLName"));
+        System.out.println(customerService.createCustomer("HibernateFName", "HibernateLName"));
         //customerService.deleteCustomer(new Long(226));
-        customerService.updateCustomer(new Long(225), "Kak", "Lekker");
+        customerService.updateCustomer(new Long(225), "PName", "PLastName");
 	}
 
 }
